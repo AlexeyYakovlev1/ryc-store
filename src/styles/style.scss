@@ -171,15 +171,13 @@
     height: 430px;
     overflow: hidden;
     transition: .5s;
-    .card:hover &__description {
-        transform: translateY(0);
-    }
     &__block-img {
+        width: 280px;
         height: 350px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
         z-index: 5;
+        position: relative;
+        overflow: hidden;
+        margin: 0 auto;
         & img {
             max-height: 350px;
         }
@@ -188,7 +186,6 @@
         text-align: center;
         margin-top: 1rem;
         transition: all .5s;
-        transform: translateY(100px);
         z-index: 5;
     }
     &-name {

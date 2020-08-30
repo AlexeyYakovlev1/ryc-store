@@ -11,7 +11,7 @@ const checkResponse = res => {
     }
 }
 
-// красивая цена
+// цена
 const toCurrency = price => {
     return new Intl.NumberFormat('ru-RU', {
         currency: 'rub',
@@ -35,7 +35,7 @@ const createProducts = response => {
             sale = `-(${product.sale}%)`;
             oldPrice = toCurrency(product.oldPrice);
         }
-        
+
         let card = `
             <li class="card" data-size="${product.size}">
                 <a href="#" title="${product.name}">
@@ -59,23 +59,25 @@ const createProducts = response => {
 }
 
 // фильтрация
-blockFiltersList.addEventListener('click', event => {
-    const target = event.target;
+if (blockFiltersList) {
+    blockFiltersList.addEventListener('click', event => {
+        const target = event.target;
 
-    target.tagName !== 'LI' || target.tagName !== 'A' && false;
+        target.tagName !== 'LI' || target.tagName !== 'A' && false;
 
-    const items = listCards.getElementsByClassName('card');
+        const items = listCards.getElementsByClassName('card');
 
-    items.forEach(item => {
-        if (item.dataset.size === target.dataset.size) {
-            item.style.display = 'block';
-        } else if (target.dataset.size === 'all') {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    })
-})
+        items.forEach(item => {
+            if (item.dataset.size === target.dataset.size) {
+                item.classList.remove('hidden');
+            } else if (target.dataset.size === 'all') {
+                item.classList.remove('hidden');
+            } else {
+                item.classList.add('hidden');
+            }
+        });
+    });
+}
 
 document.querySelectorAll('.card-old-price').forEach(node => {
     node.textContent = toCurrency(node.textContent);
@@ -100,6 +102,8 @@ const animationList = () => {
         document.querySelector('.header__bottom-list-user').style.width = '200px';
         document.querySelector('.header__block-search').style.width = '36px';
         document.querySelector('.header__block-search-content').style.transform = 'translateX(0)';
+
+        headerSearch.value = '';
     });
 }
 
@@ -152,3 +156,22 @@ const search = (data) => {
         }
     });
 }
+
+// появление кнопки прокрутки вверх
+const showBtnScrollUp = () => {
+    const up = document.querySelector('.up-wrapper');
+
+    up.style.opacity = '0';
+
+    window.addEventListener('scroll', function() {
+        let y = pageYOffset;
+
+        if (y > 500) {
+            up.style.opacity = '1';
+        } else {
+            up.style.opacity = '0';
+        }
+    });
+}
+
+showBtnScrollUp();

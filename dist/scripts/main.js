@@ -17987,10 +17987,26 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./slider */ "./src/scripts/slider.js");
-/* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./script */ "./src/scripts/script.js");
+/* harmony import */ var _preolaider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./preolaider */ "./src/scripts/preolaider.js");
+/* harmony import */ var _preolaider__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_preolaider__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slider */ "./src/scripts/slider.js");
+/* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./script */ "./src/scripts/script.js");
 
 
+
+
+/***/ }),
+
+/***/ "./src/scripts/preolaider.js":
+/*!***********************************!*\
+  !*** ./src/scripts/preolaider.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.addEventListener('load', function () {
+  return document.querySelector('.preolaider-wrapper').style.display = 'none';
+});
 
 /***/ }),
 
@@ -18052,7 +18068,7 @@ var checkResponse = function checkResponse(res) {
   } else {
     document.querySelector('.no-el').style.display = 'block';
   }
-}; // красивая цена
+}; // цена
 
 
 var toCurrency = function toCurrency(price) {
@@ -18084,20 +18100,23 @@ var createProducts = function createProducts(response) {
 }; // фильтрация
 
 
-blockFiltersList.addEventListener('click', function (event) {
-  var target = event.target;
-  target.tagName !== 'LI' || target.tagName !== 'A' && false;
-  var items = listCards.getElementsByClassName('card');
-  items.forEach(function (item) {
-    if (item.dataset.size === target.dataset.size) {
-      item.style.display = 'block';
-    } else if (target.dataset.size === 'all') {
-      item.style.display = 'block';
-    } else {
-      item.style.display = 'none';
-    }
+if (blockFiltersList) {
+  blockFiltersList.addEventListener('click', function (event) {
+    var target = event.target;
+    target.tagName !== 'LI' || target.tagName !== 'A' && false;
+    var items = listCards.getElementsByClassName('card');
+    items.forEach(function (item) {
+      if (item.dataset.size === target.dataset.size) {
+        item.classList.remove('hidden');
+      } else if (target.dataset.size === 'all') {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
   });
-});
+}
+
 document.querySelectorAll('.card-old-price').forEach(function (node) {
   node.textContent = toCurrency(node.textContent);
 });
@@ -18118,6 +18137,7 @@ var animationList = function animationList() {
     document.querySelector('.header__bottom-list-user').style.width = '200px';
     document.querySelector('.header__block-search').style.width = '36px';
     document.querySelector('.header__block-search-content').style.transform = 'translateX(0)';
+    headerSearch.value = '';
   });
 };
 
@@ -18196,7 +18216,24 @@ var search = function search(data) {
       }
     }
   });
+}; // появление кнопки прокрутки вверх
+
+
+var showBtnScrollUp = function showBtnScrollUp() {
+  var up = document.querySelector('.up-wrapper');
+  up.style.opacity = '0';
+  window.addEventListener('scroll', function () {
+    var y = pageYOffset;
+
+    if (y > 500) {
+      up.style.opacity = '1';
+    } else {
+      up.style.opacity = '0';
+    }
+  });
 };
+
+showBtnScrollUp();
 
 /***/ }),
 
