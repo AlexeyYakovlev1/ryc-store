@@ -18044,14 +18044,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var listCards = document.querySelector('.list-cards');
 var headerSearchWord = document.querySelector('.header-search-word');
 var headerSearch = document.querySelector('.header-search');
+var blockFiltersList = document.querySelector('.block-filters-list');
 
-function checkResponse(res) {
+var checkResponse = function checkResponse(res) {
   if (res.length) {
     document.querySelector('.no-el').style.display = 'none';
   } else {
     document.querySelector('.no-el').style.display = 'block';
   }
-} // создаем карточки
+}; // красивая цена
+
+
+var toCurrency = function toCurrency(price) {
+  return new Intl.NumberFormat('ru-RU', {
+    currency: 'rub',
+    style: 'currency'
+  }).format(price);
+}; // создаем карточки
 
 
 var createProducts = function createProducts(response) {
@@ -18059,21 +18068,44 @@ var createProducts = function createProducts(response) {
   response.forEach(function (product) {
     var oldPrice;
     var sale;
+    var nowPrice = toCurrency(product.nowPrice);
 
     if (product.sale <= 0) {
       oldPrice = '';
       sale = '';
     } else {
       sale = "-(".concat(product.sale, "%)");
-      oldPrice = "".concat(product.oldPrice, " \u0420\u0443\u0431.");
+      oldPrice = toCurrency(product.oldPrice);
     }
 
-    var card = "\n            <li class=\"card\">\n                <a href=\"#\" title=\"".concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <img src=\"").concat(product.img, "\" alt=\"").concat(product.name, "\">\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(product.nowPrice, " \u0420\u0443\u0431.</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
+    var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a href=\"#\" title=\"").concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <img src=\"").concat(product.img, "\" alt=\"").concat(product.name, "\">\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(nowPrice, "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
     listCards.innerHTML += card;
   });
-};
+}; // фильтрация
 
-function animationList() {
+
+blockFiltersList.addEventListener('click', function (event) {
+  var target = event.target;
+  target.tagName !== 'LI' || target.tagName !== 'A' && false;
+  var items = listCards.getElementsByClassName('card');
+  items.forEach(function (item) {
+    if (item.dataset.size === target.dataset.size) {
+      item.style.display = 'block';
+    } else if (target.dataset.size === 'all') {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+document.querySelectorAll('.card-old-price').forEach(function (node) {
+  node.textContent = toCurrency(node.textContent);
+});
+document.querySelectorAll('.card-now-price').forEach(function (node) {
+  node.textContent = toCurrency(node.textContent);
+});
+
+var animationList = function animationList() {
   headerSearchWord.addEventListener('click', function (event) {
     if (event.target) {
       document.querySelector('.header__bottom-list-user').style.width = '315px';
@@ -18087,7 +18119,7 @@ function animationList() {
     document.querySelector('.header__block-search').style.width = '36px';
     document.querySelector('.header__block-search-content').style.transform = 'translateX(0)';
   });
-}
+};
 
 animationList();
 window.addEventListener('DOMContentLoaded', function () {
@@ -18148,18 +18180,20 @@ window.addEventListener('DOMContentLoaded', function () {
 }); // поиск
 
 var search = function search(data) {
-  headerSearch.addEventListener('input', function () {
+  headerSearch.addEventListener('keydown', function (event) {
     var valueSearch = headerSearch.value.trim().toLowerCase();
     var result = data.filter(function (item) {
       return item.name.toLowerCase().includes(valueSearch);
     });
 
-    if (valueSearch.length > 2) {
-      createProducts(result);
-      checkResponse(result);
-    } else {
-      createProducts(result);
-      checkResponse(result);
+    if (event.keyCode === 13) {
+      if (valueSearch.length > 2) {
+        createProducts(result);
+        checkResponse(result);
+      } else {
+        createProducts(result);
+        checkResponse(result);
+      }
     }
   });
 };

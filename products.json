@@ -2,16 +2,16 @@
     "products": [{
             "type": "type",
             "size": "big",
-            "img": "src/assets/img/big-size/IMG_2217.jpg",
+            "img": "assets/img/big-size/IMG_2217.jpg",
             "name": "Шорты",
             "oldPrice": 0,
-            "nowPrice": 0,
+            "nowPrice": 1500,
             "sale": 0
         },
         {
             "type": "type",
-            "size": "big",
-            "img": "src/assets/img/big-size/IMG_2249.jpg",
+            "size": "small",
+            "img": "assets/img/big-size/IMG_2249.jpg",
             "name": "name",
             "oldPrice": 0,
             "nowPrice": 0,
@@ -20,16 +20,16 @@
         {
             "type": "type",
             "size": "big",
-            "img": "src/assets/img/big-size/IMG_2272.jpg",
+            "img": "assets/img/big-size/IMG_2272.jpg",
             "name": "Кофта",
             "oldPrice": 0,
-            "nowPrice": 0,
+            "nowPrice": 5000,
             "sale": 0
         },
         {
             "type": "type",
             "size": "big",
-            "img": "src/assets/img/big-size/IMG_2303.jpg",
+            "img": "assets/img/big-size/IMG_2303.jpg",
             "name": "name",
             "oldPrice": 0,
             "nowPrice": 0,
@@ -38,7 +38,7 @@
         {
             "type": "type",
             "size": "big",
-            "img": "src/assets/img/big-size/IMG_2361.jpg",
+            "img": "assets/img/big-size/IMG_2361.jpg",
             "name": "name",
             "oldPrice": 0,
             "nowPrice": 0,
@@ -47,7 +47,7 @@
         {
             "type": "type",
             "size": "big",
-            "img": "src/assets/img/big-size/IMG_2401.jpg",
+            "img": "assets/img/big-size/IMG_2401.jpg",
             "name": "name",
             "oldPrice": 0,
             "nowPrice": 0,
@@ -56,7 +56,7 @@
         {
             "type": "type",
             "size": "big",
-            "img": "src/assets/img/big-size/IMG_2425.jpg",
+            "img": "assets/img/big-size/IMG_2425.jpg",
             "name": "name",
             "oldPrice": 0,
             "nowPrice": 0,
