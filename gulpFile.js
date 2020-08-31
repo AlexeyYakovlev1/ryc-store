@@ -23,13 +23,13 @@ gulp.task('jsonServer', () => {
 });
 
 gulp.task('scss', () => {
-    return gulp.src(['src/styles/*.scss', '!src/styles/_*.scss'])
+    return gulp.src(['src/public/scss/*.scss', '!src/public/scss/_*.scss'])
         .pipe(scss({ outputStyle: 'expanded' }))
         .pipe(autoprefixer({
             cascade: true,
             overrideBrowserslist: ['last 5 versions']
         }))
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest('dist/public/css'))
         .pipe(browserSync.stream());
 });
 
@@ -47,7 +47,7 @@ gulp.task('compress', () => {
 });
 
 gulp.task("js", () => {
-    return gulp.src("src/scripts/main.js")
+    return gulp.src("src/public/js/main.js")
         .pipe(webpack({
             mode: 'development',
             output: {
@@ -74,14 +74,14 @@ gulp.task("js", () => {
                 }]
             }
         }))
-        .pipe(gulp.dest('dist/scripts'))
+        .pipe(gulp.dest('dist/public/js'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('build', gulp.parallel('html', 'scss', 'js', 'assets', 'compress', 'jsonServer'));
 
 gulp.task("build-prod-js", () => {
-    return gulp.src("src/scripts/main.js")
+    return gulp.src("src/public/js/main.js")
         .pipe(webpack({
             mode: 'production',
             output: {
@@ -111,9 +111,9 @@ gulp.task("build-prod-js", () => {
 gulp.task('watch', () => {
     const watch = (path, task) => gulp.watch(path, gulp.parallel(task));
 
-    watch('src/styles/*.scss', 'scss');
+    watch('src/public/scss/*.scss', 'scss');
     watch('src/*.html', 'html');
-    watch('src/scripts/*.js', 'js');
+    watch('src/public/js/*.js', 'js');
     watch('src/assets/img/*', 'compress');
     watch('src/assets/**/**/*', 'assets');
     watch('products.json', 'jsonServer');

@@ -1,6 +1,6 @@
 @import '_fonts';
 @import '_vars';
-@import '../../node_modules/normalize.css/normalize';
+@import '../../../node_modules/normalize.css/normalize';
 *,
 *::after,
 *::before {
@@ -28,6 +28,10 @@ body {
 img {
     max-width: 100%;
     height: auto;
+}
+
+.no-border:hover::after {
+    display: none !important;
 }
 
 .no-el {

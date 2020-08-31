@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/scripts/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/public/js/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17978,29 +17978,29 @@ module.exports = g;
 
 /***/ }),
 
-/***/ "./src/scripts/main.js":
-/*!*****************************!*\
-  !*** ./src/scripts/main.js ***!
-  \*****************************/
+/***/ "./src/public/js/main.js":
+/*!*******************************!*\
+  !*** ./src/public/js/main.js ***!
+  \*******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _preolaider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./preolaider */ "./src/scripts/preolaider.js");
+/* harmony import */ var _preolaider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./preolaider */ "./src/public/js/preolaider.js");
 /* harmony import */ var _preolaider__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_preolaider__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slider */ "./src/scripts/slider.js");
-/* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./script */ "./src/scripts/script.js");
+/* harmony import */ var _slider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slider */ "./src/public/js/slider.js");
+/* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./script */ "./src/public/js/script.js");
 
 
 
 
 /***/ }),
 
-/***/ "./src/scripts/preolaider.js":
-/*!***********************************!*\
-  !*** ./src/scripts/preolaider.js ***!
-  \***********************************/
+/***/ "./src/public/js/preolaider.js":
+/*!*************************************!*\
+  !*** ./src/public/js/preolaider.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -18010,10 +18010,10 @@ window.addEventListener('load', function () {
 
 /***/ }),
 
-/***/ "./src/scripts/script.js":
-/*!*******************************!*\
-  !*** ./src/scripts/script.js ***!
-  \*******************************/
+/***/ "./src/public/js/script.js":
+/*!*********************************!*\
+  !*** ./src/public/js/script.js ***!
+  \*********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -18080,7 +18080,7 @@ var toCurrency = function toCurrency(price) {
 
 
 var createProducts = function createProducts(response) {
-  listCards.innerHTML = '';
+  listCards.textContent = '';
   response.forEach(function (product) {
     var oldPrice;
     var sale;
@@ -18122,26 +18122,40 @@ document.querySelectorAll('.card-old-price').forEach(function (node) {
 });
 document.querySelectorAll('.card-now-price').forEach(function (node) {
   node.textContent = toCurrency(node.textContent);
-});
+}); // анимированный поиск
 
-var animationList = function animationList() {
+var animationSearch = function animationSearch() {
+  var word = document.querySelector('.header-search-word');
+  var blockSearch = document.querySelector('.header__block-search');
+  var blockSearchContent = document.querySelector('.header__block-search-content');
+  var list = document.querySelector('.header__bottom-list-user'); // Действия при клике
+
   headerSearchWord.addEventListener('click', function (event) {
     if (event.target) {
-      document.querySelector('.header__bottom-list-user').style.width = '315px';
-      document.querySelector('.header__block-search').style.width = '170px';
-      document.querySelector('.header__block-search-content').style.transform = 'translateX(-38px)';
+      word.style.opacity = '0';
+      blockSearch.style.width = '115px';
+      blockSearch.style.height = '20px';
+      blockSearch.classList.add('no-border');
+      blockSearchContent.style.height = '20px';
+      list.style.width = '315px';
+      headerSearch.style.opacity = '1';
       headerSearch.focus();
     }
-  });
+  }); // Действия при выходе из инпута
+
   headerSearch.addEventListener('blur', function () {
-    document.querySelector('.header__bottom-list-user').style.width = '200px';
-    document.querySelector('.header__block-search').style.width = '36px';
-    document.querySelector('.header__block-search-content').style.transform = 'translateX(0)';
+    word.style.opacity = '1';
+    blockSearch.style.width = '36px';
+    blockSearch.style.height = '11px';
+    blockSearch.classList.remove('no-border');
+    blockSearchContent.style.height = '11px';
+    list.style.width = '200px';
+    headerSearch.style.opacity = '0';
     headerSearch.value = '';
   });
 };
 
-animationList();
+animationSearch();
 window.addEventListener('DOMContentLoaded', function () {
   // функция для запросов
   var getResource = /*#__PURE__*/function () {
@@ -18237,10 +18251,10 @@ showBtnScrollUp();
 
 /***/ }),
 
-/***/ "./src/scripts/slider.js":
-/*!*******************************!*\
-  !*** ./src/scripts/slider.js ***!
-  \*******************************/
+/***/ "./src/public/js/slider.js":
+/*!*********************************!*\
+  !*** ./src/public/js/slider.js ***!
+  \*********************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

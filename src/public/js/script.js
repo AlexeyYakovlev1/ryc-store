@@ -21,7 +21,7 @@ const toCurrency = price => {
 
 // создаем карточки
 const createProducts = response => {
-    listCards.innerHTML = '';
+    listCards.textContent = '';
 
     response.forEach(product => {
         let oldPrice;
@@ -87,27 +87,49 @@ document.querySelectorAll('.card-now-price').forEach(node => {
     node.textContent = toCurrency(node.textContent);
 })
 
-const animationList = () => {
+// анимированный поиск
+const animationSearch = () => {
+    const word = document.querySelector('.header-search-word');
+    const blockSearch = document.querySelector('.header__block-search');
+    const blockSearchContent = document.querySelector('.header__block-search-content');
+    const list = document.querySelector('.header__bottom-list-user');
+
+    // Действия при клике
     headerSearchWord.addEventListener('click', event => {
         if (event.target) {
-            document.querySelector('.header__bottom-list-user').style.width = '315px';
-            document.querySelector('.header__block-search').style.width = '170px';
-            document.querySelector('.header__block-search-content').style.transform = 'translateX(-38px)';
+            word.style.opacity = '0';
 
+            blockSearch.style.width = '115px';
+            blockSearch.style.height = '20px';
+            blockSearch.classList.add('no-border');
+
+            blockSearchContent.style.height = '20px';
+
+            list.style.width = '315px';
+
+            headerSearch.style.opacity = '1';
             headerSearch.focus();
         }
     });
 
+    // Действия при выходе из инпута
     headerSearch.addEventListener('blur', () => {
-        document.querySelector('.header__bottom-list-user').style.width = '200px';
-        document.querySelector('.header__block-search').style.width = '36px';
-        document.querySelector('.header__block-search-content').style.transform = 'translateX(0)';
+        word.style.opacity = '1';
 
+        blockSearch.style.width = '36px';
+        blockSearch.style.height = '11px';
+        blockSearch.classList.remove('no-border');
+
+        blockSearchContent.style.height = '11px';
+
+        list.style.width = '200px';
+
+        headerSearch.style.opacity = '0';
         headerSearch.value = '';
     });
 }
 
-animationList();
+animationSearch();
 
 window.addEventListener('DOMContentLoaded', () => {
     // функция для запросов
