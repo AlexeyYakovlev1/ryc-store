@@ -18057,17 +18057,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var listCards = document.querySelector('.list-cards');
 var headerSearchWord = document.querySelector('.header-search-word');
 var headerSearch = document.querySelector('.header-search');
 var blockFiltersList = document.querySelector('.block-filters-list');
 
 var checkResponse = function checkResponse(res) {
-  if (res.length) {
-    document.querySelector('.no-el').style.display = 'none';
-  } else {
-    document.querySelector('.no-el').style.display = 'block';
-  }
+  return document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
 }; // цена
 
 
@@ -18079,24 +18074,28 @@ var toCurrency = function toCurrency(price) {
 }; // создаем карточки
 
 
-var createProducts = function createProducts(response) {
-  listCards.textContent = '';
-  response.forEach(function (product) {
-    var oldPrice;
-    var sale;
-    var nowPrice = toCurrency(product.nowPrice);
+var createProducts = function createProducts(response, listSelector) {
+  var listCards = document.querySelector(listSelector);
 
-    if (product.sale <= 0) {
-      oldPrice = '';
-      sale = '';
-    } else {
-      sale = "-(".concat(product.sale, "%)");
-      oldPrice = toCurrency(product.oldPrice);
-    }
+  if (listCards) {
+    listCards.textContent = '';
+    response.forEach(function (product) {
+      var oldPrice = product.oldPrice;
+      var sale;
+      var nowPrice = product.nowPrice;
 
-    var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a href=\"#\" title=\"").concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <img src=\"").concat(product.img, "\" alt=\"").concat(product.name, "\">\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(nowPrice, "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
-    listCards.innerHTML += card;
-  });
+      if (product.oldPrice <= 0) {
+        oldPrice = '';
+        sale = '';
+      } else {
+        sale = "-(0%)";
+        oldPrice = toCurrency(product.oldPrice);
+      }
+
+      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a href=\"#\" title=\"").concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <figure>\n                            <img src=\"").concat(product.img, "\" alt=\"").concat(product.name, "\">\n                        </figure>\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
+      listCards.innerHTML += card;
+    });
+  }
 }; // фильтрация
 
 
@@ -18104,7 +18103,7 @@ if (blockFiltersList) {
   blockFiltersList.addEventListener('click', function (event) {
     var target = event.target;
     target.tagName !== 'LI' || target.tagName !== 'A' && false;
-    var items = listCards.getElementsByClassName('card');
+    var items = document.querySelector('.list-cards').getElementsByClassName('card');
     items.forEach(function (item) {
       if (item.dataset.size === target.dataset.size) {
         item.classList.remove('hidden');
@@ -18202,7 +18201,8 @@ window.addEventListener('DOMContentLoaded', function () {
     // запрос
     getResource('http://localhost:3000/products') // обработка данных, которые приходят по этому запросу
     .then(function (data) {
-      createProducts(data);
+      createProducts(data, '.list-cards');
+      createProducts(data, '.product__options');
       search(data);
     }) // ошибка
     ["catch"](function (err) {
@@ -18222,10 +18222,10 @@ var search = function search(data) {
 
     if (event.keyCode === 13) {
       if (valueSearch.length > 2) {
-        createProducts(result);
+        createProducts(result, '.list-cards');
         checkResponse(result);
       } else {
-        createProducts(result);
+        createProducts(result, '.list-cards');
         checkResponse(result);
       }
     }
@@ -18247,7 +18247,34 @@ var showBtnScrollUp = function showBtnScrollUp() {
   });
 };
 
-showBtnScrollUp();
+showBtnScrollUp(); // показ товара
+
+var lookGoods = function lookGoods(activeClass) {
+  var images = document.querySelectorAll('.product__block-list-item');
+  images.forEach(function (item, index) {
+    var hideActiveClass = function hideActiveClass() {
+      return images.forEach(function (item) {
+        return item.classList.remove(activeClass);
+      });
+    };
+
+    var showActiveClass = function showActiveClass(num) {
+      return images[num].classList.add(activeClass);
+    };
+
+    hideActiveClass();
+    showActiveClass(0);
+    document.querySelector('.product__block-img').style.backgroundImage = images[0].style.backgroundImage;
+    item.addEventListener('click', function () {
+      var bg = item.style.backgroundImage;
+      hideActiveClass();
+      showActiveClass(index);
+      document.querySelector('.product__block-img').style.backgroundImage = bg;
+    });
+  });
+};
+
+lookGoods('active-bg');
 
 /***/ }),
 

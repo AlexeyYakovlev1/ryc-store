@@ -233,3 +233,107 @@
         color: #000000;
     }
 }
+
+.product {
+    &__info {
+        display: flex;
+        align-items: center;
+        padding-top: 100px;
+    }
+    &__block {
+        height: 500px;
+        &-sidebar {
+            width: 100px;
+            height: 100%;
+            overflow: auto;
+            &::-webkit-scrollbar {
+                display: none;
+                width: 4px;
+                &-thumb {
+                    background-color: #1B1E2B;
+                }
+            }
+            &:hover::-webkit-scrollbar {
+                display: block;
+            }
+        }
+        &-list {
+            display: flex;
+            flex-direction: column;
+            height: max-content;
+            &-item {
+                width: 100%;
+                height: 100px;
+                cursor: pointer;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+        &-img {
+            width: 650px;
+            background-repeat: no-repeat;
+            height: 100%;
+            background-size: cover;
+        }
+        &-content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        &-heading {
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        &-price {
+            margin-bottom: 10px;
+        }
+        &-desc {
+            margin-bottom: 10px;
+        }
+        &-list-size {
+            text-align: center;
+            padding: 0 10px;
+            height: 40px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        &-link {
+            color: #fff;
+            width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            height: 40px;
+            &:not(:last-child) {
+                margin-bottom: 10px;
+            }
+        }
+    }
+    &__options-wrapper {
+        margin-top: 150px;
+        height: 350px;
+        overflow-y: hidden;
+    }
+    &__options {
+        width: max-content;
+        display: flex;
+        align-items: center;
+        .card {
+            margin: 0;
+            width: 190px;
+            margin: 0 20px;
+            &__block-img {
+                width: 190px;
+                height: 265px;
+            }
+        }
+        img {
+            width: 190px;
+        }
+    }
+}

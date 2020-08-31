@@ -1,52 +1,49 @@
-const listCards = document.querySelector('.list-cards');
 const headerSearchWord = document.querySelector('.header-search-word');
 const headerSearch = document.querySelector('.header-search');
 const blockFiltersList = document.querySelector('.block-filters-list');
 
-const checkResponse = res => {
-    if (res.length) {
-        document.querySelector('.no-el').style.display = 'none';
-    } else {
-        document.querySelector('.no-el').style.display = 'block';
-    }
-}
+const checkResponse = res => document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
 
 // цена
 const toCurrency = price => {
-    return new Intl.NumberFormat('ru-RU', {
-        currency: 'rub',
-        style: 'currency',
-    }).format(price)
-}
+        return new Intl.NumberFormat('ru-RU', {
+            currency: 'rub',
+            style: 'currency',
+        }).format(price)
+    }
+    // создаем карточки
+const createProducts = (response, listSelector) => {
+    const listCards = document.querySelector(listSelector);
 
-// создаем карточки
-const createProducts = response => {
-    listCards.textContent = '';
+    if (listCards) {
+        listCards.textContent = '';
 
-    response.forEach(product => {
-        let oldPrice;
-        let sale;
-        let nowPrice = toCurrency(product.nowPrice);
+        response.forEach(product => {
+            let oldPrice = product.oldPrice;
+            let sale;
+            let nowPrice = product.nowPrice;
 
-        if (product.sale <= 0) {
-            oldPrice = '';
-            sale = '';
-        } else {
-            sale = `-(${product.sale}%)`;
-            oldPrice = toCurrency(product.oldPrice);
-        }
+            if (product.oldPrice <= 0) {
+                oldPrice = '';
+                sale = '';
+            } else {
+                sale = `-(0%)`;
+                oldPrice = toCurrency(product.oldPrice);
+            }
 
-        let card = `
+            let card = `
             <li class="card" data-size="${product.size}">
                 <a href="#" title="${product.name}">
                     <div class="card__block-img">
-                        <img src="${product.img}" alt="${product.name}">
+                        <figure>
+                            <img src="${product.img}" alt="${product.name}">
+                        </figure>
                     </div>
                     <div class="card__description">
                         <span class="card-name">${product.name}</span>
                         <div class="card__block-price">
                             <span class="card-old-price">${oldPrice}</span>
-                            <span class="card-now-price">${nowPrice}</span>
+                            <span class="card-now-price">${toCurrency(nowPrice)}</span>
                             <span class="card-sale">${sale}</span>
                         </div>
                     </div>
@@ -54,8 +51,9 @@ const createProducts = response => {
             </li>
         `
 
-        listCards.innerHTML += card;
-    })
+            listCards.innerHTML += card;
+        })
+    }
 }
 
 // фильтрация
@@ -65,7 +63,7 @@ if (blockFiltersList) {
 
         target.tagName !== 'LI' || target.tagName !== 'A' && false;
 
-        const items = listCards.getElementsByClassName('card');
+        const items = document.querySelector('.list-cards').getElementsByClassName('card');
 
         items.forEach(item => {
             if (item.dataset.size === target.dataset.size) {
@@ -151,7 +149,8 @@ window.addEventListener('DOMContentLoaded', () => {
         getResource('http://localhost:3000/products')
             // обработка данных, которые приходят по этому запросу
             .then(data => {
-                createProducts(data);
+                createProducts(data, '.list-cards');
+                createProducts(data, '.product__options');
                 search(data);
             })
             // ошибка
@@ -169,10 +168,10 @@ const search = (data) => {
 
         if (event.keyCode === 13) {
             if (valueSearch.length > 2) {
-                createProducts(result);
+                createProducts(result, '.list-cards');
                 checkResponse(result)
             } else {
-                createProducts(result);
+                createProducts(result, '.list-cards');
                 checkResponse(result)
             }
         }
@@ -197,3 +196,28 @@ const showBtnScrollUp = () => {
 }
 
 showBtnScrollUp();
+
+// показ товара
+const lookGoods = (activeClass) => {
+    let images = document.querySelectorAll('.product__block-list-item');
+
+    images.forEach((item, index) => {
+        const hideActiveClass = () => images.forEach(item => item.classList.remove(activeClass));
+        const showActiveClass = (num) => images[num].classList.add(activeClass);
+
+        hideActiveClass();
+        showActiveClass(0);
+
+        document.querySelector('.product__block-img').style.backgroundImage = images[0].style.backgroundImage;
+
+        item.addEventListener('click', () => {
+            let bg = item.style.backgroundImage;
+            hideActiveClass();
+            showActiveClass(index);
+
+            document.querySelector('.product__block-img').style.backgroundImage = bg;
+        });
+    });
+}
+
+lookGoods('active-bg');

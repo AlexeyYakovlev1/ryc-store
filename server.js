@@ -47,12 +47,12 @@ const PORT = 8000;
 
 app.use(express.static(__dirname + '/dist/'));
 
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../ryc-store/src/', 'index.html'));
+app.get('/home', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'src/', 'index.html'));
 })
 
 app.get('/sale', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../ryc-store/src/', 'sale.html'));
+    res.sendFile(path.resolve(__dirname, 'src/', 'sale.html'));
 })
 
 const start = async() => {

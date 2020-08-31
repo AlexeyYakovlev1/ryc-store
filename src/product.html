@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ryc store товар</title>
     <link rel="stylesheet" href="public/css/style.css">
+    <link rel="icon" href="assets/img/logo.jpg" type="image/jpg" sizes="16x16">
 </head>
 
 <body>
@@ -13,15 +14,41 @@
     <div class="product">
         <div class="container">
             <div class="product__info">
-                <div class="product__block">
+                <div class="product__block" style="width: 800px; display: flex; justify-content: space-between;">
                     <aside class="product__block-sidebar">
-                        <ul class="product__block-sidebar"></ul>
+                        <ul class="product__block-list">
+                            <li class="product__block-list-item" style="background-image: url(assets/img/IMG_2709.jpg);"></li>
+                            <li class="product__block-list-item" style="background-image: url(assets/img/IMG_2742.jpg);"></li>
+                            <li class="product__block-list-item" style="background-image: url(assets/img/IMG_2827.jpg);"></li>
+                        </ul>
                     </aside>
+                    <div class="product__block-img"></div>
                 </div>
-                <div class="product__block"></div>
+                <div class="product__block" style="width: 400px; margin: 0 auto;">
+                    <div class="product__block-content">
+                        <div class="product__block-heading">Name</div>
+                        <div class="product__block-price">1,000 руб</div>
+                        <p class="product__block-desc">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum iure eaque quam pariatur expedita incidunt sunt veritatis quos repellat distinctio?
+                        </p>
+                        <select class="product__block-list-size">
+                            <option value="" disabled>Выберите размер</option>
+                            <option value="s">s</option>
+                            <option value="xs">xs</option>
+                            <option value="xxl">xxl</option>
+                            <option value="m">m</option>
+                        </select>
+                        <a class="product__block-link" href="#">Добавить в корзину</a>
+                        <a class="product__block-link" href="#">Назад</a>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="product__options-wrapper">
+            <ul class="product__options"></ul>
+        </div>
     </div>
+    @@include('./components/footer.html')
     <script src="public/js/main.js"></script>
 </body>
 

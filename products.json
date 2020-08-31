@@ -4,27 +4,24 @@
             "size": "big",
             "img": "assets/img/big-size/IMG_2217.jpg",
             "name": "Шорты",
-            "oldPrice": 0,
-            "nowPrice": 1500,
-            "sale": 0
+            "oldPrice": 500,
+            "nowPrice": 352
         },
         {
             "type": "type",
             "size": "small",
             "img": "assets/img/big-size/IMG_2249.jpg",
             "name": "name",
-            "oldPrice": 0,
-            "nowPrice": 0,
-            "sale": 0
+            "oldPrice": 10,
+            "nowPrice": 5
         },
         {
             "type": "type",
             "size": "big",
             "img": "assets/img/big-size/IMG_2272.jpg",
             "name": "Кофта",
-            "oldPrice": 0,
-            "nowPrice": 5000,
-            "sale": 0
+            "oldPrice": 8500,
+            "nowPrice": 5000
         },
         {
             "type": "type",
@@ -32,8 +29,7 @@
             "img": "assets/img/big-size/IMG_2303.jpg",
             "name": "name",
             "oldPrice": 0,
-            "nowPrice": 0,
-            "sale": 0
+            "nowPrice": 0
         },
         {
             "type": "type",
@@ -41,8 +37,7 @@
             "img": "assets/img/big-size/IMG_2361.jpg",
             "name": "name",
             "oldPrice": 0,
-            "nowPrice": 0,
-            "sale": 0
+            "nowPrice": 0
         },
         {
             "type": "type",
@@ -50,8 +45,7 @@
             "img": "assets/img/big-size/IMG_2401.jpg",
             "name": "name",
             "oldPrice": 0,
-            "nowPrice": 0,
-            "sale": 0
+            "nowPrice": 0
         },
         {
             "type": "type",
@@ -59,8 +53,7 @@
             "img": "assets/img/big-size/IMG_2425.jpg",
             "name": "name",
             "oldPrice": 0,
-            "nowPrice": 0,
-            "sale": 0
+            "nowPrice": 0
         }
     ]
 }
