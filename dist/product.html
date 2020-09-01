@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header class="header" id="header">
+    <header class="header">
     <div class="header__top">
         <div class="container">
             <div class="header__top-title">
@@ -22,7 +22,7 @@
         <div class="container">
             <nav class="header__bottom-nav">
                 <div class="header__bottom-block">
-                    <ul class="header__bottom-list" style="width: 360px;">
+                    <ul class="header__bottom-list" style="width: 395px;">
                         <li>
                             <a href="#">магазин</a>
                         </li>
@@ -39,7 +39,8 @@
                 </div>
                 <div class="header__bottom-title">
                     <a href="/">
-                        <img src="../assets/img/logo.jpg" alt="logo">
+                        <!-- <img src="../assets/img/logo.jpg" alt="logo"> -->
+                        <div class="header__bottom-logo-word">RYC</div>
                     </a>
                 </div>
                 <div class="header__bottom-block">
@@ -68,23 +69,27 @@
         <div class="dash tres"></div>
         <div class="dash cuatro"></div>
     </div>
-</div> <a href="#header" class="up-wrapper">
+</div> <div href="#header" class="up-wrapper">
     <div class="up-btn">
-        up
+        <span></span>
+        <span></span>
     </div>
-</a>
+</div>
     <div class="product">
         <div class="container">
             <div class="product__info">
                 <div class="product__block" style="width: 800px; display: flex; justify-content: space-between;">
-                    <aside class="product__block-sidebar">
-                        <ul class="product__block-list">
-                            <li class="product__block-list-item" style="background-image: url(assets/img/IMG_2709.jpg);"></li>
-                            <li class="product__block-list-item" style="background-image: url(assets/img/IMG_2742.jpg);"></li>
-                            <li class="product__block-list-item" style="background-image: url(assets/img/IMG_2827.jpg);"></li>
-                        </ul>
-                    </aside>
-                    <div class="product__block-img"></div>
+                    <div data-status="off">
+                        <div class="product__block-img" style="width: 650px;"></div>
+                        <div class="container">
+                            <ul class="product__list-images">
+                                <li class="product__img" style="background-image: url(./assets/img/IMG_2709.jpg);"></li>
+                                <li class="product__img" style="background-image: url(./assets/img/IMG_2827.jpg);"></li>
+                                <li class="product__img" style="background-image: url(./assets/img/IMG_2742.jpg);"></li>
+                                <li class="product__img" style="background-image: url(./assets/img/IMG_2742.jpg"></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="product__block" style="width: 400px; margin: 0 auto;">
                     <div class="product__block-content">

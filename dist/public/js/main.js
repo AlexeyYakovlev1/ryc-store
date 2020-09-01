@@ -18144,7 +18144,7 @@ var animationSearch = function animationSearch() {
 
   headerSearch.addEventListener('blur', function () {
     word.style.opacity = '1';
-    blockSearch.style.width = '36px';
+    blockSearch.style.width = '40px';
     blockSearch.style.height = '11px';
     blockSearch.classList.remove('no-border');
     blockSearchContent.style.height = '11px';
@@ -18230,51 +18230,113 @@ var search = function search(data) {
       }
     }
   });
-}; // появление кнопки прокрутки вверх
+}; // прокрутка вверх
 
 
-var showBtnScrollUp = function showBtnScrollUp() {
+var scrollUp = function scrollUp() {
   var up = document.querySelector('.up-wrapper');
+  var lines = document.querySelectorAll('.up-wrapper span');
   up.style.opacity = '0';
   window.addEventListener('scroll', function () {
     var y = pageYOffset;
 
     if (y > 500) {
       up.style.opacity = '1';
+      up.style.visibility = 'visible';
+      lines.forEach(function (item, index) {
+        if (index === 0) {
+          item.style.transform = "rotate(45deg)";
+        } else {
+          item.style.transform = "rotate(-45deg)";
+        }
+      });
     } else {
       up.style.opacity = '0';
+      up.style.visibility = 'hidden';
+      lines.forEach(function (item) {
+        return item.style.transform = "rotate(0deg)";
+      });
     }
   });
-};
-
-showBtnScrollUp(); // показ товара
-
-var lookGoods = function lookGoods(activeClass) {
-  var images = document.querySelectorAll('.product__block-list-item');
-  images.forEach(function (item, index) {
-    var hideActiveClass = function hideActiveClass() {
-      return images.forEach(function (item) {
-        return item.classList.remove(activeClass);
-      });
-    };
-
-    var showActiveClass = function showActiveClass(num) {
-      return images[num].classList.add(activeClass);
-    };
-
-    hideActiveClass();
-    showActiveClass(0);
-    document.querySelector('.product__block-img').style.backgroundImage = images[0].style.backgroundImage;
-    item.addEventListener('click', function () {
-      var bg = item.style.backgroundImage;
-      hideActiveClass();
-      showActiveClass(index);
-      document.querySelector('.product__block-img').style.backgroundImage = bg;
+  up.addEventListener('click', function () {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0
     });
   });
 };
 
-lookGoods('active-bg');
+scrollUp(); // увеличение картинки товара при скролле
+
+var productImageEnlargement = function productImageEnlargement() {
+  var img = document.querySelector('.product__block-img');
+  var wrapper = document.querySelector('[data-status]');
+  var list_images = document.querySelector('.product__list-images');
+  var container = document.querySelector('.container');
+  var max_width = container.clientWidth;
+  var wdt = 650;
+  var scroll = true; // проверка opacity
+
+  var checkOpacityForBg = function checkOpacityForBg() {
+    if (pageYOffset / 10 > 98) {
+      wrapper.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+    }
+  }; // проверка статуса
+
+
+  var checkStatus = function checkStatus() {
+    if (wrapper.dataset.status === 'on') {
+      wrapper.classList.add('main-wrapper');
+      wrapper.style.backgroundColor = "rgba(255, 255, 255, 0.".concat(pageYOffset / 10, ")");
+      checkOpacityForBg();
+      list_images.style.visibility = 'visible';
+      list_images.style.opacity = '1';
+    } else {
+      wrapper.classList.remove('main-wrapper');
+      list_images.style.visibility = 'hidden';
+      list_images.style.opacity = '0';
+    }
+  }; // скролл
+
+
+  window.addEventListener('scroll', function () {
+    if (scroll) {
+      wdt += Math.floor(pageYOffset);
+
+      if (wdt > max_width) {
+        wdt = max_width;
+        img.style.width = "".concat(wdt, "px");
+      } else {
+        img.style.width = "".concat(wdt, "px");
+        img.style.position = 'fixed';
+        img.style.height = '500px';
+        img.style.left = '0';
+        img.style.right = '0';
+      }
+
+      if (pageYOffset > 100) {
+        wrapper.dataset.status = 'on';
+        checkStatus();
+        img.style.width = "".concat(wdt, "px");
+        img.style.margin = '0 auto';
+        img.style.position = 'absolute';
+        img.style.top = '100px';
+        img.style.left = '0';
+        img.style.right = '0';
+      } else {
+        wrapper.dataset.status = 'off';
+        checkStatus();
+        img.style.width = "650px";
+        img.style.position = '';
+        img.style.height = '500px';
+        img.style.top = '0';
+        img.style.margin = '0';
+      }
+    }
+  });
+};
+
+productImageEnlargement();
 
 /***/ }),
 

@@ -49,7 +49,7 @@
         },
         {
             "type": "type",
-            "size": "big",
+            "size": "",
             "img": "assets/img/big-size/IMG_2425.jpg",
             "name": "name",
             "oldPrice": 0,

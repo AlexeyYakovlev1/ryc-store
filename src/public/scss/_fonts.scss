@@ -1,14 +1,11 @@
+// Montserrat regular
 @font-face {
-    font-family: 'NeueHaasDisplay';
-    src: url('../../assets/fonts/NeueHaasDisplay-Bold.ttf') format('truetype');
+    src: 'https://fonts.googleapis.com/css2?family=Montserrat&display=swap';
+    font-family: 'Montserrat', sans-serif;
 }
 
+// Quicksand medium
 @font-face {
-    font-family: 'NeueHaasDisplay';
-    src: url('../../assets/fonts/NeueHaasDisplay-Mediu.eot') format('truetype');
-}
-
-@font-face {
-    font-family: 'NeueHaasDisplay';
-    src: url('../../assets/fonts/NeueHaasDisplay-XThin.ttf') format('truetype');
+    src: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap';
+    font-family: 'Quicksand', sans-serif;
 }

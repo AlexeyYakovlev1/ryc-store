@@ -114,7 +114,7 @@ const animationSearch = () => {
     headerSearch.addEventListener('blur', () => {
         word.style.opacity = '1';
 
-        blockSearch.style.width = '36px';
+        blockSearch.style.width = '40px';
         blockSearch.style.height = '11px';
         blockSearch.classList.remove('no-border');
 
@@ -178,9 +178,10 @@ const search = (data) => {
     });
 }
 
-// появление кнопки прокрутки вверх
-const showBtnScrollUp = () => {
+// прокрутка вверх
+const scrollUp = () => {
     const up = document.querySelector('.up-wrapper');
+    const lines = document.querySelectorAll('.up-wrapper span');
 
     up.style.opacity = '0';
 
@@ -189,35 +190,102 @@ const showBtnScrollUp = () => {
 
         if (y > 500) {
             up.style.opacity = '1';
+            up.style.visibility = 'visible';
+            lines.forEach((item, index) => {
+                if (index === 0) {
+                    item.style.transform = "rotate(45deg)";
+                } else {
+                    item.style.transform = "rotate(-45deg)";
+                }
+            });
         } else {
             up.style.opacity = '0';
+            up.style.visibility = 'hidden';
+            lines.forEach(item => item.style.transform = "rotate(0deg)");
         }
     });
-}
 
-showBtnScrollUp();
-
-// показ товара
-const lookGoods = (activeClass) => {
-    let images = document.querySelectorAll('.product__block-list-item');
-
-    images.forEach((item, index) => {
-        const hideActiveClass = () => images.forEach(item => item.classList.remove(activeClass));
-        const showActiveClass = (num) => images[num].classList.add(activeClass);
-
-        hideActiveClass();
-        showActiveClass(0);
-
-        document.querySelector('.product__block-img').style.backgroundImage = images[0].style.backgroundImage;
-
-        item.addEventListener('click', () => {
-            let bg = item.style.backgroundImage;
-            hideActiveClass();
-            showActiveClass(index);
-
-            document.querySelector('.product__block-img').style.backgroundImage = bg;
+    up.addEventListener('click', () => {
+        window.scrollTo({
+            behavior: 'smooth',
+            top: 0
         });
     });
 }
 
-lookGoods('active-bg');
+scrollUp();
+
+// увеличение картинки товара при скролле
+const productImageEnlargement = () => {
+    let img = document.querySelector('.product__block-img');
+    let wrapper = document.querySelector('[data-status]');
+    let list_images = document.querySelector('.product__list-images');
+    let container = document.querySelector('.container');
+    let max_width = container.clientWidth;
+    let wdt = 650;
+    let scroll = true;
+
+    // проверка opacity
+    const checkOpacityForBg = () => {
+        if (pageYOffset / 10 > 98) {
+            wrapper.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+        }
+    }
+
+    // проверка статуса
+    const checkStatus = () => {
+        if (wrapper.dataset.status === 'on') {
+            wrapper.classList.add('main-wrapper');
+            wrapper.style.backgroundColor = `rgba(255, 255, 255, 0.${pageYOffset / 10})`;
+            checkOpacityForBg();
+
+            list_images.style.visibility = 'visible';
+            list_images.style.opacity = '1';
+        } else {
+            wrapper.classList.remove('main-wrapper');
+            list_images.style.visibility = 'hidden';
+            list_images.style.opacity = '0';
+        }
+    }
+
+    // скролл
+    window.addEventListener('scroll', () => {
+        if (scroll) {
+            wdt += Math.floor(pageYOffset);
+
+            if (wdt > max_width) {
+                wdt = max_width;
+                img.style.width = `${wdt}px`;
+            } else {
+                img.style.width = `${wdt}px`;
+                img.style.position = 'fixed';
+                img.style.height = '500px';
+                img.style.left = '0';
+                img.style.right = '0';
+            }
+
+            if (pageYOffset > 100) {
+                wrapper.dataset.status = 'on';
+                checkStatus();
+
+                img.style.width = `${wdt}px`;
+                img.style.margin = '0 auto';
+                img.style.position = 'absolute';
+                img.style.top = '100px';
+                img.style.left = '0';
+                img.style.right = '0';
+            } else {
+                wrapper.dataset.status = 'off';
+                checkStatus();
+
+                img.style.width = `650px`;
+                img.style.position = '';
+                img.style.height = '500px';
+                img.style.top = '0';
+                img.style.margin = '0';
+            }
+        }
+    });
+}
+
+productImageEnlargement();
