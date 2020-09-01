@@ -4,13 +4,18 @@
 }
 
 @font-face {
-  src: 'https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap';
-  font-family: 'Quicksand', sans-serif;
+  src: 'https://fonts.googleapis.com/css2?family=Montserrat&display=swap';
+  font-family: 'Montserrat', sans-serif;
 }
 
 .header__bottom-title a {
   font-weight: 400;
   font-family: 'Work Sans', sans-serif;
+}
+
+body {
+  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -381,6 +386,53 @@ img {
   height: auto;
 }
 
+.anim-zoom {
+  -webkit-animation: img 1.5s forwards;
+          animation: img 1.5s forwards;
+}
+
+@-webkit-keyframes img {
+  0% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    min-height: 50%;
+    max-height: 50%;
+    z-index: 999;
+  }
+  100% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    z-index: 999;
+  }
+}
+
+@keyframes img {
+  0% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    min-height: 50%;
+    max-height: 50%;
+    z-index: 999;
+  }
+  100% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    z-index: 999;
+  }
+}
+
 .header {
   width: 100%;
   position: fixed;
@@ -555,11 +607,6 @@ img {
   -webkit-transition: .5s;
   -o-transition: .5s;
   transition: .5s;
-}
-
-.active-bg {
-  background-blend-mode: multiply !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .no-border:hover::after {
@@ -936,7 +983,7 @@ img {
   top: 0;
   bottom: 0;
   margin: auto 0;
-  height: 12px;
+  height: 10px;
   background-color: #000;
   -webkit-transition: .5s;
   -o-transition: .5s;
@@ -944,12 +991,12 @@ img {
 }
 
 .up-wrapper span:nth-child(1) {
-  left: 8px;
+  left: 9px;
   width: 1px;
 }
 
 .up-wrapper span:nth-child(2) {
-  right: 8px;
+  right: 9px;
   width: .5px;
 }
 
@@ -957,6 +1004,10 @@ img {
   width: 0 !important;
   height: 0 !important;
   margin: 0 !important;
+}
+
+.open-window {
+  display: block !important;
 }
 
 .footer {
@@ -1025,54 +1076,6 @@ img {
 
 .footer__link-text:hover::after {
   display: block;
-}
-
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  padding: 10px;
-  top: 50px;
-  height: 300px !important;
-}
-
-.scale {
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
-}
-
-.scale:hover {
-  width: 110% !important;
-}
-
-.view-images {
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
-  position: relative;
-  cursor: pointer;
-}
-
-.view-images::before {
-  content: '';
-  background-blend-mode: multiply;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.5);
-  background-image: url(../../assets/img/search.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0;
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
-  left: 0;
-  top: 0;
-}
-
-.view-images:hover::before {
-  opacity: 1;
 }
 
 .title {
@@ -1238,18 +1241,6 @@ img {
   -o-transition: .5s;
   transition: .5s;
   padding-top: 100px;
-  position: relative;
-}
-
-.product .bg-black {
-  width: 100%;
-  height: 101%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
 }
 
 .product__info {
@@ -1262,7 +1253,6 @@ img {
   -webkit-transition: .5s;
   -o-transition: .5s;
   transition: .5s;
-  position: relative;
 }
 
 .product__img {
@@ -1272,11 +1262,8 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(../../assets/img/IMG_2709.jpg);
-  border-radius: 5px;
-}
-
-.product__img:not(:last-child) {
-  margin-bottom: 20px;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
 }
 
 .product__block {
@@ -1300,7 +1287,6 @@ img {
 .product__block-information {
   width: 400px;
   margin: 0 auto;
-  background-color: #fff;
 }
 
 .product__block-content {
@@ -1400,4 +1386,81 @@ img {
 
 .options-wrapper .options .card figure img {
   max-height: 300px;
+}
+
+.window-look {
+  width: 100%;
+  min-height: 100%;
+  max-height: -webkit-max-content;
+  max-height: -moz-max-content;
+  max-height: max-content;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  display: none;
+}
+
+.window-look__list-images {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+}
+
+.window-look__img {
+  width: 100%;
+  height: 100vh;
+  display: block;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.window-look__close {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.window-look__close::before, .window-look__close::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 10px;
+  height: 1px;
+  background-color: #000;
+  left: 0;
+  right: 0;
+}
+
+.window-look__close::before {
+  -webkit-transform: rotateZ(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotateZ(45deg);
+}
+
+.window-look__close::after {
+  -webkit-transform: rotateZ(-45deg);
+      -ms-transform: rotate(-45deg);
+          transform: rotateZ(-45deg);
+}
+
+@media screen and (max-width: 1384px) {
+  .window-look {
+    width: 100% !important;
+  }
 }

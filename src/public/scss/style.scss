@@ -126,22 +126,12 @@
 .product {
     transition: .5s;
     padding-top: 100px;
-    position: relative;
-    .bg-black {
-        width: 100%;
-        height: 101%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: .5s;
-    }
     &__info {
         height: 500px;
         display: flex;
         padding-top: 100px;
         overflow: hidden;
         transition: .5s;
-        position: relative;
     }
     &__img {
         width: 650px;
@@ -150,10 +140,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-image: url(../../assets/img/IMG_2709.jpg);
-        border-radius: 5px;
-        &:not(:last-child) {
-            margin-bottom: 20px;
-        }
+        cursor: zoom-in;
     }
     &__block {
         height: 500px;
@@ -166,7 +153,6 @@
         &-information {
             width: 400px;
             margin: 0 auto;
-            background-color: #fff;
         }
         &-content {
             height: 500px;
@@ -235,5 +221,69 @@
                 }
             }
         }
+    }
+}
+
+.window-look {
+    width: 100%;
+    min-height: 100%;
+    max-height: max-content;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.6);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+    &__list-images {
+        width: 100%;
+        height: max-content;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #000;
+    }
+    &__img {
+        width: 100%;
+        height: 100vh;
+        display: block;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    &__close {
+        position: fixed;
+        top: 40px;
+        right: 40px;
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 10px;
+            height: 1px;
+            background-color: #000;
+            left: 0;
+            right: 0;
+        }
+        &::before {
+            transform: rotateZ(45deg);
+        }
+        &::after {
+            transform: rotateZ(-45deg);
+        }
+    }
+}
+
+@media screen and (max-width: 1384px) {
+    .window-look {
+        width: 100% !important;
     }
 }

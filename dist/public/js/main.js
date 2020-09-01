@@ -3283,6 +3283,45 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/web.timers.js":
+/*!****************************************************!*\
+  !*** ./node_modules/core-js/modules/web.timers.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var userAgent = __webpack_require__(/*! ../internals/engine-user-agent */ "./node_modules/core-js/internals/engine-user-agent.js");
+
+var slice = [].slice;
+var MSIE = /MSIE .\./.test(userAgent); // <- dirty ie9- check
+
+var wrap = function (scheduler) {
+  return function (handler, timeout /* , ...arguments */) {
+    var boundArgs = arguments.length > 2;
+    var args = boundArgs ? slice.call(arguments, 2) : undefined;
+    return scheduler(boundArgs ? function () {
+      // eslint-disable-next-line no-new-func
+      (typeof handler == 'function' ? handler : Function(handler)).apply(this, args);
+    } : handler, timeout);
+  };
+};
+
+// ie9- setTimeout & setInterval additional parameters fix
+// https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers
+$({ global: true, bind: true, forced: MSIE }, {
+  // `setTimeout` method
+  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-settimeout
+  setTimeout: wrap(global.setTimeout),
+  // `setInterval` method
+  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-setinterval
+  setInterval: wrap(global.setInterval)
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -18039,8 +18078,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_trim__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
+/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_11__);
+
 
 
 
@@ -18236,7 +18278,8 @@ var search = function search(data) {
 var scrollUp = function scrollUp() {
   var up = document.querySelector('.up-wrapper');
   var lines = document.querySelectorAll('.up-wrapper span');
-  up.style.opacity = '0';
+  up.style.opacity = '0'; // появление кнопки "вверх" при скролле
+
   window.addEventListener('scroll', function () {
     var y = pageYOffset;
 
@@ -18257,7 +18300,8 @@ var scrollUp = function scrollUp() {
         return item.style.transform = "rotate(0deg)";
       });
     }
-  });
+  }); // скролл вверх
+
   up.addEventListener('click', function () {
     window.scrollTo({
       behavior: 'smooth',
@@ -18266,88 +18310,55 @@ var scrollUp = function scrollUp() {
   });
 };
 
-scrollUp(); // просмотр картинок товара с анимацией
+scrollUp(); // просмотр изображений в модальном окне
 
-var viewImagesOfProduct = function viewImagesOfProduct() {
-  var scroll = true;
-  var img = document.querySelector('.product__block-img');
-  var desc = document.querySelector('.product__block-information');
-  var wrapper = document.querySelector('.product__info');
-  var all_img = document.querySelectorAll('.product__img');
-  var bg = document.querySelector('.bg-black');
-  var search = document.querySelector('.view-images');
-  var total_height;
-  var y; // проверка скролла
+var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
+  var img = document.querySelector('.product__img');
+  var modal_window = document.querySelector('.window-look');
+  var close = document.querySelector('.window-look__close');
+  var list_images = document.querySelector('.window-look__list-images');
+  array.forEach(function (item, index) {
+    if (index === 0) {
+      img.style.backgroundImage = "url(".concat(item.img, ")");
+    } // создание блоков с картинками
 
-  var checkScroll = function checkScroll() {
-    if (scroll) {
-      if (y > 100 && y < 1600) {
-        wrapper.style.height = "".concat(total_height, "px");
-        bg.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        img.style.height = "".concat(total_height, "px");
-        desc.classList.add('sticky');
-        all_img.forEach(function (item) {
-          item.classList.add('scale');
 
-          if (item.classList.contains('view-images')) {
-            item.classList.remove('view-images');
-          }
-        });
-        scroll = true;
-      } else if (y > 1800) {
-        img.style.height = '500px';
-        bg.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        wrapper.style.height = '500px';
-        desc.classList.remove('sticky');
-        all_img.forEach(function (item, index) {
-          item.classList.remove('scale');
+    var createImages = function createImages() {
+      var block = "<li class=\"window-look__img\" style=\"background-image: url(".concat(item.img, ");\"></li>");
+      list_images.innerHTML += block;
+    };
 
-          if (index === 0) {
-            item.classList.add('view-images');
-          }
-        });
-        scroll = false;
-      } else if (y > 0 && y < 100) {
-        img.style.height = '500px';
-        bg.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-        wrapper.style.height = '500px';
-        desc.classList.remove('sticky');
-        all_img.forEach(function (item, index) {
-          item.classList.remove('scale');
+    createImages();
+  }); // появление окна просмотра
 
-          if (index === 0) {
-            item.classList.add('view-images');
-          }
-        });
-      }
-    }
-  };
+  img.addEventListener('click', function () {
+    setTimeout(function () {
+      modal_window.classList.add('open-window');
+      img.classList.remove('anim-zoom');
+    }, 1500);
+    img.classList.add('anim-zoom');
+  }); // закрытие окна просмотра
 
-  window.addEventListener('scroll', function () {
-    all_img.forEach(function (item) {
-      return total_height = item.clientHeight * all_img.length + (all_img.length * 20 - 20);
-    });
-    y = pageYOffset;
-    checkScroll();
+  close.addEventListener('click', function () {
+    modal_window.classList.remove('open-window');
   });
-  search.addEventListener('click', function () {
-    wrapper.style.height = "".concat(total_height, "px");
-    bg.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-    img.style.height = "".concat(total_height, "px");
-    desc.classList.add('sticky');
-    all_img.forEach(function (item) {
-      item.classList.add('scale');
-
-      if (item.classList.contains('view-images')) {
-        item.classList.remove('view-images');
-      }
-    });
-    scroll = true;
-    checkScroll();
+  window.addEventListener('keydown', function (event) {
+    if (event.keyCode === 27) {
+      modal_window.classList.remove('open-window');
+    }
   });
 };
 
-viewImagesOfProduct();
+var images = [{
+  img: 'assets/img/IMG_2709.jpg'
+}, {
+  img: 'assets/img/IMG_2742.jpg'
+}, {
+  img: 'assets/img/IMG_2834.jpg'
+}, {
+  img: 'assets/img/IMG_2827.jpg'
+}];
+document.querySelector('.product__img') && lookingImagesInModalWindow(images);
 
 /***/ }),
 

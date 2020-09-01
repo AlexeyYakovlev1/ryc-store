@@ -14,6 +14,10 @@
     scroll-behavior: smooth;
 }
 
+body {
+    @extend %montserrat-regular;
+}
+
 .container {
     width: 1440px;
     margin: 0 auto;
@@ -23,6 +27,31 @@
 img {
     max-width: 100%;
     height: auto;
+}
+
+.anim-zoom {
+    animation: img 1.5s forwards;
+}
+
+@keyframes img {
+    0% {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50%;
+        min-height: 50%;
+        max-height: 50%;
+        z-index: 999;
+    }
+    100% {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        min-height: 100%;
+        max-height: 100%;
+        z-index: 999;
+    }
 }
 
 .header {
@@ -143,11 +172,6 @@ img {
         left: 0;
         transition: .5s;
     }
-}
-
-.active-bg {
-    background-blend-mode: multiply !important;
-    background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
 .no-border:hover::after {
@@ -335,15 +359,15 @@ img {
         top: 0;
         bottom: 0;
         margin: auto 0;
-        height: 12px;
+        height: 10px;
         background-color: #000;
         transition: .5s;
         &:nth-child(1) {
-            left: 8px;
+            left: 9px;
             width: 1px;
         }
         &:nth-child(2) {
-            right: 8px;
+            right: 9px;
             width: .5px;
         }
     }
@@ -353,6 +377,10 @@ img {
     width: 0 !important;
     height: 0 !important;
     margin: 0 !important;
+}
+
+.open-window {
+    display: block !important;
 }
 
 .footer {
@@ -402,43 +430,5 @@ img {
                 display: block;
             }
         }
-    }
-}
-
-.sticky {
-    position: sticky;
-    padding: 10px;
-    top: 50px;
-    height: 300px !important;
-}
-
-.scale {
-    transition: .5s;
-    &:hover {
-        width: 110% !important;
-    }
-}
-
-.view-images {
-    transition: .5s;
-    position: relative;
-    cursor: pointer;
-    &::before {
-        content: '';
-        background-blend-mode: multiply;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.5);
-        background-image: url(../../assets/img/search.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        opacity: 0;
-        transition: .5s;
-        left: 0;
-        top: 0;
-    }
-    &:hover::before {
-        opacity: 1;
     }
 }

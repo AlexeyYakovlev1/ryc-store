@@ -185,6 +185,7 @@ const scrollUp = () => {
 
     up.style.opacity = '0';
 
+    // появление кнопки "вверх" при скролле
     window.addEventListener('scroll', function() {
         let y = pageYOffset;
 
@@ -205,6 +206,7 @@ const scrollUp = () => {
         }
     });
 
+    // скролл вверх
     up.addEventListener('click', () => {
         window.scrollTo({
             behavior: 'smooth',
@@ -215,83 +217,60 @@ const scrollUp = () => {
 
 scrollUp();
 
-// просмотр картинок товара с анимацией
-const viewImagesOfProduct = () => {
-    let scroll = true;
-    let img = document.querySelector('.product__block-img');
-    let desc = document.querySelector('.product__block-information');
-    let wrapper = document.querySelector('.product__info');
-    let all_img = document.querySelectorAll('.product__img');
-    let bg = document.querySelector('.bg-black');
-    let search = document.querySelector('.view-images');
-    let total_height;
-    let y;
+// просмотр изображений в модальном окне
+const lookingImagesInModalWindow = (array) => {
+    let img = document.querySelector('.product__img');
+    let modal_window = document.querySelector('.window-look');
+    let close = document.querySelector('.window-look__close');
+    let list_images = document.querySelector('.window-look__list-images');
 
-    // проверка скролла
-    const checkScroll = () => {
-        if (scroll) {
-            if (y > 100 && y < 1600) {
-                wrapper.style.height = `${total_height}px`;
-                bg.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-                img.style.height = `${total_height}px`;
-                desc.classList.add('sticky');
-                all_img.forEach(item => {
-                    item.classList.add('scale');
-                    if (item.classList.contains('view-images')) {
-                        item.classList.remove('view-images');
-                    }
-                });
-
-                scroll = true;
-            } else if (y > 1800) {
-                img.style.height = '500px';
-                bg.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-                wrapper.style.height = '500px';
-                desc.classList.remove('sticky');
-                all_img.forEach((item, index) => {
-                    item.classList.remove('scale');
-                    if (index === 0) {
-                        item.classList.add('view-images');
-                    }
-                });
-
-                scroll = false;
-            } else if (y > 0 && y < 100) {
-                img.style.height = '500px';
-                bg.style.backgroundColor = 'rgba(0, 0, 0, 0)';
-                wrapper.style.height = '500px';
-                desc.classList.remove('sticky');
-                all_img.forEach((item, index) => {
-                    item.classList.remove('scale');
-                    if (index === 0) {
-                        item.classList.add('view-images');
-                    }
-                });
-            }
+    array.forEach((item, index) => {
+        if (index === 0) {
+            img.style.backgroundImage = `url(${item.img})`;
         }
-    }
 
-    window.addEventListener('scroll', () => {
-        all_img.forEach(item => total_height = (item.clientHeight * all_img.length) + ((all_img.length * 20) - 20));
-        y = pageYOffset;
-        checkScroll();
+        // создание блоков с картинками
+        const createImages = () => {
+            let block = `<li class="window-look__img" style="background-image: url(${item.img});"></li>`;
+            list_images.innerHTML += block;
+        }
+
+        createImages();
     });
 
-    search.addEventListener('click', () => {
-        wrapper.style.height = `${total_height}px`;
-        bg.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        img.style.height = `${total_height}px`;
-        desc.classList.add('sticky');
-        all_img.forEach(item => {
-            item.classList.add('scale');
-            if (item.classList.contains('view-images')) {
-                item.classList.remove('view-images');
-            }
-        });
+    // появление окна просмотра
+    img.addEventListener('click', () => {
+        setTimeout(() => {
+            modal_window.classList.add('open-window');
+            img.classList.remove('anim-zoom');
+        }, 1500);
+        img.classList.add('anim-zoom');
+    });
 
-        scroll = true;
-        checkScroll();
+    // закрытие окна просмотра
+    close.addEventListener('click', () => {
+        modal_window.classList.remove('open-window');
+    });
+
+    window.addEventListener('keydown', event => {
+        if (event.keyCode === 27) {
+            modal_window.classList.remove('open-window');
+        }
     });
 }
 
-viewImagesOfProduct();
+let images = [{
+        img: 'assets/img/IMG_2709.jpg'
+    },
+    {
+        img: 'assets/img/IMG_2742.jpg'
+    },
+    {
+        img: 'assets/img/IMG_2834.jpg'
+    },
+    {
+        img: 'assets/img/IMG_2827.jpg'
+    }
+];
+
+document.querySelector('.product__img') && lookingImagesInModalWindow(images);
