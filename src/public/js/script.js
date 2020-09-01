@@ -150,7 +150,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // обработка данных, которые приходят по этому запросу
             .then(data => {
                 createProducts(data, '.list-cards');
-                createProducts(data, '.product__options');
+                createProducts(data, '.options');
                 search(data);
             })
             // ошибка
@@ -215,77 +215,83 @@ const scrollUp = () => {
 
 scrollUp();
 
-// увеличение картинки товара при скролле
-const productImageEnlargement = () => {
-    let img = document.querySelector('.product__block-img');
-    let wrapper = document.querySelector('[data-status]');
-    let list_images = document.querySelector('.product__list-images');
-    let container = document.querySelector('.container');
-    let max_width = container.clientWidth;
-    let wdt = 650;
+// просмотр картинок товара с анимацией
+const viewImagesOfProduct = () => {
     let scroll = true;
+    let img = document.querySelector('.product__block-img');
+    let desc = document.querySelector('.product__block-information');
+    let wrapper = document.querySelector('.product__info');
+    let all_img = document.querySelectorAll('.product__img');
+    let bg = document.querySelector('.bg-black');
+    let search = document.querySelector('.view-images');
+    let total_height;
+    let y;
 
-    // проверка opacity
-    const checkOpacityForBg = () => {
-        if (pageYOffset / 10 > 98) {
-            wrapper.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-        }
-    }
-
-    // проверка статуса
-    const checkStatus = () => {
-        if (wrapper.dataset.status === 'on') {
-            wrapper.classList.add('main-wrapper');
-            wrapper.style.backgroundColor = `rgba(255, 255, 255, 0.${pageYOffset / 10})`;
-            checkOpacityForBg();
-
-            list_images.style.visibility = 'visible';
-            list_images.style.opacity = '1';
-        } else {
-            wrapper.classList.remove('main-wrapper');
-            list_images.style.visibility = 'hidden';
-            list_images.style.opacity = '0';
-        }
-    }
-
-    // скролл
-    window.addEventListener('scroll', () => {
+    // проверка скролла
+    const checkScroll = () => {
         if (scroll) {
-            wdt += Math.floor(pageYOffset);
+            if (y > 100 && y < 1600) {
+                wrapper.style.height = `${total_height}px`;
+                bg.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+                img.style.height = `${total_height}px`;
+                desc.classList.add('sticky');
+                all_img.forEach(item => {
+                    item.classList.add('scale');
+                    if (item.classList.contains('view-images')) {
+                        item.classList.remove('view-images');
+                    }
+                });
 
-            if (wdt > max_width) {
-                wdt = max_width;
-                img.style.width = `${wdt}px`;
-            } else {
-                img.style.width = `${wdt}px`;
-                img.style.position = 'fixed';
+                scroll = true;
+            } else if (y > 1800) {
                 img.style.height = '500px';
-                img.style.left = '0';
-                img.style.right = '0';
-            }
+                bg.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+                wrapper.style.height = '500px';
+                desc.classList.remove('sticky');
+                all_img.forEach((item, index) => {
+                    item.classList.remove('scale');
+                    if (index === 0) {
+                        item.classList.add('view-images');
+                    }
+                });
 
-            if (pageYOffset > 100) {
-                wrapper.dataset.status = 'on';
-                checkStatus();
-
-                img.style.width = `${wdt}px`;
-                img.style.margin = '0 auto';
-                img.style.position = 'absolute';
-                img.style.top = '100px';
-                img.style.left = '0';
-                img.style.right = '0';
-            } else {
-                wrapper.dataset.status = 'off';
-                checkStatus();
-
-                img.style.width = `650px`;
-                img.style.position = '';
+                scroll = false;
+            } else if (y > 0 && y < 100) {
                 img.style.height = '500px';
-                img.style.top = '0';
-                img.style.margin = '0';
+                bg.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+                wrapper.style.height = '500px';
+                desc.classList.remove('sticky');
+                all_img.forEach((item, index) => {
+                    item.classList.remove('scale');
+                    if (index === 0) {
+                        item.classList.add('view-images');
+                    }
+                });
             }
         }
+    }
+
+    window.addEventListener('scroll', () => {
+        all_img.forEach(item => total_height = (item.clientHeight * all_img.length) + ((all_img.length * 20) - 20));
+        y = pageYOffset;
+        checkScroll();
+    });
+
+    search.addEventListener('click', () => {
+        wrapper.style.height = `${total_height}px`;
+        bg.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        img.style.height = `${total_height}px`;
+        desc.classList.add('sticky');
+        all_img.forEach(item => {
+            item.classList.add('scale');
+            if (item.classList.contains('view-images')) {
+                item.classList.remove('view-images');
+            }
+        });
+
+        scroll = true;
+        checkScroll();
     });
 }
 
-productImageEnlargement();
+viewImagesOfProduct();

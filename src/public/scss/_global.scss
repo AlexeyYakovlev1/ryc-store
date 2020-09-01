@@ -75,9 +75,8 @@ img {
             display: flex;
             justify-content: center;
             align-items: center;
-            img {
-                width: 97px;
-                height: 10px;
+            a {
+                color: #000;
             }
         }
         &-list {
@@ -95,7 +94,7 @@ img {
                 &::after {
                     content: '';
                     width: 0;
-                    height: .08px;
+                    height: .1px;
                     position: absolute;
                     background-color: #000;
                     bottom: -2px;
@@ -327,11 +326,9 @@ img {
     top: 200px;
     right: 50px;
     z-index: 999;
-    -webkit-transition: .5s;
-    -o-transition: .5s;
     transition: .5s;
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
     visibility: hidden;
     background-color: #fff;
@@ -341,15 +338,15 @@ img {
         top: 0;
         bottom: 0;
         margin: auto 0;
-        height: 10px;
-        width: 1px;
+        height: 12px;
         background-color: #000;
         transition: .5s;
         &:nth-child(1) {
-            left: 9px;
+            left: 13px;
+            width: 1px;
         }
         &:nth-child(2) {
-            right: 9px;
+            right: 13px;
             width: .5px;
         }
     }
@@ -363,6 +360,7 @@ img {
 
 .footer {
     height: 300px;
+    z-index: 300;
     &__info {
         display: flex;
         justify-content: space-between;
@@ -410,13 +408,40 @@ img {
     }
 }
 
-.main-wrapper {
-    position: absolute;
-    z-index: 9999;
-    width: 100%;
-    height: max-content;
-    top: 0;
-    left: 0;
+.sticky {
+    position: sticky;
+    padding: 10px;
+    top: 50px;
+    height: 300px !important;
+}
+
+.scale {
     transition: .5s;
-    background-color: rgba(255, 255, 255, 0.2);
+    &:hover {
+        width: 110% !important;
+    }
+}
+
+.view-images {
+    transition: .5s;
+    position: relative;
+    cursor: pointer;
+    &::before {
+        content: '';
+        background-blend-mode: multiply;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.5);
+        background-image: url(../../assets/img/search.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0;
+        transition: .5s;
+        left: 0;
+        top: 0;
+    }
+    &:hover::before {
+        opacity: 1;
+    }
 }

@@ -17,6 +17,46 @@
         },
         {
             "type": "type",
+            "size": "small",
+            "img": "assets/img/big-size/IMG_2249.jpg",
+            "name": "name",
+            "oldPrice": 10,
+            "nowPrice": 5
+        },
+        {
+            "type": "type",
+            "size": "small",
+            "img": "assets/img/big-size/IMG_2249.jpg",
+            "name": "name",
+            "oldPrice": 10,
+            "nowPrice": 5
+        },
+        {
+            "type": "type",
+            "size": "small",
+            "img": "assets/img/big-size/IMG_2249.jpg",
+            "name": "name",
+            "oldPrice": 10,
+            "nowPrice": 5
+        },
+        {
+            "type": "type",
+            "size": "small",
+            "img": "assets/img/big-size/IMG_2249.jpg",
+            "name": "name",
+            "oldPrice": 10,
+            "nowPrice": 5
+        },
+        {
+            "type": "type",
+            "size": "small",
+            "img": "assets/img/big-size/IMG_2249.jpg",
+            "name": "name",
+            "oldPrice": 10,
+            "nowPrice": 5
+        },
+        {
+            "type": "type",
             "size": "big",
             "img": "assets/img/big-size/IMG_2272.jpg",
             "name": "Кофта",

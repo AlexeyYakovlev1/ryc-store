@@ -12,22 +12,16 @@
 <body>
     @@include('./components/header.html') @@include('./components/preolaider.html') @@include('./components/up.html')
     <div class="product">
+        <div class="bg-black"></div>
         <div class="container">
             <div class="product__info">
-                <div class="product__block" style="width: 800px; display: flex; justify-content: space-between;">
-                    <div data-status="off">
-                        <div class="product__block-img" style="width: 650px;"></div>
-                        <div class="container">
-                            <ul class="product__list-images">
-                                <li class="product__img" style="background-image: url(./assets/img/IMG_2709.jpg);"></li>
-                                <li class="product__img" style="background-image: url(./assets/img/IMG_2827.jpg);"></li>
-                                <li class="product__img" style="background-image: url(./assets/img/IMG_2742.jpg);"></li>
-                                <li class="product__img" style="background-image: url(./assets/img/IMG_2742.jpg"></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="product__block product__block-img">
+                    <div class="product__img view-images"></div>
+                    <div class="product__img"></div>
+                    <div class="product__img"></div>
+                    <div class="product__img"></div>
                 </div>
-                <div class="product__block" style="width: 400px; margin: 0 auto;">
+                <div class="product__block product__block-information">
                     <div class="product__block-content">
                         <div class="product__block-heading">Name</div>
                         <div class="product__block-price">1,000 руб</div>
@@ -35,20 +29,22 @@
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum iure eaque quam pariatur expedita incidunt sunt veritatis quos repellat distinctio?
                         </p>
                         <select class="product__block-list-size">
-                            <option value="" disabled>Выберите размер</option>
-                            <option value="s">s</option>
-                            <option value="xs">xs</option>
-                            <option value="xxl">xxl</option>
-                            <option value="m">m</option>
-                        </select>
+                                <option value="" disabled>Выберите размер</option>
+                                <option value="s">s</option>
+                                <option value="xs">xs</option>
+                                <option value="xxl">xxl</option>
+                                <option value="m">m</option>
+                            </select>
                         <a class="product__block-link" href="#">Добавить в корзину</a>
                         <a class="product__block-link" href="#">Назад</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="product__options-wrapper">
-            <ul class="product__options"></ul>
+    </div>
+    <div class="options-wrapper">
+        <div class="container">
+            <ul class="options"></ul>
         </div>
     </div>
     @@include('./components/footer.html')
