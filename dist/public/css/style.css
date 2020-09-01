@@ -1,6 +1,6 @@
 @font-face {
-  src: 'https://fonts.googleapis.com/css2?family=Montserrat&display=swap';
-  font-family: 'Montserrat', sans-serif;
+  src: 'https://fonts.googleapis.com/css2?family=Work+Sans&display=swap';
+  font-family: 'Work Sans', sans-serif;
 }
 
 @font-face {
@@ -8,9 +8,9 @@
   font-family: 'Quicksand', sans-serif;
 }
 
-body {
+.header__bottom-title a {
   font-weight: 400;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Work Sans', sans-serif;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -923,8 +923,8 @@ img {
   -webkit-transition: .5s;
   -o-transition: .5s;
   transition: .5s;
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
   visibility: hidden;
   background-color: #fff;
@@ -944,12 +944,12 @@ img {
 }
 
 .up-wrapper span:nth-child(1) {
-  left: 13px;
+  left: 8px;
   width: 1px;
 }
 
 .up-wrapper span:nth-child(2) {
-  right: 13px;
+  right: 8px;
   width: .5px;
 }
 
