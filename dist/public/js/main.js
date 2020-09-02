@@ -18312,11 +18312,20 @@ var scrollUp = function scrollUp() {
 
 scrollUp(); // просмотр изображений в модальном окне
 
-var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
+var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) {
   var img = document.querySelector('.product__img');
   var modal_window = document.querySelector('.window-look');
   var close = document.querySelector('.window-look__close');
   var list_images = document.querySelector('.window-look__list-images');
+
+  var hideImage = function hideImage() {
+    modal_window.classList.remove('open-window');
+    img.classList.add('close-anim-zoom');
+    setTimeout(function () {
+      img.classList.remove('close-anim-zoom');
+    }, ms);
+  };
+
   array.forEach(function (item, index) {
     if (index === 0) {
       img.style.backgroundImage = "url(".concat(item.img, ")");
@@ -18329,23 +18338,40 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
     };
 
     createImages();
+  });
+  var images = document.querySelectorAll('.window-look__img');
+  images.forEach(function (item, index) {
+    if (index === 0) {
+      item.style.cursor = 'zoom-out';
+    }
   }); // появление окна просмотра
 
   img.addEventListener('click', function () {
+    img.classList.add('anim-zoom');
     setTimeout(function () {
       modal_window.classList.add('open-window');
       img.classList.remove('anim-zoom');
-    }, 1500);
-    img.classList.add('anim-zoom');
+    }, ms);
   }); // закрытие окна просмотра
 
   close.addEventListener('click', function () {
-    modal_window.classList.remove('open-window');
+    return hideImage();
   });
   window.addEventListener('keydown', function (event) {
     if (event.keyCode === 27) {
-      modal_window.classList.remove('open-window');
+      hideImage();
     }
+  });
+  images.forEach(function (item, index) {
+    item.addEventListener('click', function () {
+      if (index === 0) {
+        img.classList.add('close-anim-zoom');
+        modal_window.classList.remove('open-window');
+        setTimeout(function () {
+          img.classList.remove('close-anim-zoom');
+        }, ms);
+      }
+    });
   });
 };
 
@@ -18358,7 +18384,22 @@ var images = [{
 }, {
   img: 'assets/img/IMG_2827.jpg'
 }];
-document.querySelector('.product__img') && lookingImagesInModalWindow(images);
+document.querySelector('.product__img') && lookingImagesInModalWindow(images, 1500); // появление меню
+
+var showMenu = function showMenu() {
+  var el = document.querySelector('.header__bottom-shop');
+  var menu = document.querySelector('.header__bottom-shop-list');
+  el.addEventListener('mouseover', function () {
+    el.classList.add('no-bottom-line');
+    menu.style.bottom = '-40px';
+  });
+  el.addEventListener('mouseout', function () {
+    el.classList.add('no-bottom-line');
+    menu.style.bottom = '100px';
+  }); // const events = (ev, className, removeClass, addClass, num)
+};
+
+showMenu();
 
 /***/ }),
 
@@ -18380,6 +18421,7 @@ __webpack_require__.r(__webpack_exports__);
 jquery__WEBPACK_IMPORTED_MODULE_1___default()('.title__slider').slick({
   arrows: false,
   dots: false,
+  speed: 2000,
   autoplay: 4000
 });
 

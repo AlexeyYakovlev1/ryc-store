@@ -8,12 +8,12 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.header__bottom-title a {
+.header__bottom a, .header__bottom-title a {
   font-weight: 400;
   font-family: 'Work Sans', sans-serif;
 }
 
-body {
+body, .header__bottom-link {
   font-weight: 400;
   font-family: 'Montserrat', sans-serif;
 }
@@ -387,11 +387,12 @@ img {
 }
 
 .anim-zoom {
-  -webkit-animation: img 1.5s forwards;
-          animation: img 1.5s forwards;
+  -webkit-animation: zoom 1.5s forwards;
+          animation: zoom 1.5s forwards;
+  z-index: 999;
 }
 
-@-webkit-keyframes img {
+@-webkit-keyframes zoom {
   0% {
     position: absolute;
     left: 0;
@@ -399,7 +400,6 @@ img {
     width: 50%;
     min-height: 50%;
     max-height: 50%;
-    z-index: 999;
   }
   100% {
     position: absolute;
@@ -408,11 +408,10 @@ img {
     width: 100%;
     min-height: 100%;
     max-height: 100%;
-    z-index: 999;
   }
 }
 
-@keyframes img {
+@keyframes zoom {
   0% {
     position: absolute;
     left: 0;
@@ -420,7 +419,6 @@ img {
     width: 50%;
     min-height: 50%;
     max-height: 50%;
-    z-index: 999;
   }
   100% {
     position: absolute;
@@ -429,7 +427,6 @@ img {
     width: 100%;
     min-height: 100%;
     max-height: 100%;
-    z-index: 999;
   }
 }
 
@@ -454,7 +451,8 @@ img {
   height: 100%;
   color: #fff;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 11px;
+  text-transform: uppercase;
   display: block;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -488,6 +486,10 @@ img {
   position: relative;
 }
 
+.header__bottom a {
+  color: #000;
+}
+
 .header__bottom-title {
   position: absolute;
   width: -webkit-max-content;
@@ -513,6 +515,38 @@ img {
   color: #000;
 }
 
+.header__bottom-shop {
+  z-index: 999;
+}
+
+.header__bottom-shop-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  -webkit-transition: .5s;
+  -o-transition: .5s;
+  transition: .5s;
+  overflow-y: hidden;
+  position: absolute;
+  left: 0;
+  bottom: 100px;
+}
+
+.header__bottom-shop-list li {
+  font-size: 9px;
+}
+
+.header__bottom-shop-list li:not(:last-child) {
+  margin-bottom: 5px;
+}
+
 .header__bottom-list {
   width: 200px;
   display: -webkit-box;
@@ -532,13 +566,13 @@ img {
   transition: .5s;
 }
 
-.header__bottom-list li {
+.header__bottom-link {
   text-transform: uppercase;
   font-size: 0.625rem;
   position: relative;
 }
 
-.header__bottom-list li::after {
+.header__bottom-link::after {
   content: '';
   width: 0;
   height: .1px;
@@ -553,12 +587,8 @@ img {
   overflow: hidden;
 }
 
-.header__bottom-list li:hover::after {
+.header__bottom-link:hover::after {
   width: 100%;
-}
-
-.header__bottom-list li a {
-  color: #000;
 }
 
 .header__block-search {
@@ -1078,6 +1108,61 @@ img {
   display: block;
 }
 
+.no-bottom-line::after {
+  width: 0 !important;
+}
+
+.close-anim-zoom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  z-index: 999;
+  -webkit-animation: zoomOut 1.5s forwards;
+          animation: zoomOut 1.5s forwards;
+  z-index: 999;
+}
+
+@-webkit-keyframes zoomOut {
+  0% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+  }
+  100% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    min-height: 500px;
+    max-height: 501px;
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+  }
+  100% {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    min-height: 500px;
+    max-height: 501px;
+  }
+}
+
 .title {
   height: 600px;
   padding-top: 100px;
@@ -1285,7 +1370,7 @@ img {
 }
 
 .product__block-information {
-  width: 400px;
+  width: 305px;
   margin: 0 auto;
 }
 
@@ -1457,10 +1542,4 @@ img {
   -webkit-transform: rotateZ(-45deg);
       -ms-transform: rotate(-45deg);
           transform: rotateZ(-45deg);
-}
-
-@media screen and (max-width: 1384px) {
-  .window-look {
-    width: 100% !important;
-  }
 }
