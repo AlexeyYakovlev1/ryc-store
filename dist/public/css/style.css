@@ -372,7 +372,6 @@ template {
   text-decoration: none;
   outline: none;
   resize: none;
-  scroll-behavior: smooth;
 }
 
 .container {
@@ -1185,7 +1184,6 @@ img {
 .title__block-img {
   display: block;
   height: 500px;
-  background-color: #000;
 }
 
 .title__text {

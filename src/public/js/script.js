@@ -231,6 +231,11 @@ const lookingImagesInModalWindow = (array, ms) => {
         setTimeout(() => {
             img.classList.remove('close-anim-zoom');
         }, ms);
+
+        window.scrollTo({
+            behavior: 'auto',
+            top: 0
+        });
     }
 
     array.forEach((item, index) => {
@@ -250,41 +255,30 @@ const lookingImagesInModalWindow = (array, ms) => {
     let images = document.querySelectorAll('.window-look__img');
 
     images.forEach((item, index) => {
-        if (index === 0) {
-            item.style.cursor = 'zoom-out';
-        }
+        if (index === 0) item.style.cursor = 'zoom-out';
     });
 
     // появление окна просмотра
     img.addEventListener('click', () => {
         img.classList.add('anim-zoom');
+        document.body.style.overflow = 'hidden';
+
+        window.scrollTo({
+            behavior: 'auto',
+            top: 0
+        });
+
         setTimeout(() => {
             modal_window.classList.add('open-window');
             img.classList.remove('anim-zoom');
+            document.body.style.overflow = 'visible';
         }, ms);
     });
 
     // закрытие окна просмотра
     close.addEventListener('click', () => hideImage());
-
-    window.addEventListener('keydown', event => {
-        if (event.keyCode === 27) {
-            hideImage();
-        }
-    });
-
-    images.forEach((item, index) => {
-        item.addEventListener('click', () => {
-            if (index === 0) {
-                img.classList.add('close-anim-zoom');
-                modal_window.classList.remove('open-window');
-
-                setTimeout(() => {
-                    img.classList.remove('close-anim-zoom');
-                }, ms);
-            }
-        });
-    });
+    window.addEventListener('keydown', event => event.keyCode === 27 && hideImage());
+    images.forEach((item, index) => item.addEventListener('click', () => index === 0 && hideImage()));
 }
 
 let images = [{

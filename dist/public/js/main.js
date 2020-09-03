@@ -18324,6 +18324,10 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) 
     setTimeout(function () {
       img.classList.remove('close-anim-zoom');
     }, ms);
+    window.scrollTo({
+      behavior: 'auto',
+      top: 0
+    });
   };
 
   array.forEach(function (item, index) {
@@ -18341,16 +18345,20 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) 
   });
   var images = document.querySelectorAll('.window-look__img');
   images.forEach(function (item, index) {
-    if (index === 0) {
-      item.style.cursor = 'zoom-out';
-    }
+    if (index === 0) item.style.cursor = 'zoom-out';
   }); // появление окна просмотра
 
   img.addEventListener('click', function () {
     img.classList.add('anim-zoom');
+    document.body.style.overflow = 'hidden';
+    window.scrollTo({
+      behavior: 'auto',
+      top: 0
+    });
     setTimeout(function () {
       modal_window.classList.add('open-window');
       img.classList.remove('anim-zoom');
+      document.body.style.overflow = 'visible';
     }, ms);
   }); // закрытие окна просмотра
 
@@ -18358,19 +18366,11 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) 
     return hideImage();
   });
   window.addEventListener('keydown', function (event) {
-    if (event.keyCode === 27) {
-      hideImage();
-    }
+    return event.keyCode === 27 && hideImage();
   });
   images.forEach(function (item, index) {
-    item.addEventListener('click', function () {
-      if (index === 0) {
-        img.classList.add('close-anim-zoom');
-        modal_window.classList.remove('open-window');
-        setTimeout(function () {
-          img.classList.remove('close-anim-zoom');
-        }, ms);
-      }
+    return item.addEventListener('click', function () {
+      return index === 0 && hideImage();
     });
   });
 };
