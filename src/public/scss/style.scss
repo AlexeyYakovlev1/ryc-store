@@ -280,3 +280,68 @@
         }
     }
 }
+
+.account {
+    height: 800px;
+    padding-top: 200px;
+    &__content {
+        width: 1100px;
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    &__block {
+        width: 384px;
+        &-heading {
+            text-align: center;
+            font-size: 1em;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            @extend %montserrat-regular;
+        }
+        &-form {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        &-label {
+            position: relative;
+            &:not(:last-child) {
+                margin-bottom: 20px;
+            }
+            &-heading {
+                @extend %montserrat-regular;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                font-size: 10px;
+                font-weight: 600;
+            }
+        }
+    }
+    &__data {
+        padding: 5px 10px;
+        display: block;
+        width: 100%;
+        @extend %montserrat-regular;
+        border: 1px solid #000;
+        height: 40px;
+        &::placeholder {
+            color: #000;
+        }
+    }
+    &__submit {
+        height: 40px;
+        border: none;
+        cursor: pointer;
+        background-color: #000;
+        color: #fff;
+        @extend %montserrat-regular;
+    }
+    &__eye {
+        position: absolute;
+        cursor: pointer;
+        bottom: 11px;
+        right: 5px;
+    }
+}

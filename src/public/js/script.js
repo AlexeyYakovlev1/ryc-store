@@ -316,3 +316,69 @@ const showMenu = () => {
 }
 
 showMenu();
+
+// валидация формы 
+const validateForm = () => {
+    // валидация
+    const validate = (elSelector, className, regexp) => {
+        let inputs = document.querySelectorAll(elSelector);
+        let cls = className;
+
+        inputs.forEach(item => {
+            item.addEventListener('input', () => {
+                let val = item.value.toLowerCase().trim();
+                let res = regexp.test(val);
+                res ? item.classList.remove(cls) : item.classList.add(cls);
+            });
+        });
+    }
+
+    validate('.account__data[name="email-login"]', 'invalid', /^([A-Z]|[a-z]|[\d]{0,}|[\.]{0,1}|[\_]{0,1}){0,}@[a-z]+\.[a-z]{1,}$/gm);
+    validate('.account__data[name="email-register"]', 'invalid', /^([A-Z]|[a-z]|[\d]{0,}|[\.]{0,1}|[\_]{0,1}){0,}@[a-z]+\.[a-z]{1,}$/gm);
+    validate('.account__data[name="password-login"]', 'invalid', /^\w{6,}$/);
+    validate('.account__data[name="password-register"]', 'invalid', /^\w{6,}$/);
+    validate('.account__data-name', 'invalid', /^\w{0,}$/);
+
+    // показать/скрыть пароль
+    const showHidePassword = () => {
+        let passwords = document.querySelectorAll('.account__data[type="password"]');
+        let eyes = document.querySelectorAll('.account__eye');
+        let show = false;
+
+        eyes.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                show = !show;
+                item.src = show ? './assets/img/eye-hide.png' : './assets/img/eye-show.png';
+                passwords[index].type = show ? 'text' : 'password';
+            });
+        });
+    }
+
+    showHidePassword();
+
+    // проверка формы 
+    const checkForm = (inputsSelector, className, formSelector, btnSelector) => {
+        let inputs = document.querySelectorAll(inputsSelector);
+        let form = document.querySelector(formSelector);
+        let btn = document.querySelector(btnSelector);
+
+        form.addEventListener('submit', event => {
+            event.preventDefault();
+            let arr = [...inputs];
+            arr = arr.filter(item => item.classList.contains(className));
+
+            if (arr.length) {
+                btn.dataset.valid = 'false';
+                btn.style.backgroundColor = '#c2c2c2';
+            } else {
+                btn.dataset.valid = 'true';
+                btn.style.backgroundColor = '#000';
+            }
+        });
+    }
+
+    checkForm('.account__data-login', 'invalid', '.account__block-form-login', '.account__submit-login');
+    checkForm('.account__data-register', 'invalid', '.account__block-form-register', '.account__submit-register');
+}
+
+validateForm();

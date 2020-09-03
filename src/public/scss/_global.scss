@@ -17,6 +17,10 @@ body {
     @extend %montserrat-regular;
 }
 
+.invalid {
+    border: 1px solid red !important;
+}
+
 .container {
     width: 1440px;
     margin: 0 auto;
