@@ -19620,37 +19620,88 @@ document.querySelector('.product__img') && lookingImagesInModalWindow(images, 15
 var showMenu = function showMenu() {
   var el = document.querySelector('.header__bottom-shop');
   var menu = document.querySelector('.header__bottom-shop-list');
-  el.addEventListener('mouseover', function () {
-    el.classList.add('no-bottom-line');
-    menu.style.bottom = '-40px';
-  });
-  el.addEventListener('mouseout', function () {
-    el.classList.add('no-bottom-line');
-    menu.style.bottom = '100px';
-  }); // const events = (ev, className, removeClass, addClass, num)
+
+  var mouseEvents = function mouseEvents(item, ev, add, bottomCount) {
+    item.addEventListener(ev, function () {
+      if (add) {
+        item.classList.add('no-bottom-line');
+      } else {
+        item.classList.add('no-bottom-line');
+      }
+
+      menu.style.bottom = "".concat(bottomCount, "px");
+    });
+  };
+
+  mouseEvents(el, 'mouseover', true, -100);
+  mouseEvents(el, 'mouseout', false, 100);
 };
 
 showMenu(); // валидация формы 
 
 var validateForm = function validateForm() {
-  // валидация
-  var validate = function validate(elSelector, className, regexp) {
+  // проверка всех ипутов на действительность
+  var checkForm = function checkForm(inputsSelector, className, btnSelector, textBtn) {
+    var inputs = document.querySelectorAll(inputsSelector);
+    var btn = document.querySelector(btnSelector);
+
+    var arr = _toConsumableArray(inputs);
+
+    arr = arr.filter(function (item) {
+      return item.classList.contains(className);
+    });
+
+    if (arr.length) {
+      btn.dataset.valid = 'false';
+      btn.classList.add('no-submit');
+      btn.value = 'неверные данные';
+      btn.disabled = 'true';
+    } else {
+      btn.dataset.valid = 'true';
+      btn.classList.remove('no-submit');
+      btn.value = textBtn;
+      btn.removeAttribute('disabled');
+    }
+  }; // валидация
+
+
+  var validate = function validate(elSelector, classInvalid, classValid, regexp, btnSelector, inputsSelector, textBtn) {
     var inputs = document.querySelectorAll(elSelector);
-    var cls = className;
+    var cls_invalid = classInvalid;
+    var cls_valid = classValid;
     inputs.forEach(function (item) {
       item.addEventListener('input', function () {
         var val = item.value.toLowerCase().trim();
         var res = regexp.test(val);
-        res ? item.classList.remove(cls) : item.classList.add(cls);
+
+        if (res) {
+          item.classList.remove(cls_invalid);
+          item.classList.add(cls_valid);
+          checkForm(inputsSelector, 'invalid', btnSelector, textBtn);
+        } else {
+          item.classList.add(cls_invalid);
+          item.classList.remove(cls_valid);
+          checkForm(inputsSelector, 'invalid', btnSelector, textBtn);
+        }
       });
     });
   };
 
-  validate('.account__data[name="email-login"]', 'invalid', /^([A-Z]|[a-z]|[\d]{0,}|[\.]{0,1}|[\_]{0,1}){0,}@[a-z]+\.[a-z]{1,}$/gm);
-  validate('.account__data[name="email-register"]', 'invalid', /^([A-Z]|[a-z]|[\d]{0,}|[\.]{0,1}|[\_]{0,1}){0,}@[a-z]+\.[a-z]{1,}$/gm);
-  validate('.account__data[name="password-login"]', 'invalid', /^\w{6,}$/);
-  validate('.account__data[name="password-register"]', 'invalid', /^\w{6,}$/);
-  validate('.account__data-name', 'invalid', /^\w{0,}$/); // показать/скрыть пароль
+  var regexp_email = /^[A-Z|a-z|\d|\.|\_]{0,}@[a-z]+\.[a-z]{1,}$/gm;
+  var regexp_password = /^.{6,}$/;
+  var regexp_name = /^[а-я|А-Я]{6,}$/;
+  validate('.account__data[name="email-login"]', 'invalid', 'valid', regexp_email, '.account__submit-login', '.account__data-login', 'войти');
+  validate('.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+  validate('.account__data[name="password-login"]', 'invalid', 'valid', regexp_password, '.account__submit-login', '.account__data-login', 'войти');
+  validate('.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+  validate('.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться'); // отправка данных
+
+  var formSubmit = function formSubmit(formSelector, inputsSelector, btnSelector, textBtn) {
+    document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
+  };
+
+  formSubmit('.account__block-form-login', '.account__data-login', '.account__submit-login', 'войти');
+  formSubmit('.account__block-form-register', '.account__data-register', '.account__submit-register', 'зарегистрироваться'); // показать/скрыть пароль
 
   var showHidePassword = function showHidePassword() {
     var passwords = document.querySelectorAll('.account__data[type="password"]');
@@ -19665,33 +19716,7 @@ var validateForm = function validateForm() {
     });
   };
 
-  showHidePassword(); // проверка формы 
-
-  var checkForm = function checkForm(inputsSelector, className, formSelector, btnSelector) {
-    var inputs = document.querySelectorAll(inputsSelector);
-    var form = document.querySelector(formSelector);
-    var btn = document.querySelector(btnSelector);
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      var arr = _toConsumableArray(inputs);
-
-      arr = arr.filter(function (item) {
-        return item.classList.contains(className);
-      });
-
-      if (arr.length) {
-        btn.dataset.valid = 'false';
-        btn.style.backgroundColor = '#c2c2c2';
-      } else {
-        btn.dataset.valid = 'true';
-        btn.style.backgroundColor = '#000';
-      }
-    });
-  };
-
-  checkForm('.account__data-login', 'invalid', '.account__block-form-login', '.account__submit-login');
-  checkForm('.account__data-register', 'invalid', '.account__block-form-register', '.account__submit-register');
+  showHidePassword();
 };
 
 validateForm();

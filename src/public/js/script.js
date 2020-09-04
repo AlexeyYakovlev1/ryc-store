@@ -302,42 +302,89 @@ const showMenu = () => {
     let el = document.querySelector('.header__bottom-shop');
     let menu = document.querySelector('.header__bottom-shop-list');
 
-    el.addEventListener('mouseover', () => {
-        el.classList.add('no-bottom-line');
-        menu.style.bottom = '-40px';
-    });
+    const mouseEvents = (item, ev, add, bottomCount) => {
+        item.addEventListener(ev, () => {
+            if (add) {
+                item.classList.add('no-bottom-line');
+            } else {
+                item.classList.add('no-bottom-line');
+            }
+            menu.style.bottom = `${bottomCount}px`;
+        });
+    }
 
-    el.addEventListener('mouseout', () => {
-        el.classList.add('no-bottom-line');
-        menu.style.bottom = '100px';
-    });
-
-    // const events = (ev, className, removeClass, addClass, num)
+    mouseEvents(el, 'mouseover', true, -100);
+    mouseEvents(el, 'mouseout', false, 100);
 }
 
 showMenu();
 
 // валидация формы 
 const validateForm = () => {
+    // проверка всех ипутов на действительность
+    const checkForm = (inputsSelector, className, btnSelector, textBtn) => {
+        let inputs = document.querySelectorAll(inputsSelector);
+        let btn = document.querySelector(btnSelector);
+
+        let arr = [...inputs];
+        arr = arr.filter(item => item.classList.contains(className));
+
+        if (arr.length) {
+            btn.dataset.valid = 'false';
+            btn.classList.add('no-submit');
+            btn.value = 'неверные данные';
+            btn.disabled = 'true';
+        } else {
+            btn.dataset.valid = 'true';
+            btn.classList.remove('no-submit');
+            btn.value = textBtn;
+            btn.removeAttribute('disabled');
+        }
+    }
+
     // валидация
-    const validate = (elSelector, className, regexp) => {
+    const validate = (elSelector, classInvalid, classValid, regexp, btnSelector, inputsSelector, textBtn) => {
         let inputs = document.querySelectorAll(elSelector);
-        let cls = className;
+        let cls_invalid = classInvalid;
+        let cls_valid = classValid;
 
         inputs.forEach(item => {
             item.addEventListener('input', () => {
                 let val = item.value.toLowerCase().trim();
                 let res = regexp.test(val);
-                res ? item.classList.remove(cls) : item.classList.add(cls);
+
+                if (res) {
+                    item.classList.remove(cls_invalid);
+                    item.classList.add(cls_valid);
+
+                    checkForm(inputsSelector, 'invalid', btnSelector, textBtn);
+                } else {
+                    item.classList.add(cls_invalid);
+                    item.classList.remove(cls_valid);
+
+                    checkForm(inputsSelector, 'invalid', btnSelector, textBtn);
+                }
             });
         });
     }
 
-    validate('.account__data[name="email-login"]', 'invalid', /^([A-Z]|[a-z]|[\d]{0,}|[\.]{0,1}|[\_]{0,1}){0,}@[a-z]+\.[a-z]{1,}$/gm);
-    validate('.account__data[name="email-register"]', 'invalid', /^([A-Z]|[a-z]|[\d]{0,}|[\.]{0,1}|[\_]{0,1}){0,}@[a-z]+\.[a-z]{1,}$/gm);
-    validate('.account__data[name="password-login"]', 'invalid', /^\w{6,}$/);
-    validate('.account__data[name="password-register"]', 'invalid', /^\w{6,}$/);
-    validate('.account__data-name', 'invalid', /^\w{0,}$/);
+    let regexp_email = /^[A-Z|a-z|\d|\.|\_]{0,}@[a-z]+\.[a-z]{1,}$/gm;
+    let regexp_password = /^.{6,}$/;
+    let regexp_name = /^[а-я|А-Я]{6,}$/;
+
+    validate('.account__data[name="email-login"]', 'invalid', 'valid', regexp_email, '.account__submit-login', '.account__data-login', 'войти');
+    validate('.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+    validate('.account__data[name="password-login"]', 'invalid', 'valid', regexp_password, '.account__submit-login', '.account__data-login', 'войти');
+    validate('.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+    validate('.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+
+    // отправка данных
+    const formSubmit = (formSelector, inputsSelector, btnSelector, textBtn) => {
+        document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
+    }
+
+    formSubmit('.account__block-form-login', '.account__data-login', '.account__submit-login', 'войти');
+    formSubmit('.account__block-form-register', '.account__data-register', '.account__submit-register', 'зарегистрироваться');
 
     // показать/скрыть пароль
     const showHidePassword = () => {
@@ -355,30 +402,6 @@ const validateForm = () => {
     }
 
     showHidePassword();
-
-    // проверка формы 
-    const checkForm = (inputsSelector, className, formSelector, btnSelector) => {
-        let inputs = document.querySelectorAll(inputsSelector);
-        let form = document.querySelector(formSelector);
-        let btn = document.querySelector(btnSelector);
-
-        form.addEventListener('submit', event => {
-            event.preventDefault();
-            let arr = [...inputs];
-            arr = arr.filter(item => item.classList.contains(className));
-
-            if (arr.length) {
-                btn.dataset.valid = 'false';
-                btn.style.backgroundColor = '#c2c2c2';
-            } else {
-                btn.dataset.valid = 'true';
-                btn.style.backgroundColor = '#000';
-            }
-        });
-    }
-
-    checkForm('.account__data-login', 'invalid', '.account__block-form-login', '.account__submit-login');
-    checkForm('.account__data-register', 'invalid', '.account__block-form-register', '.account__submit-register');
 }
 
 validateForm();
