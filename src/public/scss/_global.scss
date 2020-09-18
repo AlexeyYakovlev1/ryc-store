@@ -1,5 +1,6 @@
 @import '_fonts';
 @import '_vars';
+@import '_media';
 @import '../../../node_modules/normalize.css/normalize';
 *,
 *::after,
@@ -26,9 +27,10 @@ body {
 }
 
 .container {
-    width: 1440px;
+    width: 1450px;
     margin: 0 auto;
     height: 100%;
+    padding: 0 5px;
 }
 
 img {
@@ -89,6 +91,18 @@ img {
     &__bottom {
         height: 40px;
         margin-top: 10px;
+        &-list-close {
+            position: absolute;
+        }
+        &-link-mobile-item {
+            display: none;
+        }
+        &-btn {
+            display: none;
+        }
+        &-btn-user {
+            display: none;
+        }
         &-nav {
             height: 100%;
             display: flex;
@@ -171,6 +185,7 @@ img {
     &__block-search {
         width: 40px;
         height: 11px;
+        display: block;
         &-content {
             width: inherit;
             transition: .5s;
@@ -476,4 +491,12 @@ img {
 
 .no-submit {
     cursor: default !important;
+}
+
+.show-menu {
+    display: flex !important;
+}
+
+.no-scroll {
+    overflow: hidden;
 }

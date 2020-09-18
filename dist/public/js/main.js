@@ -19697,7 +19697,9 @@ var validateForm = function validateForm() {
   validate('.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться'); // отправка данных
 
   var formSubmit = function formSubmit(formSelector, inputsSelector, btnSelector, textBtn) {
-    document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
+    if (document.querySelector(formSelector)) {
+      document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
+    }
   };
 
   formSubmit('.account__block-form-login', '.account__data-login', '.account__submit-login', 'войти');
@@ -19719,7 +19721,37 @@ var validateForm = function validateForm() {
   showHidePassword();
 };
 
-validateForm();
+validateForm(); // появление меню (адаптив)
+
+var showMenuList = function showMenuList() {
+  var btn_open_nav = document.querySelector('.header__bottom-btn');
+  var btn_open_user = document.querySelector('.header__bottom-btn-user');
+  var list_nav = document.querySelector('.header__bottom-list-nav');
+  var list_user = document.querySelector('.header__bottom-list-user');
+  var btn_close_nav = document.querySelector('.header__bottom-list-close-nav');
+  var btn_close_user = document.querySelector('.header__bottom-list-close-user');
+
+  var switchingClasses = function switchingClasses(btn, list, open) {
+    btn.addEventListener('click', function () {
+      document.querySelector('.up-wrapper').style.zIndex = '0';
+
+      if (open) {
+        list.classList.add('show-menu');
+        document.documentElement.classList.add('no-scroll');
+      } else {
+        list.classList.remove('show-menu');
+        document.documentElement.classList.remove('no-scroll');
+      }
+    });
+  };
+
+  switchingClasses(btn_open_nav, list_nav, true);
+  switchingClasses(btn_open_user, list_user, true);
+  switchingClasses(btn_close_nav, list_nav, false);
+  switchingClasses(btn_close_user, list_user, false);
+};
+
+showMenuList();
 
 /***/ }),
 

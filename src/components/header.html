@@ -10,7 +10,11 @@
         <div class="container">
             <nav class="header__bottom-nav">
                 <div class="header__bottom-block">
-                    <ul class="header__bottom-list" style="width: 290px;">
+                    <button class="header__bottom-btn">
+                        <div class="header__bottom-btn-center-line"></div>
+                    </button>
+                    <ul class="header__bottom-list header__bottom-list-nav" style="width: 290px;">
+                        <div class="header__bottom-list-close header__bottom-list-close-nav"></div>
                         <li class="header__bottom-shop header__bottom-link">
                             <a href="shop.html">магазин</a>
                             <ul class="header__bottom-shop-list">
@@ -28,6 +32,12 @@
                         <li class="header__bottom-link">
                             <a href="#">дизайнерское</a>
                         </li>
+                        <li class="header__bottom-link header__bottom-link-mobile-item">
+                            <a href="#">Коллекция</a>
+                        </li>
+                        <li class="header__bottom-link header__bottom-link-mobile-item">
+                            <a href="#">Акссесуары</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="header__bottom-title">
@@ -36,12 +46,17 @@
                     </a>
                 </div>
                 <div class="header__bottom-block">
+                    <button class="header__bottom-btn-user"></button>
                     <ul class="header__bottom-list header__bottom-list-user">
+                        <div class="header__bottom-list-close header__bottom-list-close-user"></div>
                         <li class="header__block-search header__bottom-link">
                             <div class="header__block-search-content">
                                 <input class="header-search" type="text">
                                 <span class="header-search-word">поиск</span>
                             </div>
+                        </li>
+                        <li class="header__bottom-link header__bottom-link-mobile-item header__bottom-link-no-border">
+                            <input class="header-search" placeholder="Искать..." type="text">
                         </li>
                         <li class="header__bottom-link">
                             <a href="account.html">аккаунт</a>

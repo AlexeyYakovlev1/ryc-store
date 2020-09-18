@@ -380,7 +380,9 @@ const validateForm = () => {
 
     // отправка данных
     const formSubmit = (formSelector, inputsSelector, btnSelector, textBtn) => {
-        document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
+        if (document.querySelector(formSelector)) {
+            document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
+        }
     }
 
     formSubmit('.account__block-form-login', '.account__data-login', '.account__submit-login', 'войти');
@@ -405,3 +407,34 @@ const validateForm = () => {
 }
 
 validateForm();
+
+// появление меню (адаптив)
+const showMenuList = () => {
+    const btn_open_nav = document.querySelector('.header__bottom-btn');
+    const btn_open_user = document.querySelector('.header__bottom-btn-user');
+    const list_nav = document.querySelector('.header__bottom-list-nav');
+    const list_user = document.querySelector('.header__bottom-list-user');
+    const btn_close_nav = document.querySelector('.header__bottom-list-close-nav');
+    const btn_close_user = document.querySelector('.header__bottom-list-close-user');
+
+    const switchingClasses = (btn, list, open) => {
+        btn.addEventListener('click', () => {
+            document.querySelector('.up-wrapper').style.zIndex = '0';
+            if (open) {
+                list.classList.add('show-menu');
+                document.documentElement.classList.add('no-scroll');
+            } else {
+                list.classList.remove('show-menu');
+                document.documentElement.classList.remove('no-scroll');
+            }
+        });
+    }
+
+    switchingClasses(btn_open_nav, list_nav, true);
+    switchingClasses(btn_open_user, list_user, true);
+
+    switchingClasses(btn_close_nav, list_nav, false);
+    switchingClasses(btn_close_user, list_user, false);
+}
+
+showMenuList();
