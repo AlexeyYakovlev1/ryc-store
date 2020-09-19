@@ -20,7 +20,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
 
 @media (max-width: 1025px) {
   .container {
-    width: 1300px !important;
+    width: 1200px !important;
   }
   .header__top {
     height: 35px !important;
@@ -163,12 +163,30 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .title__block-img {
     height: 750px !important;
   }
+  .list-cards {
+    width: 780px !important;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .block-filters-list li:not(:last-child) {
+    margin-bottom: 10px !important;
+  }
+  .block-filters-list li a {
+    font-size: 1rem !important;
+  }
+  .card-old-price, .card-now-price, .card-sale, .card-name {
+    font-size: 1rem !important;
+  }
+  .account__content {
+    width: 940px !important;
+  }
+  .footer__block-desc {
+    font-size: 1.2em;
+  }
 }
 
 @media (max-width: 768px) {
-  .container {
-    width: 1300px !important;
-  }
   .header__top {
     height: 60px !important;
   }
@@ -187,12 +205,42 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .title__block-img {
     height: 750px !important;
   }
+  .block-filters-list {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+  }
+  .block-filters-list li a {
+    font-size: 1.3rem !important;
+  }
+  .sale {
+    padding-top: 50px;
+  }
+  .up-wrapper {
+    -webkit-transform: scale(2);
+        -ms-transform: scale(2);
+            transform: scale(2);
+    top: 400px !important;
+  }
+  .account__block-heading {
+    font-size: 1.3em !important;
+  }
+  .account__block-label-heading {
+    font-size: 14px !important;
+  }
+  .account__content {
+    width: 830px !important;
+  }
+  .account__data {
+    font-size: 19px;
+  }
+  .account__submit {
+    font-size: 14px !important;
+    letter-spacing: 1px;
+  }
 }
 
 @media (max-width: 600px) {
-  .container {
-    width: 1300px !important;
-  }
   .header__top {
     height: 140px !important;
   }
@@ -243,11 +291,136 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .title__block-img {
     height: 750px !important;
   }
+  .sale {
+    padding-top: 300px !important;
+  }
+  .list-cards {
+    width: 720px !important;
+  }
+  .list-cards .card {
+    -webkit-transform: scale(1.5) !important;
+        -ms-transform: scale(1.5) !important;
+            transform: scale(1.5) !important;
+  }
+  .list-cards .card:not(:last-child) {
+    margin-bottom: 200px !important;
+  }
+  .block-filters-list {
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+    background-color: #fff;
+    position: absolute;
+    left: -500px;
+    top: 15px;
+    z-index: 999;
+  }
+  .block-filters-list li a {
+    font-size: 1.6rem !important;
+  }
+  .btn-open-filters {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+  .account {
+    padding-top: 400px !important;
+    height: -webkit-max-content !important;
+    height: -moz-max-content !important;
+    height: max-content !important;
+  }
+  .account__block-heading {
+    font-size: 3em !important;
+  }
+  .account__block-label-heading {
+    font-size: 25px !important;
+  }
+  .account__content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .account__data {
+    font-size: 2.3em;
+    height: 100px !important;
+  }
+  .account__submit {
+    font-size: 30px !important;
+    letter-spacing: 1px;
+    height: 100px !important;
+  }
+  .account__block {
+    width: 100% !important;
+  }
+  .account__block:not(:last-child) {
+    margin-bottom: 50px;
+  }
+  .account__eye {
+    width: 50px;
+    height: 50px;
+    bottom: 20px !important;
+    right: 10px !important;
+  }
+  .footer__block-desc {
+    font-size: 1.6em;
+  }
+  .footer__link-icon:not(:last-child) {
+    margin-right: 40px !important;
+  }
+  .footer__link-icon a img {
+    width: 100px !important;
+  }
 }
 
-@media (max-width: 368px) {
-  .container {
-    width: 1300px !important;
+@media (max-width: 360px) {
+  .sale {
+    padding-top: 400px !important;
+  }
+  .up-wrapper {
+    -webkit-transform: scale(2.8) !important;
+        -ms-transform: scale(2.8) !important;
+            transform: scale(2.8) !important;
+  }
+  .list-cards .card {
+    -webkit-transform: scale(2) !important;
+        -ms-transform: scale(2) !important;
+            transform: scale(2) !important;
+  }
+  .list-cards .card:not(:last-child) {
+    margin-bottom: 440px !important;
+  }
+  .block-filters-list li:not(:last-child) {
+    margin-bottom: 20px !important;
+  }
+  .block-filters-list li a {
+    font-size: 1.9rem !important;
+  }
+  .btn-open-filters {
+    -webkit-transform: scale(1.4);
+        -ms-transform: scale(1.4);
+            transform: scale(1.4);
+  }
+  .footer__block-desc {
+    font-size: 1.8em;
+  }
+  .footer__block:not(:last-child) {
+    width: 750px !important;
+  }
+  .footer__block:not(:first-child) {
+    width: 350px !important;
   }
 }
 
@@ -895,6 +1068,7 @@ img {
   -webkit-transition: .5s;
   -o-transition: .5s;
   transition: .5s;
+  background-color: transparent;
 }
 
 .no-border:hover::after {
@@ -1403,6 +1577,10 @@ img {
   overflow: hidden;
 }
 
+.show-filters {
+  left: 0 !important;
+}
+
 .title {
   height: 600px;
   padding-top: 100px;
@@ -1456,11 +1634,18 @@ img {
 
 .block-filters {
   width: 192px;
+  position: fixed;
 }
 
 .block-filters-list {
-  position: fixed;
   margin-top: 125px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .block-filters-list li {
@@ -1491,6 +1676,10 @@ img {
   color: #000;
   text-transform: uppercase;
   font-size: 0.625rem;
+}
+
+.block-filters .btn-open-filters {
+  display: none;
 }
 
 .list-cards {

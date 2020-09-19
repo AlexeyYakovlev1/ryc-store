@@ -438,3 +438,17 @@ const showMenuList = () => {
 }
 
 showMenuList();
+
+// появление фильтра (адаптив)
+const showFilter = () => {
+    const btn_open = document.querySelector('.btn-open-filters');
+    const filters = document.querySelector('.block-filters-list');
+
+    if (btn_open) {
+        btn_open.addEventListener('click', () => {
+            filters.classList.toggle('show-filters');
+        });
+    }
+}
+
+showFilter();

@@ -216,6 +216,7 @@ img {
         opacity: 0;
         left: 0;
         transition: .5s;
+        background-color: transparent;
     }
 }
 
@@ -499,4 +500,8 @@ img {
 
 .no-scroll {
     overflow: hidden;
+}
+
+.show-filters {
+    left: 0 !important;
 }

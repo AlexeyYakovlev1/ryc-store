@@ -19751,7 +19751,20 @@ var showMenuList = function showMenuList() {
   switchingClasses(btn_close_user, list_user, false);
 };
 
-showMenuList();
+showMenuList(); // появление фильтра (адаптив)
+
+var showFilter = function showFilter() {
+  var btn_open = document.querySelector('.btn-open-filters');
+  var filters = document.querySelector('.block-filters-list');
+
+  if (btn_open) {
+    btn_open.addEventListener('click', function () {
+      filters.classList.toggle('show-filters');
+    });
+  }
+};
+
+showFilter();
 
 /***/ }),
 
