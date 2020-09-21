@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/slick.css">
+    <link rel="icon" href="assets/img/logo.jpg" type="image/jpg" sizes="16x16">
+    <title>#{title}</title>
+</head>
+    <body>
+        include ./partials/header.pug
+        include ./partials/arrow-up.pug
+        include ./partials/preolaider.pug
+    <div class="sale">
+        <div class="container"> 
+            if products.length
+                <div class="wrapper">
+                    <div class="block-filters">
+                        <ul class="block-filters-list">
+                            <li data-size="big">
+                                <a data-size="big" href="#">Мужское</a>
+                            </li>
+                            <li data-size="big">
+                                <a data-size="big" href="#">Unisex</a>
+                            </li>
+                            <li data-size="big">
+                                <a data-size="big" href="#">Женское</a>
+                            </li>
+                            <li data-size="big">
+                                <a data-size="big" href="#">Большой размер</a>
+                            </li>
+                            <li data-size="small">
+                                <a data-size="small" href="#">Маленький размер</a>
+                            </li>
+                            <li data-size="all">
+                                <a data-size="all" href="#">Все товары</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="list-cards">
+                        each product in products
+                            <li class="card" data-size="#{product.mainSize}">
+                                <a href="/shop/#{product.id}" title="#{product.title}">
+                                    <div class="card__block-img">
+                                        <figure>
+                                            <img src="#{product.img[0]}" alt="#{product.title}">
+                                        </figure>
+                                    </div>
+                                    <div class="card__description">
+                                        <span class="card-name">#{product.title}</span>
+                                        <div class="card__block-price">
+                                            if product.oldPrice > 0
+                                                <span class="card-old-price">#{product.oldPrice}</span>
+                                            <span class="card-now-price">#{product.nowPrice}</span>
+                                            if product.sale > 0
+                                                <span class="card-sale">#{product.sale}%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            else
+                <p class="nothing">Товаров не найдено</p>
+        </div>
+    </div>
+    include ./partials/footer.pug
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/preolaider.js"></script>
+    <script src="/js/slider.js"></script>
+    </body>
+</html>

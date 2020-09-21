@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/slick.css">
+    <link rel="icon" href="assets/img/logo.jpg" type="image/jpg" sizes="16x16">
+    <title>#{title}</title>
+</head>
+<body>
+    include ./partials/header.pug
+    include ./partials/arrow-up.pug
+    include ./partials/preolaider.pug
+    <div class="cart">
+        <div class="container">
+            if cartProducts.length
+                <ul class="cart__products">
+                    each product in cartProducts
+                        <li class="cart__product">
+                            <div class="cart__product-content">
+                                <div class="cart__product-desc">
+                                    <div class="cart__product-desc-img">
+                                        <figure>
+                                            <img src="#{product.img[0]}" alt="#{product.title}" width="128">
+                                        </figure>
+                                    </div>
+                                    <div class="cart__product-desc-text">
+                                        <div class="cart__product-desc-block">
+                                            <div class="cart__product-desc-block-item" style="width: 200px;">
+                                                <p>#{product.description}</p>
+                                                <div class="cart__product-desc-size">Размер: #{product.mainSize} (#{product.sizes[0]})</div>
+                                            </div>
+                                            <div class="cart__product-desc-block-item">
+                                                <div class="cart__product-desc-price">#{product.nowPrice}</div>
+                                            </div>
+                                        </div>
+                                        <div class="cart__product-desc-block">
+                                            <div class="cart__product-desc-block-item">
+                                                <div class="cart__product-desc-count">Количество: #{product.count}</div>
+                                            </div>
+                                            <div class="cart__product-desc-block-item">
+                                                <form class="cart__product-desc-form" action="/remove/:id" method="POST">
+                                                    <input class="cart__product-desc-remove-product js-remove" type="submit" data-csrf="#{csrf}" data-id="#{product.id}" value="Удалить" />
+                                                    <input type="hidden" name="_csrf" value="csrf" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart__product-info">
+                                    <div class="cart__product-heading">Осень-зима</div>
+                                    <div class="cart__product-total">Итого: #{product.nowPrice * product.count}</div>
+                                    <form class="cart__product-info-form" action="/order" method="GET">
+                                        <input type="hidden" name="_csrf" value="#{csrf}">
+                                        <input class="cart__product-form-buy" type="submit" value="Заказать">
+                                    </form>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
+            else
+                <h1>SHOPPING BAG</h1>
+                <p>Your shopping bag is currently empty. Enable cookies to use the shopping cart</p>
+
+        </div>
+    </div>
+    include ./partials/footer.pug
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/preolaider.js"></script>
+    <script src="/js/slider.js"></script>
+</body>
+</html>

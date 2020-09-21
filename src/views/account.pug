@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/slick.css">
+    <link rel="icon" href="assets/img/logo.jpg" type="image/jpg" sizes="16x16">
+    <title>#{title}</title>
+</head>
+<body>
+include ./partials/header.pug
+include ./partials/arrow-up.pug
+include ./partials/preolaider.pug
+<div class="account">
+    <div class="container">
+        <div class="account__content">
+            <div class="account__block">
+                <h2 class="account__block-heading">Вход</h2>
+                if loginError
+                    <p>#{loginError}</p>
+                <form action="/auth/login" method="POST" class="account__block-form account__block-form-login">
+                    <label class="account__block-label" for="email-login">
+                        <h4 class="account__block-label-heading">Эл. почта</h4>
+                        <input class="account__data account__data-login invalid" type="email" placeholder="Эл. почта" name="email" data-form="email-login" id="email-login" autofocus>
+                    </label>
+                    <label class="account__block-label" for="password-login">
+                        <h4 class="account__block-label-heading">Пароль</h4>
+                        <input class="account__data account__data-login invalid" type="password" id="password-login" placeholder="Пароль" data-form="password-login" name="password">
+                        <img class="account__eye" src="/eye-show.png" alt="глаз">
+                    </label>
+                    <input type="hidden" name="_csrf" value="#{csrf}">
+                    <input class="account__submit account__submit-login" type="submit" value="Войти">
+                </form>
+            </div>
+            <div class="account__block">
+                <h2 class="account__block-heading">Регистрация</h2>
+                if registerError
+                    <p>#{registerError}</p>
+                <form action="/auth/register" method="POST" class="account__block-form account__block-form-register">
+                    <label class="account__block-label" for="first-name">
+                        <h4 class="account__block-label-heading">Имя</h4>
+                        <input class="account__data account__data-register account__data-name invalid" type="text" id="first-name" placeholder="Имя" name="firstName">
+                    </label>
+                    <label class="account__block-label" for="last-name">
+                        <h4 class="account__block-label-heading">Фамилия</h4>
+                        <input class="account__data account__data-register account__data-name invalid" type="text" id="last-name" placeholder="Фамилия" name="lastName">
+                    </label>
+                    <label class="account__block-label" for="email">
+                        <h4 class="account__block-label-heading">Эл. почта</h4>
+                        <input class="account__data account__data-register invalid" type="text" id="email" data-form="email-register" placeholder="Эл. почта" name="email">
+                    </label>
+                    <label class="account__block-label" for="password-register">
+                        <h4 class="account__block-label-heading">Пароль</h4>
+                        <input class="account__data account__data-register invalid" type="password" id="password-register" data-form="password-register" placeholder="Пароль" name="password">
+                        <img class="account__eye" src="/eye-show.png" alt="глаз">
+                    </label>
+                    <input type="hidden" name="_csrf" value="#{csrf}">
+                    <input class="account__submit account__submit-register" type="submit" value="Зарегистрироваться">
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    include ./partials/footer.pug
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/preolaider.js"></script>
+    <script src="/js/slider.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+header.header
+    div.header__top
+        div.container
+            div.header__top-title
+                a(href="#") Осень-зима 2020
+    div.header__bottom
+        div.container
+            nav.header__bottom-nav
+                div.header__bottom-block
+                    ul.header__bottom-list(style="width: 290px;")
+                        li.header__bottom-link.header__bottom-shop
+                            a(href="/shop") магазин
+                            ul.header__bottom-shop-list
+                                li
+                                    a(href="#") Коллекция
+                                li
+                                    a(href="#") Акссесуары
+                        li.header__bottom-link
+                            a(href="/sale") Распродажа 
+                        li.header__bottom-link
+                            a(href="#") дизайнерское
+                    div.header__bottom-title
+                        a(href="/")
+                            img(src="/logo.png" alt="logo" width="40")
+                div.header__bottom-block
+                if isAuth
+                    ul.header__bottom-list.header__bottom-list-user
+                        li.header__block-search.header__bottom-link
+                            form(action="/shop/products" method="GET")
+                                input(class="header-search-test" name="search" id="search" data-search="search" type="text")
+                                span поиск
+                        li.header__bottom-link
+                            // a(href="/cart") корзина (#{cartProducts.length})
+                            a(href="/cart") корзина (<strong>0</strong>)
+                        li.header__bottom-link
+                            a(href="/auth/logout") Выйти
+                else 
+                    ul.header__bottom-list.header__bottom-list-user
+                        form(action="/shop/search-product" method="GET").header__block-search__form
+                            li.header__block-search.header__bottom-link
+                                input.header-search(type="text")
+                                span.header-search-word поиск
+                        li.header__bottom-link
+                            a(href="/auth/login") Аккаунт
