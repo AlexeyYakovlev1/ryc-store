@@ -38,30 +38,6 @@ img {
     height: auto;
 }
 
-.anim-zoom {
-    animation: zoom 1.5s forwards;
-    z-index: 999;
-}
-
-@keyframes zoom {
-    0% {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 50%;
-        min-height: 50%;
-        max-height: 50%;
-    }
-    100% {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        min-height: 100%;
-        max-height: 100%;
-    }
-}
-
 .header {
     width: 100%;
     position: fixed;
@@ -410,7 +386,7 @@ img {
         transition: .5s;
         &:nth-child(1) {
             left: 9px;
-            width: 1px;
+            width: .5px;
         }
         &:nth-child(2) {
             right: 9px;
@@ -457,37 +433,6 @@ img {
 
 .no-bottom-line::after {
     width: 0 !important;
-}
-
-.close-anim-zoom {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    min-height: 100%;
-    max-height: 100%;
-    z-index: 999;
-    animation: zoomOut 1.5s forwards;
-    z-index: 999;
-}
-
-@keyframes zoomOut {
-    0% {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        min-height: 100%;
-        max-height: 100%;
-    }
-    100% {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 50%;
-        min-height: 500px;
-        max-height: 501px;
-    }
 }
 
 .no-submit {

@@ -218,7 +218,7 @@ const scrollUp = () => {
 scrollUp();
 
 // просмотр изображений в модальном окне
-const lookingImagesInModalWindow = (array, ms) => {
+const lookingImagesInModalWindow = array => {
     let img = document.querySelector('.product__img');
     let modal_window = document.querySelector('.window-look');
     let close = document.querySelector('.window-look__close');
@@ -226,12 +226,6 @@ const lookingImagesInModalWindow = (array, ms) => {
 
     const hideImage = () => {
         modal_window.classList.remove('open-window');
-        img.classList.add('close-anim-zoom');
-
-        setTimeout(() => {
-            img.classList.remove('close-anim-zoom');
-        }, ms);
-
         window.scrollTo({
             behavior: 'auto',
             top: 0
@@ -254,31 +248,20 @@ const lookingImagesInModalWindow = (array, ms) => {
 
     let images = document.querySelectorAll('.window-look__img');
 
-    images.forEach((item, index) => {
-        if (index === 0) item.style.cursor = 'zoom-out';
-    });
-
     // появление окна просмотра
     img.addEventListener('click', () => {
         img.classList.add('anim-zoom');
-        document.body.style.overflow = 'hidden';
-
+        modal_window.classList.add('open-window');
         window.scrollTo({
             behavior: 'auto',
             top: 0
         });
-
-        setTimeout(() => {
-            modal_window.classList.add('open-window');
-            img.classList.remove('anim-zoom');
-            document.body.style.overflow = 'visible';
-        }, ms);
     });
 
     // закрытие окна просмотра
     close.addEventListener('click', () => hideImage());
     window.addEventListener('keydown', event => event.keyCode === 27 && hideImage());
-    images.forEach((item, index) => item.addEventListener('click', () => index === 0 && hideImage()));
+    images.forEach(item => item.addEventListener('click', () => hideImage()));
 }
 
 let images = [{
@@ -295,7 +278,7 @@ let images = [{
     }
 ];
 
-document.querySelector('.product__img') && lookingImagesInModalWindow(images, 1500);
+document.querySelector('.product__img') && lookingImagesInModalWindow(images);
 
 // появление меню
 const showMenu = () => {
@@ -369,8 +352,8 @@ const validateForm = () => {
     }
 
     let regexp_email = /^[A-Z|a-z|\d|\.|\_]{0,}@[a-z]+\.[a-z]{1,}$/gm;
-    let regexp_password = /^.{6,}$/;
-    let regexp_name = /^[а-я|А-Я]{6,}$/;
+    let regexp_password = /^.{2,}$/;
+    let regexp_name = /^[а-я|А-Я]{2,}$/;
 
     validate('.account__data[name="email-login"]', 'invalid', 'valid', regexp_email, '.account__submit-login', '.account__data-login', 'войти');
     validate('.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
@@ -408,7 +391,9 @@ const validateForm = () => {
 
 validateForm();
 
-// появление меню (адаптив)
+// адаптив
+
+// появление меню 
 const showMenuList = () => {
     const btn_open_nav = document.querySelector('.header__bottom-btn');
     const btn_open_user = document.querySelector('.header__bottom-btn-user');
@@ -421,11 +406,19 @@ const showMenuList = () => {
         btn.addEventListener('click', () => {
             document.querySelector('.up-wrapper').style.zIndex = '0';
             if (open) {
-                list.classList.add('show-menu');
                 document.documentElement.classList.add('no-scroll');
+                list.classList.add('show-menu');
+
+                if (document.querySelector('.block-filters')) {
+                    document.querySelector('.block-filters').style.zIndex = '0';
+                }
             } else {
-                list.classList.remove('show-menu');
                 document.documentElement.classList.remove('no-scroll');
+                list.classList.remove('show-menu');
+
+                if (document.querySelector('.block-filters')) {
+                    document.querySelector('.block-filters').style.zIndex = '999';
+                }
             }
         });
     }
@@ -439,7 +432,7 @@ const showMenuList = () => {
 
 showMenuList();
 
-// появление фильтра (адаптив)
+// появление фильтра
 const showFilter = () => {
     const btn_open = document.querySelector('.btn-open-filters');
     const filters = document.querySelector('.block-filters-list');

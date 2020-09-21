@@ -4469,45 +4469,6 @@ for (var COLLECTION_NAME in DOMIterables) {
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/web.timers.js":
-/*!****************************************************!*\
-  !*** ./node_modules/core-js/modules/web.timers.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
-var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
-var userAgent = __webpack_require__(/*! ../internals/engine-user-agent */ "./node_modules/core-js/internals/engine-user-agent.js");
-
-var slice = [].slice;
-var MSIE = /MSIE .\./.test(userAgent); // <- dirty ie9- check
-
-var wrap = function (scheduler) {
-  return function (handler, timeout /* , ...arguments */) {
-    var boundArgs = arguments.length > 2;
-    var args = boundArgs ? slice.call(arguments, 2) : undefined;
-    return scheduler(boundArgs ? function () {
-      // eslint-disable-next-line no-new-func
-      (typeof handler == 'function' ? handler : Function(handler)).apply(this, args);
-    } : handler, timeout);
-  };
-};
-
-// ie9- setTimeout & setInterval additional parameters fix
-// https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers
-$({ global: true, bind: true, forced: MSIE }, {
-  // `setTimeout` method
-  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-settimeout
-  setTimeout: wrap(global.setTimeout),
-  // `setInterval` method
-  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-setinterval
-  setInterval: wrap(global.setInterval)
-});
-
-
-/***/ }),
-
 /***/ "./node_modules/jquery/dist/jquery.js":
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
@@ -19286,11 +19247,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_19__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! core-js/modules/web.timers */ "./node_modules/core-js/modules/web.timers.js");
-/* harmony import */ var core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_timers__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_22__);
-
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_21__);
 
 
 
@@ -19543,7 +19501,7 @@ var scrollUp = function scrollUp() {
 
 scrollUp(); // просмотр изображений в модальном окне
 
-var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) {
+var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
   var img = document.querySelector('.product__img');
   var modal_window = document.querySelector('.window-look');
   var close = document.querySelector('.window-look__close');
@@ -19551,10 +19509,6 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) 
 
   var hideImage = function hideImage() {
     modal_window.classList.remove('open-window');
-    img.classList.add('close-anim-zoom');
-    setTimeout(function () {
-      img.classList.remove('close-anim-zoom');
-    }, ms);
     window.scrollTo({
       behavior: 'auto',
       top: 0
@@ -19574,23 +19528,15 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) 
 
     createImages();
   });
-  var images = document.querySelectorAll('.window-look__img');
-  images.forEach(function (item, index) {
-    if (index === 0) item.style.cursor = 'zoom-out';
-  }); // появление окна просмотра
+  var images = document.querySelectorAll('.window-look__img'); // появление окна просмотра
 
   img.addEventListener('click', function () {
     img.classList.add('anim-zoom');
-    document.body.style.overflow = 'hidden';
+    modal_window.classList.add('open-window');
     window.scrollTo({
       behavior: 'auto',
       top: 0
     });
-    setTimeout(function () {
-      modal_window.classList.add('open-window');
-      img.classList.remove('anim-zoom');
-      document.body.style.overflow = 'visible';
-    }, ms);
   }); // закрытие окна просмотра
 
   close.addEventListener('click', function () {
@@ -19599,9 +19545,9 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array, ms) 
   window.addEventListener('keydown', function (event) {
     return event.keyCode === 27 && hideImage();
   });
-  images.forEach(function (item, index) {
+  images.forEach(function (item) {
     return item.addEventListener('click', function () {
-      return index === 0 && hideImage();
+      return hideImage();
     });
   });
 };
@@ -19615,7 +19561,7 @@ var images = [{
 }, {
   img: 'assets/img/IMG_2827.jpg'
 }];
-document.querySelector('.product__img') && lookingImagesInModalWindow(images, 1500); // появление меню
+document.querySelector('.product__img') && lookingImagesInModalWindow(images); // появление меню
 
 var showMenu = function showMenu() {
   var el = document.querySelector('.header__bottom-shop');
@@ -19688,8 +19634,8 @@ var validateForm = function validateForm() {
   };
 
   var regexp_email = /^[A-Z|a-z|\d|\.|\_]{0,}@[a-z]+\.[a-z]{1,}$/gm;
-  var regexp_password = /^.{6,}$/;
-  var regexp_name = /^[а-я|А-Я]{6,}$/;
+  var regexp_password = /^.{2,}$/;
+  var regexp_name = /^[а-я|А-Я]{2,}$/;
   validate('.account__data[name="email-login"]', 'invalid', 'valid', regexp_email, '.account__submit-login', '.account__data-login', 'войти');
   validate('.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
   validate('.account__data[name="password-login"]', 'invalid', 'valid', regexp_password, '.account__submit-login', '.account__data-login', 'войти');
@@ -19721,7 +19667,8 @@ var validateForm = function validateForm() {
   showHidePassword();
 };
 
-validateForm(); // появление меню (адаптив)
+validateForm(); // адаптив
+// появление меню 
 
 var showMenuList = function showMenuList() {
   var btn_open_nav = document.querySelector('.header__bottom-btn');
@@ -19736,11 +19683,19 @@ var showMenuList = function showMenuList() {
       document.querySelector('.up-wrapper').style.zIndex = '0';
 
       if (open) {
-        list.classList.add('show-menu');
         document.documentElement.classList.add('no-scroll');
+        list.classList.add('show-menu');
+
+        if (document.querySelector('.block-filters')) {
+          document.querySelector('.block-filters').style.zIndex = '0';
+        }
       } else {
-        list.classList.remove('show-menu');
         document.documentElement.classList.remove('no-scroll');
+        list.classList.remove('show-menu');
+
+        if (document.querySelector('.block-filters')) {
+          document.querySelector('.block-filters').style.zIndex = '999';
+        }
       }
     });
   };
@@ -19751,7 +19706,7 @@ var showMenuList = function showMenuList() {
   switchingClasses(btn_close_user, list_user, false);
 };
 
-showMenuList(); // появление фильтра (адаптив)
+showMenuList(); // появление фильтра
 
 var showFilter = function showFilter() {
   var btn_open = document.querySelector('.btn-open-filters');
