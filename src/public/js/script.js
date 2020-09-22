@@ -352,7 +352,7 @@ const validateForm = () => {
     }
 
     let regexp_email = /^[A-Z|a-z|\d|\.|\_]{0,}@[a-z]+\.[a-z]{1,}$/gm;
-    let regexp_password = /^.{2,}$/;
+    let regexp_password = /^.{6,}$/;
     let regexp_name = /^[а-я|А-Я]{2,}$/;
 
     validate('.account__data[name="email-login"]', 'invalid', 'valid', regexp_email, '.account__submit-login', '.account__data-login', 'войти');

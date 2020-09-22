@@ -146,7 +146,6 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-image: url(../../assets/img/IMG_2709.jpg);
-        cursor: zoom-in;
     }
     &__block {
         height: 500px;
@@ -173,17 +172,26 @@
             margin-bottom: 10px;
         }
         &-desc {
-            margin-bottom: 10px;
             font-size: 0.625rem;
             text-transform: uppercase;
         }
+        &-select-wrapper {
+            width: 100%;
+            margin: 10px 0;
+        }
         &-list-size {
-            text-align: center;
             padding: 0 10px;
             height: 40px;
-            margin-bottom: 10px;
             cursor: pointer;
+            width: 100%;
             background-color: #fff;
+            option {
+                appearance: none;
+                &:hover {
+                    background-color: #000;
+                    color: #fff;
+                }
+            }
         }
         &-link {
             color: #fff;

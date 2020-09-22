@@ -5,15 +5,6 @@
 }
 
 @media (max-width: 1150px) {
-    .header {
-        &__bottom-link a,
-        &-search-word {
-            font-size: 1.2em !important;
-        }
-        &__block-search {
-            width: 45px !important;
-        }
-    }
     .title {
         padding-top: 100px !important;
     }
@@ -27,7 +18,7 @@
             font-size: 1.5em !important;
         }
         &__block-heading {
-            font-size: 2.3em !important;
+            font-size: 2em !important;
         }
         &__block-desc {
             font-size: 0.9em !important;
@@ -51,18 +42,41 @@
             width: 100% !important;
             height: auto !important;
         }
-        &__block-list-size {
-            width: 800px !important;
+        &__block-select-wrapper {
+            width: 90% !important;
             height: 70px !important;
-            margin: 30px auto;
+            margin: 30px auto !important;
+            position: relative;
+            &::after {
+                content: '';
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                background-image: url(../../assets/img/svg/options_mobile.svg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                top: 0;
+                bottom: 0;
+                margin: auto 0;
+                right: 10px;
+                transform: rotateZ(90deg);
+                pointer-events: none;
+            }
+        }
+        &__block-list-size {
+            height: 100% !important;
             border: 1px solid #000;
             font-size: 2em !important;
+            appearance: none;
+            &::-ms-expand {
+                display: none;
+            }
             option {
                 font-size: 0.5em !important;
             }
         }
         &__block-links {
-            margin-top: 30px;
             display: flex;
             justify-content: space-around;
         }
@@ -95,6 +109,11 @@
         .block-filters {
             top: 160px;
             left: 5px;
+        }
+    }
+    .footer {
+        &__block-text {
+            width: 50% !important;
         }
     }
 }
@@ -246,13 +265,13 @@
             font-size: 1rem !important;
         }
     }
-    .footer {
-        &__block-desc {
-            font-size: 1em;
-        }
-    }
     .up-wrapper {
         transform: scale(2) !important;
+    }
+    .footer {
+        &__block-text {
+            font-size: 0.8em !important;
+        }
     }
 }
 
@@ -335,34 +354,32 @@
         }
     }
     .product {
-        &__block-price {
-            font-size: 2em !important;
-            margin: 15px 0;
-        }
-        &__block-heading {
-            font-size: 3.3em !important;
-        }
-        &__block-desc {
-            font-size: 1.9em !important;
-        }
         &__block-links {
             a {
-                font-size: 2em !important;
-                width: 370px !important;
-                height: 90px !important;
-            }
-        }
-        &__block-list-size {
-            width: 910px !important;
-            height: 100px !important;
-            font-size: 2.5em !important;
-            option {
-                font-size: 0.5em !important;
+                font-size: 1.5em !important;
+                width: 300px !important;
+                height: 60px !important;
             }
         }
     }
     .card {
         margin: 0 !important;
+    }
+    .footer {
+        &__block {
+            &-list-social {
+                justify-content: center;
+            }
+            &-text {
+                width: 100% !important;
+            }
+            &-desc {
+                font-size: 10px !important;
+            }
+        }
+        &__link-icon img {
+            width: 20px !important;
+        }
     }
 }
 
@@ -374,6 +391,15 @@
             width: 90% !important;
             margin: 0 auto;
             text-align: center;
+        }
+    }
+    .product {
+        &__block-links {
+            a {
+                font-size: 1.3em !important;
+                width: 280px !important;
+                height: 50px !important;
+            }
         }
     }
 }
@@ -427,44 +453,32 @@
             width: 0 !important;
         }
     }
-    .footer {
-        &__block-desc {
-            font-size: 0.9em !important;
-        }
-    }
     .product {
-        padding-top: 300px !important;
-        &__block-img {
-            height: 900px !important;
-        }
-        &__block-price {
-            font-size: 3em !important;
-            margin: 35px 0 !important;
-        }
-        &__block-heading {
-            font-size: 4.3em !important;
-        }
-        &__block-desc {
-            font-size: 1.9em !important;
-        }
-        &__block-list-size {
-            width: 910px !important;
-            height: 100px !important;
-            margin: 30px auto;
-            border: 1px solid #000;
-            font-size: 2.5em !important;
-            option {
-                font-size: 0.5em !important;
+        padding-top: 200px !important;
+        &__block-links {
+            a {
+                width: 250px !important;
             }
         }
+    }
+}
+
+@media (max-width: 530px) {
+    .product {
         &__block-links {
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-around;
             a {
-                font-size: 2em !important;
-                width: 370px !important;
-                height: 90px !important;
+                width: 220px !important;
+                font-size: 1em !important;
+            }
+        }
+    }
+}
+
+@media (max-width: 475px) {
+    .product {
+        &__block-links {
+            a {
+                width: 180px !important;
             }
         }
     }
@@ -474,6 +488,22 @@
     .account {
         &__block {
             width: 100% !important;
+        }
+    }
+    .product {
+        &__block-links {
+            a {
+                width: 150px !important;
+                height: 40px !important;
+                font-size: 0.9em !important;
+            }
+        }
+        &__block-select-wrapper {
+            height: 55px !important;
+            &::after {
+                width: 25px !important;
+                height: 25px !important;
+            }
         }
     }
 }
@@ -486,44 +516,46 @@
             }
         }
     }
-    .footer {
-        &__block-desc {
-            font-size: 2.5em;
-        }
-        &__block {
-            &:not(:last-child) {
-                width: 900px !important;
-            }
-            &:not(:first-child) {
-                width: 300px !important;
-            }
+    .product {
+        &__block-select-wrapper {
+            margin: 20px auto !important;
         }
     }
+}
+
+@media (max-width: 330px) {
     .product {
-        &__block-price {
-            font-size: 4.5em !important;
-            margin: 35px 0 50px !important;
-        }
-        &__block-heading {
-            font-size: 6.3em !important;
-        }
-        &__block-desc {
-            font-size: 2.9em !important;
-        }
-        &__block-list-size {
-            width: 1000px !important;
-            height: 140px !important;
-            font-size: 4em !important;
-            margin: 60px auto !important;
-            option {
-                font-size: 0.3em !important;
-            }
-        }
         &__block-links {
             a {
-                font-size: 3.1em !important;
-                width: 530px !important;
-                height: 150px !important;
+                width: 135px !important;
+                font-size: 0.8em !important;
+            }
+        }
+        &__block-select-wrapper {
+            height: 40px !important;
+            &::after {
+                width: 15px !important;
+                height: 15px !important;
+            }
+        }
+        &__block-list-size {
+            font-size: 1.5em !important;
+        }
+    }
+}
+
+@media (max-width: 300px) {
+    .product {
+        &__block-select-wrapper {
+            margin: 30px auto !important;
+        }
+        &__block-links {
+            flex-direction: column;
+            align-items: center;
+            a {
+                width: 165px !important;
+                height: 40px !important;
+                font-size: 1em !important;
             }
         }
     }
