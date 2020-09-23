@@ -239,7 +239,13 @@ const lookingImagesInModalWindow = array => {
 
         // создание блоков с картинками
         const createImages = () => {
-            let block = `<li class="window-look__img" style="background-image: url(${item.img});"></li>`;
+            let block =
+                `
+            <li class="window-look__img" style="background-image: url(${item.img});">
+                <div class="window-look__img-cursor-close product__img-cursor"></div>
+            </li>
+            `;
+
             list_images.innerHTML += block;
         }
 
@@ -250,7 +256,6 @@ const lookingImagesInModalWindow = array => {
 
     // появление окна просмотра
     img.addEventListener('click', () => {
-        img.classList.add('anim-zoom');
         modal_window.classList.add('open-window');
         window.scrollTo({
             behavior: 'auto',
@@ -280,6 +285,58 @@ let images = [{
 
 document.querySelector('.product__img') && lookingImagesInModalWindow(images);
 
+// появление курсора при наведении на картинку (открытие)
+const showCursorOfImgOpen = () => {
+    const img = document.querySelector('.product__img');
+    const cursor = document.querySelector('.product__img-cursor-open');
+
+    const showHideCursor = (ev, open) => {
+        img.addEventListener(ev, () => {
+            cursor.style.display = open ? 'block' : 'none';
+        });
+    }
+
+    showHideCursor('mouseover', true);
+    showHideCursor('mouseout', false);
+
+    img.addEventListener('mousemove', e => {
+        let [x, y] = [e.pageX - 40, e.pageY - 100];
+
+        cursor.style.top = `${y}px`;
+        cursor.style.left = `${x}px`;
+    });
+}
+
+document.querySelector('.product__img') && showCursorOfImgOpen();
+
+// появление курсора при наведении на картинку (закрытие)
+const showCursorOfImgClose = () => {
+    const img = document.querySelectorAll('.window-look__img');
+    const cursor = document.querySelectorAll('.window-look__img-cursor-close');
+
+    const showHideCursor = (ev, open) => {
+        img.forEach((item, index) => {
+            item.addEventListener(ev, () => {
+                cursor[index].style.display = open ? 'block' : 'none';
+            });
+        });
+    }
+
+    showHideCursor('mouseover', true);
+    showHideCursor('mouseout', false);
+
+    img.forEach((item, index) => {
+        item.addEventListener('mousemove', e => {
+            let [x, y] = [e.pageX, e.pageY];
+
+            cursor[index].style.top = `${y}px`;
+            cursor[index].style.left = `${x}px`;
+        });
+    });
+}
+
+document.querySelector('.window-look__img') && showCursorOfImgClose();
+
 // появление меню
 const showMenu = () => {
     let el = document.querySelector('.header__bottom-shop');
@@ -290,7 +347,7 @@ const showMenu = () => {
             if (add) {
                 item.classList.add('no-bottom-line');
             } else {
-                item.classList.add('no-bottom-line');
+                item.classList.remove('no-bottom-line');
             }
             menu.style.bottom = `${bottomCount}px`;
         });
@@ -351,7 +408,7 @@ const validateForm = () => {
         });
     }
 
-    let regexp_email = /^[A-Z|a-z|\d|\.|\_]{0,}@[a-z]+\.[a-z]{1,}$/gm;
+    let regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/g;
     let regexp_password = /^.{6,}$/;
     let regexp_name = /^[а-я|А-Я]{2,}$/;
 

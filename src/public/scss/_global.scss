@@ -107,8 +107,6 @@ img {
             justify-content: center;
             align-items: center;
             a {
-                @extend %work-sans-regular;
-                color: #000;
                 user-select: none;
             }
         }
@@ -413,7 +411,6 @@ img {
 
 .footer {
     height: 300px;
-    z-index: 300;
     &__info {
         display: flex;
         justify-content: space-between;

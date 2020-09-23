@@ -66,7 +66,6 @@
         }
         &__block-list-size {
             height: 100% !important;
-            border: 1px solid #000;
             font-size: 2em !important;
             appearance: none;
             &::-ms-expand {
@@ -273,6 +272,17 @@
             font-size: 0.8em !important;
         }
     }
+    .product {
+        &__img-cursor {
+            display: none !important;
+        }
+        &__img {
+            cursor: pointer !important;
+        }
+    }
+    .window-look__img {
+        cursor: pointer !important;
+    }
 }
 
 @media (max-width: 971px) {
@@ -351,15 +361,6 @@
         &__submit {
             font-size: 14px !important;
             letter-spacing: 1px;
-        }
-    }
-    .product {
-        &__block-links {
-            a {
-                font-size: 1.5em !important;
-                width: 300px !important;
-                height: 60px !important;
-            }
         }
     }
     .card {

@@ -19522,7 +19522,7 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
 
 
     var createImages = function createImages() {
-      var block = "<li class=\"window-look__img\" style=\"background-image: url(".concat(item.img, ");\"></li>");
+      var block = "\n            <li class=\"window-look__img\" style=\"background-image: url(".concat(item.img, ");\">\n                <div class=\"window-look__img-cursor-close product__img-cursor\"></div>\n            </li>\n            ");
       list_images.innerHTML += block;
     };
 
@@ -19531,7 +19531,6 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
   var images = document.querySelectorAll('.window-look__img'); // появление окна просмотра
 
   img.addEventListener('click', function () {
-    img.classList.add('anim-zoom');
     modal_window.classList.add('open-window');
     window.scrollTo({
       behavior: 'auto',
@@ -19561,7 +19560,56 @@ var images = [{
 }, {
   img: 'assets/img/IMG_2827.jpg'
 }];
-document.querySelector('.product__img') && lookingImagesInModalWindow(images); // появление меню
+document.querySelector('.product__img') && lookingImagesInModalWindow(images); // появление курсора при наведении на картинку (открытие)
+
+var showCursorOfImgOpen = function showCursorOfImgOpen() {
+  var img = document.querySelector('.product__img');
+  var cursor = document.querySelector('.product__img-cursor-open');
+
+  var showHideCursor = function showHideCursor(ev, open) {
+    img.addEventListener(ev, function () {
+      cursor.style.display = open ? 'block' : 'none';
+    });
+  };
+
+  showHideCursor('mouseover', true);
+  showHideCursor('mouseout', false);
+  img.addEventListener('mousemove', function (e) {
+    var x = e.pageX - 40,
+        y = e.pageY - 100;
+    cursor.style.top = "".concat(y, "px");
+    cursor.style.left = "".concat(x, "px");
+  });
+};
+
+document.querySelector('.product__img') && showCursorOfImgOpen(); // появление курсора при наведении на картинку (закрытие)
+
+var showCursorOfImgClose = function showCursorOfImgClose() {
+  var img = document.querySelectorAll('.window-look__img');
+  var cursor = document.querySelectorAll('.window-look__img-cursor-close');
+
+  var showHideCursor = function showHideCursor(ev, open) {
+    img.forEach(function (item, index) {
+      item.addEventListener(ev, function () {
+        cursor[index].style.display = open ? 'block' : 'none';
+      });
+    });
+  };
+
+  showHideCursor('mouseover', true);
+  showHideCursor('mouseout', false);
+  img.forEach(function (item, index) {
+    item.addEventListener('mousemove', function (e) {
+      var _ref2 = [e.pageX, e.pageY],
+          x = _ref2[0],
+          y = _ref2[1];
+      cursor[index].style.top = "".concat(y, "px");
+      cursor[index].style.left = "".concat(x, "px");
+    });
+  });
+};
+
+document.querySelector('.window-look__img') && showCursorOfImgClose(); // появление меню
 
 var showMenu = function showMenu() {
   var el = document.querySelector('.header__bottom-shop');
@@ -19572,7 +19620,7 @@ var showMenu = function showMenu() {
       if (add) {
         item.classList.add('no-bottom-line');
       } else {
-        item.classList.add('no-bottom-line');
+        item.classList.remove('no-bottom-line');
       }
 
       menu.style.bottom = "".concat(bottomCount, "px");
@@ -19633,7 +19681,7 @@ var validateForm = function validateForm() {
     });
   };
 
-  var regexp_email = /^[A-Z|a-z|\d|\.|\_]{0,}@[a-z]+\.[a-z]{1,}$/gm;
+  var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/g;
   var regexp_password = /^.{6,}$/;
   var regexp_name = /^[а-я|А-Я]{2,}$/;
   validate('.account__data[name="email-login"]', 'invalid', 'valid', regexp_email, '.account__submit-login', '.account__data-login', 'войти');
