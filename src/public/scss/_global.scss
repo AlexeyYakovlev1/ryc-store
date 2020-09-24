@@ -380,6 +380,9 @@ img {
     visibility: hidden;
     background-color: #fff;
     border-radius: 50%;
+    .up-btn {
+        height: 100%;
+    }
     span {
         position: absolute;
         top: 0;
@@ -388,6 +391,7 @@ img {
         height: 10px;
         background-color: #000;
         transition: .5s;
+        display: block;
         &:nth-child(1) {
             left: 9px;
             width: .5px;
