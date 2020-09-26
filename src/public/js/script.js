@@ -448,6 +448,50 @@ const validateForm = () => {
 
 validateForm();
 
+// создание select
+const select = () => {
+    const heading = document.querySelector('.product__block-list-heading');
+    const list = document.querySelector('.product__block-list');
+    const sizes = document.querySelectorAll('.product__block-size');
+    const block = document.querySelector('.product__block-select-wrapper');
+    const height = sizes.length * sizes[0].clientHeight;
+    const bottom = sizes.length * sizes[0].clientHeight;
+    let open = false;
+
+    // открытие/закрытие select
+    const openCloseSelect = () => {
+        heading.addEventListener('click', () => {
+            open = !open;
+            list.style.height = open ? `${height}px` : `0px`;
+            list.style.bottom = open ? `-${bottom}px` : `0px`;
+
+            list.classList.toggle('open-select');
+            block.classList.toggle('open-options');
+        });
+    }
+
+    openCloseSelect();
+
+    // выбор размера
+    const choiceSize = () => {
+        sizes.forEach(item => {
+            item.addEventListener('click', () => {
+                open = false;
+                list.style.height = open ? `${height}px` : `0px`;
+                list.style.bottom = open ? `-${bottom}px` : `0px`;
+
+                heading.innerHTML = item.innerHTML;
+                list.classList.remove('open-select');
+                block.classList.remove('open-options');
+            });
+        });
+    }
+
+    choiceSize();
+}
+
+document.querySelector('.product__block-select-wrapper') && select();
+
 // адаптив
 
 // появление меню 
@@ -471,6 +515,7 @@ const showMenuList = () => {
                 }
             } else {
                 document.documentElement.classList.remove('no-scroll');
+                document.querySelector('.up-wrapper').style.zIndex = '999';
                 list.classList.remove('show-menu');
 
                 if (document.querySelector('.block-filters')) {

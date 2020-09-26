@@ -392,13 +392,12 @@ img {
         background-color: #000;
         transition: .5s;
         display: block;
+        width: .5px;
         &:nth-child(1) {
             left: 9px;
-            width: .5px;
         }
         &:nth-child(2) {
             right: 9px;
-            width: .5px;
         }
     }
 }
@@ -456,4 +455,12 @@ img {
 
 .show-filters {
     left: 0 !important;
+}
+
+.open-select {
+    visibility: visible !important;
+}
+
+.open-options::after {
+    transform: rotateZ(90deg) rotateY(180deg) !important;
 }

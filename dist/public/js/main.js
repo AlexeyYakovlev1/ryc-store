@@ -19715,7 +19715,46 @@ var validateForm = function validateForm() {
   showHidePassword();
 };
 
-validateForm(); // адаптив
+validateForm(); // создание select
+
+var select = function select() {
+  var heading = document.querySelector('.product__block-list-heading');
+  var list = document.querySelector('.product__block-list');
+  var sizes = document.querySelectorAll('.product__block-size');
+  var block = document.querySelector('.product__block-select-wrapper');
+  var height = sizes.length * sizes[0].clientHeight;
+  var bottom = sizes.length * sizes[0].clientHeight;
+  var open = false; // открытие/закрытие select
+
+  var openCloseSelect = function openCloseSelect() {
+    heading.addEventListener('click', function () {
+      open = !open;
+      list.style.height = open ? "".concat(height, "px") : "0px";
+      list.style.bottom = open ? "-".concat(bottom, "px") : "0px";
+      list.classList.toggle('open-select');
+      block.classList.toggle('open-options');
+    });
+  };
+
+  openCloseSelect(); // выбор размера
+
+  var choiceSize = function choiceSize() {
+    sizes.forEach(function (item) {
+      item.addEventListener('click', function () {
+        open = false;
+        list.style.height = open ? "".concat(height, "px") : "0px";
+        list.style.bottom = open ? "-".concat(bottom, "px") : "0px";
+        heading.innerHTML = item.innerHTML;
+        list.classList.remove('open-select');
+        block.classList.remove('open-options');
+      });
+    });
+  };
+
+  choiceSize();
+};
+
+document.querySelector('.product__block-select-wrapper') && select(); // адаптив
 // появление меню 
 
 var showMenuList = function showMenuList() {
@@ -19739,6 +19778,7 @@ var showMenuList = function showMenuList() {
         }
       } else {
         document.documentElement.classList.remove('no-scroll');
+        document.querySelector('.up-wrapper').style.zIndex = '999';
         list.classList.remove('show-menu');
 
         if (document.querySelector('.block-filters')) {
