@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ryc store товар</title>
+    <title>Document</title>
     <link rel="stylesheet" href="public/css/style.css">
-    <link rel="icon" href="assets/img/logo.jpg" type="image/jpg" sizes="16x16">
 </head>
 
 <body>
@@ -96,51 +95,54 @@
         <span></span>
     </div>
 </div>
-    <div class="window-look">
-        <ul class="window-look__list-images"></ul>
-        <div class="window-look__close"></div>
-    </div>
-    <div class="product">
+    <div class="cart">
         <div class="container">
-            <div class="product__info">
-                <div class="product__block product__block-img">
-                    <div class="product__img">
-                        <div class="product__img-cursor product__img-cursor-open"></div>
-                    </div>
-                </div>
-                <div class="product__block product__block-information">
-                    <div class="product__block-content">
-                        <div class="product__block-heading">Название</div>
-                        <div class="product__block-price">1,000 руб</div>
-                        <p class="product__block-desc">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum iure eaque quam pariatur expedita incidunt sunt veritatis quos repellat distinctio?
-                        </p>
-                        <div class="product__block-order-info">
-                            <div class="product__block-select-wrapper">
-                                <div class="product__block-list-size">
-                                    <div class="product__block-list-heading">Выберите размер</div>
-                                    <ul class="product__block-list">
-                                        <li class="product__block-size">s</li>
-                                        <li class="product__block-size">m</li>
-                                        <li class="product__block-size">xxl</li>
-                                        <li class="product__block-size">l</li>
-                                    </ul>
+            <ul class="cart__products">
+                <li class="cart__product">
+                    <div class="cart__product-content">
+                        <div class="cart__product-desc">
+                            <a href="/shop/#{product.id}/">
+                                <div class="cart__product-desc-img">
+                                    <figure>
+                                        <img src="./assets/img/big-size/IMG_2213.jpg" alt="" width="128">
+                                    </figure>
+                                </div>
+                            </a>
+                            <div class="cart__product-desc-text">
+                                <div class="cart__product-desc-block">
+                                    <div class="cart__product-desc-block-item cart__product-desc-block-item-text" style="width: 200px;">
+                                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod, iusto.</p>
+                                        <div class="cart__product-desc-size">Размер: l</div>
+                                    </div>
+                                    <div class="cart__product-desc-block-item cart__product-desc-block-item-price">
+                                        <div class="cart__product-desc-price">1000₽</div>
+                                    </div>
+                                </div>
+                                <div class="cart__product-desc-block">
+                                    <div class="cart__product-desc-block-item cart__product-desc-block-item-count">
+                                        <div class="cart__product-desc-count">Количество: 1</div>
+                                    </div>
+                                    <div class="cart__product-desc-block-item">
+                                        <form action="">
+                                            <input class="cart__product-desc-remove-product" type="submit" data-csrf="#{csrf}" data-id="#{product.id}" value="Удалить" />
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="product__block-links">
-                                <a class="product__block-link" href="#">Добавить в корзину</a>
-                            </div>
+                        </div>
+                        <div class="cart__product-info">
+                            <div class="cart__product-heading">Осень-зима</div>
+                            <div class="cart__product-total">Итого: 1000₽</div>
+                            <form class="cart__product-info-form" action="" method="GET">
+                                <input class="cart__product-form-buy" type="submit" value="Заказать">
+                            </form>
                         </div>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
     </div>
-    <div class="options-wrapper">
-        <div class="container">
-            <ul class="options"></ul>
-        </div>
-    </div>
+    <script src="public/js/main.js"></script>
     <footer class="footer">
     <div class="container">
         <div class="footer__info">
@@ -173,7 +175,6 @@
         </div>
     </div>
 </footer>
-    <script src="public/js/main.js"></script>
 </body>
 
 </html>

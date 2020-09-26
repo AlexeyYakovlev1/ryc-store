@@ -41,6 +41,7 @@ body {
 img {
     max-width: 100%;
     height: auto;
+    user-select: none;
 }
 
 .header {
@@ -72,6 +73,13 @@ img {
     &__bottom {
         height: 40px;
         margin-top: 10px;
+        &-wrapper-list {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
         &-list-close {
             position: absolute;
         }
@@ -106,9 +114,6 @@ img {
             display: flex;
             justify-content: center;
             align-items: center;
-            a {
-                user-select: none;
-            }
         }
         &-shop {
             z-index: 999;

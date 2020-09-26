@@ -108,6 +108,12 @@
         &__bottom-shop-list {
             display: none !important;
         }
+        &__bottom-wrapper-list {
+            width: max-content !important;
+            height: max-content !important;
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
         &__bottom-btn {
             width: 30px;
             height: 20px;
@@ -149,13 +155,13 @@
             z-index: 9999;
             bottom: 0;
             background-color: #fff;
-            flex-direction: column !important;
+            flex-direction: column;
             justify-content: center !important;
             overflow-y: auto;
             li {
-                font-size: 2em;
+                font-size: 1.3em;
                 &:not(:last-child) {
-                    margin-bottom: 20px;
+                    margin-bottom: 30px;
                 }
             }
         }
@@ -208,7 +214,7 @@
             position: relative !important;
             border-bottom: 1px solid #000 !important;
             width: 500px !important;
-            height: 100px !important;
+            height: 40px !important;
             opacity: 1 !important;
             font-size: 0.9em !important;
             display: block;
@@ -272,6 +278,11 @@
     .window-look__img {
         cursor: pointer !important;
     }
+    .cart {
+        &__product-content {
+            width: 100% !important;
+        }
+    }
 }
 
 @media (max-width: 971px) {
@@ -302,6 +313,19 @@
         }
         &__block {
             margin-bottom: 50px;
+        }
+    }
+    .cart {
+        &__product {
+            height: 300px !important;
+            &-content {
+                flex-direction: column;
+            }
+            &-desc,
+            &-info {
+                margin: 0 auto;
+                width: 80% !important;
+            }
         }
     }
 }
@@ -417,7 +441,6 @@
         }
         &-search {
             width: 300px !important;
-            height: 50px !important;
         }
     }
     .title {
@@ -444,6 +467,24 @@
         &__block-links {
             a {
                 width: 250px !important;
+            }
+        }
+    }
+}
+
+@media (max-width: 540px) {
+    .cart {
+        &__product-desc-block-item {
+            font-size: 10px !important;
+            padding: 0 10px;
+            &-text {
+                width: auto !important;
+            }
+        }
+        &__product {
+            &-desc,
+            &-info {
+                width: 95% !important;
             }
         }
     }
@@ -479,6 +520,12 @@
             li {
                 font-size: 1.2em !important;
             }
+        }
+        &__bottom-wrapper-list {
+            width: 90% !important;
+        }
+        &-search {
+            width: 100% !important;
         }
     }
     .product {
