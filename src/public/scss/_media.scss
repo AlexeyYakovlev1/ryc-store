@@ -1,10 +1,10 @@
-@media (max-width: 1450px) {
+@media screen and (max-width: 1450px) {
     .container {
         width: 100% !important;
     }
 }
 
-@media (max-width: 1150px) {
+@media screen and (max-width: 1150px) {
     .title {
         padding-top: 100px !important;
     }
@@ -79,9 +79,6 @@
             width: 100px;
             height: auto;
         }
-        .list-cards {
-            justify-content: center !important;
-        }
         .block-filters {
             top: 160px;
             left: 5px;
@@ -92,9 +89,16 @@
             width: 50% !important;
         }
     }
+    .list-cards {
+        width: auto !important;
+        margin: 0 auto;
+    }
+    .card {
+        padding: 0 10px;
+    }
 }
 
-@media (max-width: 1025px) {
+@media screen and (max-width: 1025px) {
     .header {
         &__top {
             height: 35px !important;
@@ -239,14 +243,6 @@
             }
         }
     }
-    .card {
-        &-old-price,
-        &-now-price,
-        &-sale,
-        &-name {
-            font-size: 1rem !important;
-        }
-    }
     .up-wrapper {
         width: 55px !important;
         height: 55px !important;
@@ -285,7 +281,7 @@
     }
 }
 
-@media (max-width: 971px) {
+@media screen and (max-width: 971px) {
     .block-filters-list {
         transition: .5s;
         position: absolute;
@@ -304,7 +300,7 @@
     }
 }
 
-@media (max-width: 850px) {
+@media screen and (max-width: 850px) {
     .account {
         &__content {
             flex-direction: column;
@@ -330,7 +326,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .header {
         &__top {
             height: 60px !important;
@@ -373,7 +369,14 @@
         }
     }
     .card {
-        margin: 0 !important;
+        margin: 0 0 10px 0 !important;
+        width: 45% !important;
+        &-old-price,
+        &-now-price,
+        &-sale,
+        &-name {
+            font-size: 0.7rem !important;
+        }
     }
     .footer {
         &__block {
@@ -393,7 +396,7 @@
     }
 }
 
-@media (max-width: 670px) {
+@media screen and (max-width: 700px) {
     .title {
         &__text {
             left: 0;
@@ -403,7 +406,13 @@
             text-align: center;
         }
     }
+}
+
+@media screen and (max-width: 670px) {
     .product {
+        &__img {
+            width: 100% !important;
+        }
         &__block-links {
             a {
                 font-size: 1.3em !important;
@@ -414,7 +423,7 @@
     }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .header {
         &__top {
             height: 60px !important;
@@ -472,7 +481,7 @@
     }
 }
 
-@media (max-width: 540px) {
+@media screen and (max-width: 540px) {
     .cart {
         &__product-desc-block-item {
             font-size: 10px !important;
@@ -488,9 +497,20 @@
             }
         }
     }
+    .card {
+        &__block-price {
+            margin-top: 0 !important;
+        }
+        &-old-price,
+        &-now-price,
+        &-sale,
+        &-name {
+            font-size: 0.6rem !important;
+        }
+    }
 }
 
-@media (max-width: 395px) {
+@media screen and (max-width: 395px) {
     .account {
         &__block {
             width: 100% !important;
@@ -514,7 +534,7 @@
     }
 }
 
-@media (max-width: 360px) {
+@media screen and (max-width: 360px) {
     .header {
         &__bottom-list {
             li {
@@ -538,7 +558,7 @@
     }
 }
 
-@media (max-width: 330px) {
+@media screen and (max-width: 330px) {
     .product {
         &__block-links {
             a {
@@ -557,15 +577,41 @@
             font-size: 1em !important;
         }
     }
+    .card {
+        &__description {
+            margin-top: 0 !important;
+        }
+        &-old-price,
+        &-now-price,
+        &-sale,
+        &-name {
+            font-size: 0.5rem !important;
+        }
+    }
 }
 
-@media (max-width: 300px) {
+@media screen and (max-width: 300px) {
     .product {
         &__block-links {
             a {
                 width: 165px !important;
                 height: 40px !important;
             }
+        }
+    }
+    .card {
+        width: 100% !important;
+        &-old-price,
+        &-now-price,
+        &-sale,
+        &-name {
+            font-size: 0.9rem !important;
+        }
+        &__description {
+            margin-top: 15px !important;
+        }
+        &__block-price {
+            margin-top: 5px !important;
         }
     }
 }

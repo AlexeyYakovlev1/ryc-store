@@ -35,9 +35,7 @@ const createProducts = (response, listSelector) => {
             <li class="card" data-size="${product.size}">
                 <a href="#" title="${product.name}">
                     <div class="card__block-img">
-                        <figure>
-                            <img src="${product.img}" alt="${product.name}">
-                        </figure>
+                        <img src="${product.img}" alt="${product.name}">
                     </div>
                     <div class="card__description">
                         <span class="card-name">${product.name}</span>

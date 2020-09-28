@@ -18,13 +18,13 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   font-family: 'Montserrat', sans-serif;
 }
 
-@media (max-width: 1450px) {
+@media screen and (max-width: 1450px) {
   .container {
     width: 100% !important;
   }
 }
 
-@media (max-width: 1150px) {
+@media screen and (max-width: 1150px) {
   .title {
     padding-top: 100px !important;
   }
@@ -102,11 +102,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     width: 100px;
     height: auto;
   }
-  .sale .list-cards {
-    -webkit-box-pack: center !important;
-        -ms-flex-pack: center !important;
-            justify-content: center !important;
-  }
   .sale .block-filters {
     top: 160px;
     left: 5px;
@@ -114,9 +109,16 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .footer__block-text {
     width: 50% !important;
   }
+  .list-cards {
+    width: auto !important;
+    margin: 0 auto;
+  }
+  .card {
+    padding: 0 10px;
+  }
 }
 
-@media (max-width: 1025px) {
+@media screen and (max-width: 1025px) {
   .header__top {
     height: 35px !important;
   }
@@ -275,9 +277,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .block-filters-list li a {
     font-size: 1rem !important;
   }
-  .card-old-price, .card-now-price, .card-sale, .card-name {
-    font-size: 1rem !important;
-  }
   .up-wrapper {
     width: 55px !important;
     height: 55px !important;
@@ -310,7 +309,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 971px) {
+@media screen and (max-width: 971px) {
   .block-filters-list {
     -webkit-transition: .5s;
     -o-transition: .5s;
@@ -335,7 +334,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 850px) {
+@media screen and (max-width: 850px) {
   .account__content {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -366,7 +365,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .header__top {
     height: 60px !important;
   }
@@ -407,7 +406,11 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     letter-spacing: 1px;
   }
   .card {
-    margin: 0 !important;
+    margin: 0 0 10px 0 !important;
+    width: 45% !important;
+  }
+  .card-old-price, .card-now-price, .card-sale, .card-name {
+    font-size: 0.7rem !important;
   }
   .footer__block-list-social {
     -webkit-box-pack: center;
@@ -425,13 +428,19 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 670px) {
+@media screen and (max-width: 700px) {
   .title__text {
     left: 0;
     right: 0;
     width: 90% !important;
     margin: 0 auto;
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .product__img {
+    width: 100% !important;
   }
   .product__block-links a {
     font-size: 1.3em !important;
@@ -440,7 +449,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .header__top {
     height: 60px !important;
   }
@@ -493,7 +502,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 540px) {
+@media screen and (max-width: 540px) {
   .cart__product-desc-block-item {
     font-size: 10px !important;
     padding: 0 10px;
@@ -504,9 +513,15 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .cart__product-desc, .cart__product-info {
     width: 95% !important;
   }
+  .card__block-price {
+    margin-top: 0 !important;
+  }
+  .card-old-price, .card-now-price, .card-sale, .card-name {
+    font-size: 0.6rem !important;
+  }
 }
 
-@media (max-width: 395px) {
+@media screen and (max-width: 395px) {
   .account__block {
     width: 100% !important;
   }
@@ -524,7 +539,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 360px) {
+@media screen and (max-width: 360px) {
   .header__bottom-list li {
     font-size: 1.2em !important;
   }
@@ -542,7 +557,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media (max-width: 330px) {
+@media screen and (max-width: 330px) {
   .product__block-links a {
     width: 135px !important;
     font-size: 0.7em !important;
@@ -557,12 +572,30 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .product__block-list-size {
     font-size: 1em !important;
   }
+  .card__description {
+    margin-top: 0 !important;
+  }
+  .card-old-price, .card-now-price, .card-sale, .card-name {
+    font-size: 0.5rem !important;
+  }
 }
 
-@media (max-width: 300px) {
+@media screen and (max-width: 300px) {
   .product__block-links a {
     width: 165px !important;
     height: 40px !important;
+  }
+  .card {
+    width: 100% !important;
+  }
+  .card-old-price, .card-now-price, .card-sale, .card-name {
+    font-size: 0.9rem !important;
+  }
+  .card__description {
+    margin-top: 15px !important;
+  }
+  .card__block-price {
+    margin-top: 5px !important;
   }
 }
 
@@ -1715,9 +1748,7 @@ img {
 }
 
 .sale {
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
+  padding-top: 100px;
 }
 
 .block-filters {
@@ -1771,45 +1802,36 @@ img {
 .list-cards {
   width: 1100px;
   height: auto;
-  margin: 100px auto 0;
+  margin: 0 auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: relative;
 }
 
 .card {
-  width: 333px;
-  margin: 10px 0 0 30px;
-  height: 430px;
-  overflow: hidden;
+  width: 300px;
+  height: auto;
+  margin: 0 auto 10px;
   -webkit-transition: .5s;
   -o-transition: .5s;
   transition: .5s;
 }
 
 .card__block-img {
-  width: 280px;
-  height: 350px;
-  z-index: 5;
+  height: auto;
   position: relative;
-  overflow: hidden;
   margin: 0 auto;
-}
-
-.card__block-img img {
-  max-height: 350px;
 }
 
 .card__description {
   text-align: center;
   margin-top: 1rem;
-  -webkit-transition: all .5s;
-  -o-transition: all .5s;
-  transition: all .5s;
-  z-index: 5;
 }
 
 .card-name {
