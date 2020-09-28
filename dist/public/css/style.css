@@ -22,12 +22,12 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .container {
     width: 100% !important;
   }
+  .title__block-img {
+    height: auto !important;
+  }
 }
 
-@media screen and (max-width: 1150px) {
-  .title {
-    padding-top: 100px !important;
-  }
+@media screen and (max-width: 1360px) {
   .product__block-link {
     font-size: 1em !important;
     width: 200px !important;
@@ -49,9 +49,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     font-size: 0.9em !important;
   }
   .product__img {
-    width: inherit !important;
-    min-height: 101% !important;
-    max-height: 100% !important;
+    height: 100% !important;
   }
   .product__info {
     height: auto !important;
@@ -62,7 +60,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
   .product__block-img {
     width: 100% !important;
-    height: 620px !important;
+    height: 600px !important;
   }
   .product__block-information {
     margin: 0 !important;
@@ -83,6 +81,21 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     display: flex;
     -ms-flex-pack: distribute;
         justify-content: space-around;
+  }
+  .product__img-cursor {
+    display: none !important;
+  }
+  .product__img {
+    cursor: pointer !important;
+  }
+  .window-look__img {
+    cursor: pointer !important;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .title {
+    padding-top: 100px !important;
   }
   .options .card-name {
     font-size: 0.9rem !important;
@@ -115,6 +128,9 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
   .card {
     padding: 0 10px;
+  }
+  .product__block-img {
+    height: auto !important;
   }
 }
 
@@ -295,15 +311,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .footer__block-text {
     font-size: 0.8em !important;
   }
-  .product__img-cursor {
-    display: none !important;
-  }
-  .product__img {
-    cursor: pointer !important;
-  }
-  .window-look__img {
-    cursor: pointer !important;
-  }
   .cart__product-content {
     width: 100% !important;
   }
@@ -331,6 +338,16 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     border: none;
     cursor: pointer;
     background-color: transparent;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .card {
+    margin: 0 0 10px 0 !important;
+    width: 45% !important;
+  }
+  .card-old-price, .card-now-price, .card-sale, .card-name {
+    font-size: 0.7rem !important;
   }
 }
 
@@ -405,13 +422,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     font-size: 14px !important;
     letter-spacing: 1px;
   }
-  .card {
-    margin: 0 0 10px 0 !important;
-    width: 45% !important;
-  }
-  .card-old-price, .card-now-price, .card-sale, .card-name {
-    font-size: 0.7rem !important;
-  }
   .footer__block-list-social {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -428,7 +438,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 750px) {
   .title__text {
     left: 0;
     right: 0;
@@ -439,9 +449,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
 }
 
 @media screen and (max-width: 670px) {
-  .product__img {
-    width: 100% !important;
-  }
   .product__block-links a {
     font-size: 1.3em !important;
     width: 280px !important;
@@ -476,7 +483,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     width: 300px !important;
   }
   .title {
-    padding: 0 !important;
+    padding-top: 200px !important;
     height: auto !important;
   }
   .title .container {
@@ -484,9 +491,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
   .title__text a {
     font-size: 2em !important;
-  }
-  .title__block-img {
-    height: 750px !important;
   }
   .sale {
     padding-top: 200px !important;
@@ -596,6 +600,9 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   }
   .card__block-price {
     margin-top: 5px !important;
+  }
+  .cart__product-desc-block-item {
+    font-size: 8.8px !important;
   }
 }
 
@@ -1723,8 +1730,6 @@ img {
 
 .title__block-img {
   display: block;
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 500px;
 }
 
@@ -1826,6 +1831,10 @@ img {
 .card__block-img {
   height: auto;
   position: relative;
+}
+
+.card__block-img img {
+  display: block;
   margin: 0 auto;
 }
 
@@ -1878,12 +1887,7 @@ img {
 }
 
 .product__img {
-  width: 650px;
-  min-height: 500px;
-  max-height: 501px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-image: url(../../assets/img/IMG_2709.jpg);
+  height: auto;
   position: relative;
   overflow: hidden;
   cursor: none;
@@ -1906,13 +1910,6 @@ img {
 
 .product__block-img {
   width: 800px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 .product__block-information {
@@ -2076,9 +2073,7 @@ img {
 .options-wrapper .options .card {
   min-width: 300px;
   max-width: 301px;
-  height: 370px;
   margin: 0;
-  z-index: 1;
 }
 
 .options-wrapper .options .card__description {
@@ -2104,38 +2099,28 @@ img {
 
 .window-look {
   width: 100%;
-  min-height: 100%;
-  max-height: -webkit-max-content;
-  max-height: -moz-max-content;
-  max-height: max-content;
+  min-height: 100vh;
+  max-height: 100%;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   z-index: 999;
   display: none;
+  overflow-y: auto;
 }
 
 .window-look__list-images {
-  width: 100%;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .window-look__img {
-  width: 100%;
-  height: 100vh;
-  display: block;
-  background-size: cover;
-  background-repeat: no-repeat;
-  overflow: hidden;
   cursor: none;
 }
 
@@ -2279,8 +2264,6 @@ img {
 }
 
 .cart {
-  min-height: 700px;
-  max-height: auto;
   padding-top: 200px;
 }
 

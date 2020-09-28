@@ -19289,7 +19289,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var headerSearchWord = document.querySelector('.header-search-word');
-var headerSearch = document.querySelector('.header-search');
+var headerSearch = document.querySelector('.header-search-show');
 var blockFiltersList = document.querySelector('.block-filters-list');
 
 var checkResponse = function checkResponse(res) {
@@ -19360,17 +19360,15 @@ var animationSearch = function animationSearch() {
   var blockSearchContent = document.querySelector('.header__block-search-content');
   var list = document.querySelector('.header__bottom-list-user'); // Действия при клике
 
-  headerSearchWord.addEventListener('click', function (event) {
-    if (event.target) {
-      word.style.opacity = '0';
-      blockSearch.style.width = '115px';
-      blockSearch.style.height = '20px';
-      blockSearch.classList.add('no-border');
-      blockSearchContent.style.height = '20px';
-      list.style.width = '315px';
-      headerSearch.style.opacity = '1';
-      headerSearch.focus();
-    }
+  headerSearchWord.addEventListener('click', function () {
+    word.style.opacity = '0';
+    blockSearch.style.width = '115px';
+    blockSearch.style.height = '20px';
+    blockSearch.classList.add('no-border');
+    blockSearchContent.style.height = '20px';
+    list.style.width = '315px';
+    headerSearch.style.opacity = '1';
+    headerSearch.focus();
   }); // Действия при выходе из инпута
 
   headerSearch.addEventListener('blur', function () {
@@ -19445,8 +19443,9 @@ window.addEventListener('DOMContentLoaded', function () {
 }); // поиск
 
 var search = function search(data) {
-  headerSearch.addEventListener('keydown', function (event) {
-    var valueSearch = headerSearch.value.trim().toLowerCase();
+  var search = document.querySelector('.header-search');
+  search.addEventListener('keydown', function (event) {
+    var valueSearch = search.value.trim().toLowerCase();
     var result = data.filter(function (item) {
       return item.name.toLowerCase().includes(valueSearch);
     });
@@ -19502,13 +19501,16 @@ var scrollUp = function scrollUp() {
 scrollUp(); // просмотр изображений в модальном окне
 
 var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
-  var img = document.querySelector('.product__img');
+  var img = document.querySelector('.product__img img');
+  var product_img = document.querySelector('.product__img');
   var modal_window = document.querySelector('.window-look');
   var close = document.querySelector('.window-look__close');
   var list_images = document.querySelector('.window-look__list-images');
 
   var hideImage = function hideImage() {
     modal_window.classList.remove('open-window');
+    document.body.style.height = 'auto';
+    document.body.style.overflow = 'visible';
     window.scrollTo({
       behavior: 'auto',
       top: 0
@@ -19517,12 +19519,12 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
 
   array.forEach(function (item, index) {
     if (index === 0) {
-      img.style.backgroundImage = "url(".concat(item.img, ")");
+      img.src = item.img;
     } // создание блоков с картинками
 
 
     var createImages = function createImages() {
-      var block = "\n            <li class=\"window-look__img\" style=\"background-image: url(".concat(item.img, ");\">\n                <div class=\"window-look__img-cursor-close product__img-cursor\"></div>\n            </li>\n            ");
+      var block = "\n            <li class=\"window-look__img\">\n                <img src=\"".concat(item.img, "\" alt=\"\" />\n                <div class=\"window-look__img-cursor-close product__img-cursor\"></div>\n            </li>\n            ");
       list_images.innerHTML += block;
     };
 
@@ -19530,8 +19532,10 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
   });
   var images = document.querySelectorAll('.window-look__img'); // появление окна просмотра
 
-  img.addEventListener('click', function () {
+  product_img.addEventListener('click', function () {
     modal_window.classList.add('open-window');
+    document.body.style.height = "".concat(document.querySelector('.window-look').clientHeight, "px");
+    document.body.style.overflow = 'hidden';
     window.scrollTo({
       behavior: 'auto',
       top: 0

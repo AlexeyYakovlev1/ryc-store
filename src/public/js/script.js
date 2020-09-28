@@ -1,5 +1,5 @@
 const headerSearchWord = document.querySelector('.header-search-word');
-const headerSearch = document.querySelector('.header-search');
+const headerSearch = document.querySelector('.header-search-show');
 const blockFiltersList = document.querySelector('.block-filters-list');
 
 const checkResponse = res => document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
@@ -91,21 +91,19 @@ const animationSearch = () => {
     const list = document.querySelector('.header__bottom-list-user');
 
     // Действия при клике
-    headerSearchWord.addEventListener('click', event => {
-        if (event.target) {
-            word.style.opacity = '0';
+    headerSearchWord.addEventListener('click', () => {
+        word.style.opacity = '0';
 
-            blockSearch.style.width = '115px';
-            blockSearch.style.height = '20px';
-            blockSearch.classList.add('no-border');
+        blockSearch.style.width = '115px';
+        blockSearch.style.height = '20px';
+        blockSearch.classList.add('no-border');
 
-            blockSearchContent.style.height = '20px';
+        blockSearchContent.style.height = '20px';
 
-            list.style.width = '315px';
+        list.style.width = '315px';
 
-            headerSearch.style.opacity = '1';
-            headerSearch.focus();
-        }
+        headerSearch.style.opacity = '1';
+        headerSearch.focus();
     });
 
     // Действия при выходе из инпута
@@ -160,8 +158,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // поиск
 const search = (data) => {
-    headerSearch.addEventListener('keydown', event => {
-        const valueSearch = headerSearch.value.trim().toLowerCase();
+    const search = document.querySelector('.header-search');
+
+    search.addEventListener('keydown', event => {
+        const valueSearch = search.value.trim().toLowerCase();
         const result = data.filter(item => item.name.toLowerCase().includes(valueSearch));
 
         if (event.keyCode === 13) {
@@ -217,13 +217,17 @@ scrollUp();
 
 // просмотр изображений в модальном окне
 const lookingImagesInModalWindow = array => {
-    let img = document.querySelector('.product__img');
+    let img = document.querySelector('.product__img img');
+    let product_img = document.querySelector('.product__img');
     let modal_window = document.querySelector('.window-look');
     let close = document.querySelector('.window-look__close');
     let list_images = document.querySelector('.window-look__list-images');
 
     const hideImage = () => {
         modal_window.classList.remove('open-window');
+        document.body.style.height = 'auto';
+        document.body.style.overflow = 'visible';
+
         window.scrollTo({
             behavior: 'auto',
             top: 0
@@ -232,14 +236,15 @@ const lookingImagesInModalWindow = array => {
 
     array.forEach((item, index) => {
         if (index === 0) {
-            img.style.backgroundImage = `url(${item.img})`;
+            img.src = item.img;
         }
 
         // создание блоков с картинками
         const createImages = () => {
             let block =
                 `
-            <li class="window-look__img" style="background-image: url(${item.img});">
+            <li class="window-look__img">
+                <img src="${item.img}" alt="" />
                 <div class="window-look__img-cursor-close product__img-cursor"></div>
             </li>
             `;
@@ -253,8 +258,11 @@ const lookingImagesInModalWindow = array => {
     let images = document.querySelectorAll('.window-look__img');
 
     // появление окна просмотра
-    img.addEventListener('click', () => {
+    product_img.addEventListener('click', () => {
         modal_window.classList.add('open-window');
+        document.body.style.height = `${document.querySelector('.window-look').clientHeight}px`;
+        document.body.style.overflow = 'hidden';
+
         window.scrollTo({
             behavior: 'auto',
             top: 0

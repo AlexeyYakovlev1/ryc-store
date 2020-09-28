@@ -15,8 +15,6 @@
         position: relative;
         &-img {
             display: block;
-            background-repeat: no-repeat;
-            background-size: cover;
             height: 500px;
         }
     }
@@ -92,7 +90,10 @@
     &__block-img {
         height: auto;
         position: relative;
-        margin: 0 auto;
+        img {
+            display: block;
+            margin: 0 auto;
+        }
     }
     &__description {
         text-align: center;
@@ -132,12 +133,7 @@
         transition: .5s;
     }
     &__img {
-        width: 650px;
-        min-height: 500px;
-        max-height: 501px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-image: url(../../assets/img/IMG_2709.jpg);
+        height: auto;
         position: relative;
         overflow: hidden;
         cursor: none;
@@ -156,8 +152,6 @@
         height: 500px;
         &-img {
             width: 800px;
-            display: flex;
-            flex-direction: column;
         }
         &-information {
             width: 500px;
@@ -272,9 +266,7 @@
         .card {
             min-width: 300px;
             max-width: 301px;
-            height: 370px;
             margin: 0;
-            z-index: 1;
             &__description {
                 margin-top: -2rem;
             }
@@ -294,31 +286,20 @@
 
 .window-look {
     width: 100%;
-    min-height: 100%;
-    max-height: max-content;
+    min-height: 100vh;
+    max-height: 100%;
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.8);
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
     z-index: 999;
     display: none;
+    overflow-y: auto;
     &__list-images {
-        width: 100%;
-        height: max-content;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: #000;
+        display: flex;
+        flex-direction: column;
     }
     &__img {
-        width: 100%;
-        height: 100vh;
-        display: block;
-        background-size: cover;
-        background-repeat: no-repeat;
-        overflow: hidden;
         cursor: none;
         &-cursor-close {
             background-image: url(../../assets/img/svg/minus.svg);
@@ -424,8 +405,6 @@
 }
 
 .cart {
-    min-height: 700px;
-    max-height: auto;
     padding-top: 200px;
     &__products {
         display: flex;
