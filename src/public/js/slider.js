@@ -1,9 +1,11 @@
-import 'slick-carousel';
-import $ from 'jquery';
+import Glide from '@glidejs/glide';
 
-$('.title__slider').slick({
-    arrows: false,
-    dots: false,
-    speed: 2000,
-    autoplay: 4000
-});
+let options = {
+    type: 'carousel',
+    autoplay: 4000,
+    animationDuration: 2000,
+    animationTimingFunc: 'ease',
+    gap: 0
+};
+
+document.querySelector('.glide') && new Glide('.glide', options).mount();

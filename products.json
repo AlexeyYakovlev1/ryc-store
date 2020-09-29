@@ -2,7 +2,7 @@
     "products": [{
             "type": "type",
             "size": "big",
-            "img": "assets/img/big-size/IMG_2217.jpg",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076",
             "name": "Шорты",
             "oldPrice": 500,
             "nowPrice": 352
@@ -10,7 +10,7 @@
         {
             "type": "type",
             "size": "small",
-            "img": "assets/img/big-size/IMG_2249.jpg",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/ACW-UF003B-GRY_1_360x.jpg?v=1584713939",
             "name": "name",
             "oldPrice": 10,
             "nowPrice": 5
@@ -18,7 +18,7 @@
         {
             "type": "type",
             "size": "small",
-            "img": "assets/img/big-size/IMG_2249.jpg",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/a-cold-wall_acw_ACWMR002WHL-BLK-1_180x.jpg?v=1595011865",
             "name": "name",
             "oldPrice": 10,
             "nowPrice": 5
@@ -26,7 +26,7 @@
         {
             "type": "type",
             "size": "small",
-            "img": "assets/img/big-size/IMG_2249.jpg",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/ACWMW017DRT-BLK_1_blk_180x.jpg?v=1586433043",
             "name": "name",
             "oldPrice": 10,
             "nowPrice": 5
@@ -34,7 +34,7 @@
         {
             "type": "type",
             "size": "small",
-            "img": "assets/img/big-size/IMG_2249.jpg",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/a-cold-wall_acw_ACWMO018WHL-GRV-1_180x.jpg?v=1595012323",
             "name": "name",
             "oldPrice": 10,
             "nowPrice": 5
@@ -42,7 +42,7 @@
         {
             "type": "type",
             "size": "small",
-            "img": "assets/img/big-size/IMG_2249.jpg",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/a-cold-wall_acw_ACWMK005WHL-BLK-1_180x.jpg?v=1595011750",
             "name": "name",
             "oldPrice": 10,
             "nowPrice": 5
@@ -50,50 +50,26 @@
         {
             "type": "type",
             "size": "small",
-            "img": "assets/img/big-size/IMG_2249.jpg",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/a-cold-wall_acw_ACWMJS001WHL-MNB-1_180x.jpg?v=1595011705",
             "name": "name",
             "oldPrice": 10,
             "nowPrice": 5
         },
         {
             "type": "type",
-            "size": "big",
-            "img": "assets/img/big-size/IMG_2272.jpg",
-            "name": "Кофта",
-            "oldPrice": 8500,
-            "nowPrice": 5000
+            "size": "small",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/a-cold-wall_acw_ACWMO014WHL-SLT-1_180x.jpg?v=1595011806",
+            "name": "name",
+            "oldPrice": 10,
+            "nowPrice": 5
         },
         {
             "type": "type",
-            "size": "big",
-            "img": "assets/img/big-size/IMG_2303.jpg",
+            "size": "small",
+            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/a-cold-wall_acw_ACWMH003WHL-BLK-1_180x.jpg?v=1595011639",
             "name": "name",
-            "oldPrice": 0,
-            "nowPrice": 0
-        },
-        {
-            "type": "type",
-            "size": "big",
-            "img": "assets/img/big-size/IMG_2361.jpg",
-            "name": "name",
-            "oldPrice": 0,
-            "nowPrice": 0
-        },
-        {
-            "type": "type",
-            "size": "big",
-            "img": "assets/img/big-size/IMG_2401.jpg",
-            "name": "name",
-            "oldPrice": 0,
-            "nowPrice": 0
-        },
-        {
-            "type": "type",
-            "size": "",
-            "img": "assets/img/big-size/IMG_2425.jpg",
-            "name": "name",
-            "oldPrice": 0,
-            "nowPrice": 0
+            "oldPrice": 10,
+            "nowPrice": 5
         }
     ]
 }

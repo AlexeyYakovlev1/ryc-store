@@ -33,7 +33,7 @@ const createProducts = (response, listSelector) => {
 
             let card = `
             <li class="card" data-size="${product.size}">
-                <a href="#" title="${product.name}">
+                <a class="card__link" href="#" title="${product.name}">
                     <div class="card__block-img">
                         <img src="${product.img}" alt="${product.name}">
                     </div>
@@ -47,7 +47,7 @@ const createProducts = (response, listSelector) => {
                     </div>
                 </a>
             </li>
-        `
+        `;
 
             listCards.innerHTML += card;
         })

@@ -34,6 +34,7 @@
     "dependencies": {
         "@babel/polyfill": "^7.10.4",
         "@babel/preset-env": "^7.11.0",
+        "@glidejs/glide": "^3.4.1",
         "browser-sync": "^2.26.12",
         "config": "^3.3.1",
         "core-js": "^3.6.5",
@@ -45,11 +46,9 @@
         "gulp-json-server": "0.0.7",
         "gulp-json-srv": "^1.2.0",
         "gulp-sass": "^4.1.0",
-        "jquery": "^3.5.1",
         "json-server": "^0.16.1",
         "mongoose": "^5.10.2",
         "normalize.css": "^8.0.1",
-        "slick-carousel": "^1.8.1",
         "webpack-stream": "^6.0.0"
     }
 }

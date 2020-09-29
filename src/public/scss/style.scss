@@ -1,22 +1,13 @@
 @import '_global';
 .title {
-    height: 600px;
     padding-top: 100px;
-    .slick-list {
-        overflow-x: hidden;
+    .glide__slides {
+        height: 500px;
     }
-    &__blocks {
-        height: 100%;
-    }
-    &__slider {
-        height: 100%;
-    }
-    &__block {
+    &__block-img {
+        display: block;
         position: relative;
-        &-img {
-            display: block;
-            height: 500px;
-        }
+        height: 100%;
     }
     &__text {
         width: 100%;
@@ -87,6 +78,12 @@
     height: auto;
     margin: 0 auto 10px;
     transition: .5s;
+    &__link {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+    }
     &__block-img {
         height: auto;
         position: relative;
@@ -411,7 +408,7 @@
         flex-direction: column;
     }
     &__product {
-        height: 200px;
+        min-height: 200px;
         &:not(:last-child) {
             margin-bottom: 30px;
         }
