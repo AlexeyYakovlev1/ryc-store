@@ -77,7 +77,6 @@
     width: 300px;
     height: auto;
     margin: 0 auto 10px;
-    transition: .5s;
     &__link {
         display: flex;
         flex-direction: column;
@@ -104,19 +103,17 @@
     }
     &__block-price {
         margin-top: 5px;
+        font-size: 0.800rem;
     }
     &-old-price {
         color: gray;
         text-decoration: line-through;
-        font-size: 0.800rem;
     }
     &-now-price {
         color: #000000;
-        font-size: 0.800rem;
     }
     &-sale {
         color: #000000;
-        font-size: 0.800rem;
     }
 }
 
@@ -132,17 +129,11 @@
     &__img {
         height: auto;
         position: relative;
-        overflow: hidden;
-        cursor: none;
-        &-cursor {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            display: none;
-            background-image: url(../../assets/img/svg/plus.svg);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
+        img {
+            display: block;
+            margin: 0 auto;
+            cursor: url(../../assets/img/svg/plus.svg) 0 0, pointer;
+            cursor: -webkit-image-set(url(../../assets/img/svg/plus.svg) 1x, url(../../assets/img/svg/plus.svg) 2x) 0 0, pointer;
         }
     }
     &__block {
@@ -254,29 +245,60 @@
 }
 
 .options-wrapper {
-    height: 400px;
+    min-height: 400px;
+    padding-top: 100px;
     overflow-x: auto;
-    margin-top: 100px;
+    -webkit-overflow-scrolling: touch;
     .options {
+        width: auto;
+        height: 100%;
+        padding-bottom: 10px;
         display: flex;
-        align-items: center;
-        .card {
+        &__product {
             min-width: 300px;
-            max-width: 301px;
-            margin: 0;
-            &__description {
-                margin-top: -2rem;
-            }
+            height: 100%;
             &:not(:last-child) {
                 margin-right: 20px;
             }
-            figure {
-                display: flex;
-                justify-content: center;
-                img {
-                    max-height: 300px;
-                }
+        }
+        &__link {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            height: 100%;
+        }
+        &__block-img {
+            height: auto;
+            position: relative;
+            img {
+                display: block;
+                margin: 0 auto;
+                width: 120px;
             }
+        }
+        &__description {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        &-name {
+            text-transform: uppercase;
+            color: #000000;
+            font-size: 0.625rem;
+            font-weight: 400;
+        }
+        &__block-price {
+            margin-top: 5px;
+            font-size: 0.800rem;
+        }
+        &-old-price {
+            color: gray;
+            text-decoration: line-through;
+        }
+        &-now-price {
+            color: #000000;
+        }
+        &-sale {
+            color: #000000;
         }
     }
 }
@@ -295,12 +317,17 @@
     &__list-images {
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     &__img {
-        cursor: none;
-        &-cursor-close {
-            background-image: url(../../assets/img/svg/minus.svg);
-            background-size: contain;
+        width: 100%;
+        height: auto;
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+        img {
+            cursor: url(../../assets/img/svg/minus.svg) 0 0, pointer;
+            cursor: -webkit-image-set(url(../../assets/img/svg/minus.svg) 1x, url(../../assets/img/svg/minus.svg) 2x) 0 0, pointer;
         }
     }
     &__close {

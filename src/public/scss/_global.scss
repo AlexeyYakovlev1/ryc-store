@@ -409,9 +409,7 @@ img {
 }
 
 .hidden {
-    width: 0 !important;
-    height: 0 !important;
-    margin: 0 !important;
+    display: none;
 }
 
 .open-window {

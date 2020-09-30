@@ -9099,7 +9099,7 @@ var createProducts = function createProducts(response, listSelector) {
         oldPrice = toCurrency(product.oldPrice);
       }
 
-      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a class=\"card__link\" href=\"#\" title=\"").concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <img src=\"").concat(product.img, "\" alt=\"").concat(product.name, "\">\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
+      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a class=\"card__link\" href=\"#\" title=\"").concat(product.name, "\">\n                    <picture class=\"card__block-img\">\n                        <img src=\"").concat(product.img, "\" alt=\"").concat(product.name, "\">\n                    </picture>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
       listCards.innerHTML += card;
     });
   }
@@ -9207,7 +9207,6 @@ window.addEventListener('DOMContentLoaded', function () {
     getResource('http://localhost:3000/products') // обработка данных, которые приходят по этому запросу
     .then(function (data) {
       createProducts(data, '.list-cards');
-      createProducts(data, '.options');
       search(data);
     }) // ошибка
     ["catch"](function (err) {
@@ -9300,7 +9299,7 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
 
 
     var createImages = function createImages() {
-      var block = "\n            <li class=\"window-look__img\">\n                <img src=\"".concat(item.img, "\" alt=\"\" />\n                <div class=\"window-look__img-cursor-close product__img-cursor\"></div>\n            </li>\n            ");
+      var block = "\n            <li class=\"window-look__img\">\n                <figure>\n                    <img src=\"".concat(item.img, "\" alt=\"\" />\n                </figure>\n            </li>\n            ");
       list_images.innerHTML += block;
     };
 
@@ -9332,64 +9331,15 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
 };
 
 var images = [{
-  img: 'assets/img/IMG_2709.jpg'
+  img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
 }, {
-  img: 'assets/img/IMG_2742.jpg'
+  img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
 }, {
-  img: 'assets/img/IMG_2834.jpg'
+  img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
 }, {
-  img: 'assets/img/IMG_2827.jpg'
+  img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
 }];
-document.querySelector('.product__img') && lookingImagesInModalWindow(images); // появление курсора при наведении на картинку (открытие)
-
-var showCursorOfImgOpen = function showCursorOfImgOpen() {
-  var img = document.querySelector('.product__img');
-  var cursor = document.querySelector('.product__img-cursor-open');
-
-  var showHideCursor = function showHideCursor(ev, open) {
-    img.addEventListener(ev, function () {
-      cursor.style.display = open ? 'block' : 'none';
-    });
-  };
-
-  showHideCursor('mouseover', true);
-  showHideCursor('mouseout', false);
-  img.addEventListener('mousemove', function (e) {
-    var x = e.pageX - 40,
-        y = e.pageY - 100;
-    cursor.style.top = "".concat(y, "px");
-    cursor.style.left = "".concat(x, "px");
-  });
-};
-
-document.querySelector('.product__img') && showCursorOfImgOpen(); // появление курсора при наведении на картинку (закрытие)
-
-var showCursorOfImgClose = function showCursorOfImgClose() {
-  var img = document.querySelectorAll('.window-look__img');
-  var cursor = document.querySelectorAll('.window-look__img-cursor-close');
-
-  var showHideCursor = function showHideCursor(ev, open) {
-    img.forEach(function (item, index) {
-      item.addEventListener(ev, function () {
-        cursor[index].style.display = open ? 'block' : 'none';
-      });
-    });
-  };
-
-  showHideCursor('mouseover', true);
-  showHideCursor('mouseout', false);
-  img.forEach(function (item, index) {
-    item.addEventListener('mousemove', function (e) {
-      var _ref2 = [e.pageX, e.pageY],
-          x = _ref2[0],
-          y = _ref2[1];
-      cursor[index].style.top = "".concat(y, "px");
-      cursor[index].style.left = "".concat(x, "px");
-    });
-  });
-};
-
-document.querySelector('.window-look__img') && showCursorOfImgClose(); // появление меню
+document.querySelector('.product__img') && lookingImagesInModalWindow(images); // появление меню
 
 var showMenu = function showMenu() {
   var el = document.querySelector('.header__bottom-shop');

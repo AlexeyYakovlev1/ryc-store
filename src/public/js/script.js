@@ -34,9 +34,9 @@ const createProducts = (response, listSelector) => {
             let card = `
             <li class="card" data-size="${product.size}">
                 <a class="card__link" href="#" title="${product.name}">
-                    <div class="card__block-img">
+                    <picture class="card__block-img">
                         <img src="${product.img}" alt="${product.name}">
-                    </div>
+                    </picture>
                     <div class="card__description">
                         <span class="card-name">${product.name}</span>
                         <div class="card__block-price">
@@ -50,7 +50,7 @@ const createProducts = (response, listSelector) => {
         `;
 
             listCards.innerHTML += card;
-        })
+        });
     }
 }
 
@@ -146,7 +146,6 @@ window.addEventListener('DOMContentLoaded', () => {
             // обработка данных, которые приходят по этому запросу
             .then(data => {
                 createProducts(data, '.list-cards');
-                createProducts(data, '.options');
                 search(data);
             })
             // ошибка
@@ -244,8 +243,9 @@ const lookingImagesInModalWindow = array => {
             let block =
                 `
             <li class="window-look__img">
-                <img src="${item.img}" alt="" />
-                <div class="window-look__img-cursor-close product__img-cursor"></div>
+                <figure>
+                    <img src="${item.img}" alt="" />
+                </figure>
             </li>
             `;
 
@@ -276,72 +276,20 @@ const lookingImagesInModalWindow = array => {
 }
 
 let images = [{
-        img: 'assets/img/IMG_2709.jpg'
+        img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
     },
     {
-        img: 'assets/img/IMG_2742.jpg'
+        img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
     },
     {
-        img: 'assets/img/IMG_2834.jpg'
+        img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
     },
     {
-        img: 'assets/img/IMG_2827.jpg'
+        img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
     }
 ];
 
 document.querySelector('.product__img') && lookingImagesInModalWindow(images);
-
-// появление курсора при наведении на картинку (открытие)
-const showCursorOfImgOpen = () => {
-    const img = document.querySelector('.product__img');
-    const cursor = document.querySelector('.product__img-cursor-open');
-
-    const showHideCursor = (ev, open) => {
-        img.addEventListener(ev, () => {
-            cursor.style.display = open ? 'block' : 'none';
-        });
-    }
-
-    showHideCursor('mouseover', true);
-    showHideCursor('mouseout', false);
-
-    img.addEventListener('mousemove', e => {
-        let [x, y] = [e.pageX - 40, e.pageY - 100];
-
-        cursor.style.top = `${y}px`;
-        cursor.style.left = `${x}px`;
-    });
-}
-
-document.querySelector('.product__img') && showCursorOfImgOpen();
-
-// появление курсора при наведении на картинку (закрытие)
-const showCursorOfImgClose = () => {
-    const img = document.querySelectorAll('.window-look__img');
-    const cursor = document.querySelectorAll('.window-look__img-cursor-close');
-
-    const showHideCursor = (ev, open) => {
-        img.forEach((item, index) => {
-            item.addEventListener(ev, () => {
-                cursor[index].style.display = open ? 'block' : 'none';
-            });
-        });
-    }
-
-    showHideCursor('mouseover', true);
-    showHideCursor('mouseout', false);
-
-    img.forEach((item, index) => {
-        item.addEventListener('mousemove', e => {
-            let [x, y] = [e.pageX, e.pageY];
-
-            cursor[index].style.top = `${y}px`;
-            cursor[index].style.left = `${x}px`;
-        });
-    });
-}
-
-document.querySelector('.window-look__img') && showCursorOfImgClose();
 
 // появление меню
 const showMenu = () => {
