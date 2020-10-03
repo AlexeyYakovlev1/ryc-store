@@ -74,11 +74,6 @@
             left: 5px;
         }
     }
-    .footer {
-        &__block-text {
-            width: 50% !important;
-        }
-    }
     .list-cards {
         width: 100% !important;
     }
@@ -355,22 +350,6 @@
             letter-spacing: 1px;
         }
     }
-    .footer {
-        &__block {
-            &-list-social {
-                justify-content: center;
-            }
-            &-text {
-                width: 100% !important;
-            }
-            &-desc {
-                font-size: 10px !important;
-            }
-        }
-        &__link-icon img {
-            width: 20px !important;
-        }
-    }
 }
 
 @media screen and (max-width: 750px) {
@@ -484,6 +463,31 @@
             font-size: 0.6rem !important;
         }
     }
+    .footer {
+        &__block-text {
+            grid-column: 1/5 !important;
+        }
+        &__block-icons {
+            justify-content: flex-start !important;
+            margin-top: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .design {
+        &__title {
+            margin-bottom: 30px !important;
+        }
+        &__list {
+            grid-template-columns: repeat(1, 1fr) !important;
+        }
+        &__product {
+            &-content-title {
+                font-size: 8px !important;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -594,6 +598,20 @@
     .cart__product {
         &-desc-block-item {
             font-size: 8.8px !important;
+        }
+    }
+    .list-cards {
+        grid-template-columns: repeat(1, 1fr) !important;
+    }
+    .card {
+        &__description {
+            margin-top: 10px !important;
+        }
+        &-old-price,
+        &-now-price,
+        &-sale,
+        &-name {
+            font-size: 0.6rem !important;
         }
     }
 }

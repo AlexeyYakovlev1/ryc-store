@@ -9099,11 +9099,28 @@ var createProducts = function createProducts(response, listSelector) {
         oldPrice = toCurrency(product.oldPrice);
       }
 
-      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a class=\"card__link\" href=\"#\" title=\"").concat(product.name, "\">\n                    <picture class=\"card__block-img\">\n                        <img src=\"").concat(product.img, "\" alt=\"").concat(product.name, "\">\n                    </picture>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
+      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a class=\"card__link\" href=\"#\" title=\"").concat(product.name, "\">\n                    <picture class=\"card__block-img\">\n                        <img data-src=\"").concat(product.img, "\" src=\"\" alt=\"").concat(product.name, "\">\n                    </picture>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
       listCards.innerHTML += card;
     });
   }
-}; // фильтрация
+
+  showImages();
+}; // появление картинок
+
+
+function showImages() {
+  var imageObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (item) {
+      // если попало в зону экрана
+      if (item.isIntersecting) {
+        item.target.src = item.target.dataset.src;
+      }
+    });
+  });
+  document.querySelectorAll('.card__block-img img').forEach(function (item) {
+    return imageObserver.observe(item);
+  });
+} // фильтрация
 
 
 if (blockFiltersList) {

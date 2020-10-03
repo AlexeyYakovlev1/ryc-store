@@ -35,7 +35,7 @@ const createProducts = (response, listSelector) => {
             <li class="card" data-size="${product.size}">
                 <a class="card__link" href="#" title="${product.name}">
                     <picture class="card__block-img">
-                        <img src="${product.img}" alt="${product.name}">
+                        <img data-src="${product.img}" src="" alt="${product.name}">
                     </picture>
                     <div class="card__description">
                         <span class="card-name">${product.name}</span>
@@ -52,6 +52,22 @@ const createProducts = (response, listSelector) => {
             listCards.innerHTML += card;
         });
     }
+
+    showImages();
+}
+
+// появление картинок
+function showImages() {
+    const imageObserver = new IntersectionObserver(entries => {
+        entries.forEach(item => {
+            // если попало в зону экрана
+            if (item.isIntersecting) {
+                item.target.src = item.target.dataset.src;
+            }
+        });
+    });
+
+    document.querySelectorAll('.card__block-img img').forEach(item => imageObserver.observe(item));
 }
 
 // фильтрация
