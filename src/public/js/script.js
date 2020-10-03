@@ -243,9 +243,7 @@ const lookingImagesInModalWindow = array => {
             let block =
                 `
             <li class="window-look__img">
-                <figure>
-                    <img src="${item.img}" alt="" />
-                </figure>
+                <img src="${item.img}" alt="" />
             </li>
             `;
 

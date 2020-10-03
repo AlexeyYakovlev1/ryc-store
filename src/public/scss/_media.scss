@@ -273,8 +273,6 @@
 
 @media screen and (max-width: 950px) {
     .card {
-        margin: 0 0 10px 0 !important;
-        width: 45% !important;
         &-old-price,
         &-now-price,
         &-sale,
@@ -454,6 +452,9 @@
             }
         }
     }
+    .list-cards {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
 }
 
 @media screen and (max-width: 540px) {
@@ -588,21 +589,6 @@
                 width: 165px !important;
                 height: 40px !important;
             }
-        }
-    }
-    .card {
-        width: 100% !important;
-        &-old-price,
-        &-now-price,
-        &-sale,
-        &-name {
-            font-size: 0.9rem !important;
-        }
-        &__description {
-            margin-top: 15px !important;
-        }
-        &__block-price {
-            margin-top: 5px !important;
         }
     }
     .cart__product {

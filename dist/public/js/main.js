@@ -9299,7 +9299,7 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
 
 
     var createImages = function createImages() {
-      var block = "\n            <li class=\"window-look__img\">\n                <figure>\n                    <img src=\"".concat(item.img, "\" alt=\"\" />\n                </figure>\n            </li>\n            ");
+      var block = "\n            <li class=\"window-look__img\">\n                <img src=\"".concat(item.img, "\" alt=\"\" />\n            </li>\n            ");
       list_images.innerHTML += block;
     };
 

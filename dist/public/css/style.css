@@ -309,10 +309,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
 }
 
 @media screen and (max-width: 950px) {
-  .card {
-    margin: 0 0 10px 0 !important;
-    width: 45% !important;
-  }
   .card-old-price, .card-now-price, .card-sale, .card-name {
     font-size: 0.7rem !important;
   }
@@ -469,6 +465,9 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .product__block-links a {
     width: 250px !important;
   }
+  .list-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
 @media screen and (max-width: 540px) {
@@ -565,18 +564,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .product__block-links a {
     width: 165px !important;
     height: 40px !important;
-  }
-  .card {
-    width: 100% !important;
-  }
-  .card-old-price, .card-now-price, .card-sale, .card-name {
-    font-size: 0.9rem !important;
-  }
-  .card__description {
-    margin-top: 15px !important;
-  }
-  .card__block-price {
-    margin-top: 5px !important;
   }
   .cart__product-desc-block-item {
     font-size: 8.8px !important;
@@ -1857,21 +1844,11 @@ img {
   width: 1100px;
   height: auto;
   margin: 0 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: minmax(250px, auto);
+  grid-gap: 15px;
   position: relative;
-}
-
-.card {
-  width: 300px;
-  height: auto;
-  margin: 0 auto 10px;
 }
 
 .card__link {
@@ -2125,7 +2102,6 @@ img {
 
 .options-wrapper .options__product {
   min-width: 300px;
-  height: 100%;
 }
 
 .options-wrapper .options__product:not(:last-child) {

@@ -67,16 +67,14 @@
     width: 1100px;
     height: auto;
     margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(250px, auto);
+    grid-gap: 15px;
     position: relative;
 }
 
 .card {
-    width: 300px;
-    height: auto;
-    margin: 0 auto 10px;
     &__link {
         display: flex;
         flex-direction: column;
@@ -256,7 +254,6 @@
         display: flex;
         &__product {
             min-width: 300px;
-            height: 100%;
             &:not(:last-child) {
                 margin-right: 20px;
             }
