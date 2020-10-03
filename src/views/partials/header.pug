@@ -26,12 +26,19 @@ header.header
                 if isAuth
                     ul.header__bottom-list.header__bottom-list-user
                         li.header__block-search.header__bottom-link
-                            form(action="/shop/products" method="GET")
-                                input(class="header-search-test" name="search" id="search" data-search="search" type="text")
-                                span поиск
+                            //- form(action="/shop/products/" method="GET")
+                            //-     input(class="header-search-test" type="text")
+                            //-     input(type="hidden" name="search" id="search")
+                            //-     span поиск
+
+                            input(class="header-search-test" type="text")
+                            input(type="hidden" name="search" id="search")
+                            span поиск
                         li.header__bottom-link
-                            // a(href="/cart") корзина (#{cartProducts.length})
-                            a(href="/cart") корзина (<strong>0</strong>)
+                            if cartProducts 
+                                a(href="/cart") корзина (<strong>#{cartProducts.length}</strong>)
+                            else
+                                a(href="/cart") корзина (<strong>0</strong>)
                         li.header__bottom-link
                             a(href="/auth/logout") Выйти
                 else 

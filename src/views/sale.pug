@@ -15,7 +15,7 @@
         include ./partials/preolaider.pug
     <div class="sale">
         <div class="container"> 
-            if products.length
+            if products.length && products.sale > 0
                 <div class="wrapper">
                     <div class="block-filters">
                         <ul class="block-filters-list">

@@ -2,8 +2,6 @@ const headerSearch = document.querySelector('.header-search');
 const headerSearchWord = document.querySelector('.header-search-word');
 const blockFiltersList = document.querySelector('.block-filters-list');
 const jsRemove = document.querySelector('.js-remove');
-const cartProducts = document.querySelector('.cart__products');
-const cartProduct = document.querySelector('.cart__product');
 
 // цена
 const toCurrency = price => {
@@ -55,54 +53,54 @@ document.querySelectorAll('.card-now-price').forEach(node => {
 })
 
 // анимированный поиск
-const animationSearch = () => {
-    const word = document.querySelector('.header-search-word');
-    const headerSearch = document.querySelector('.header-search-word');
-    const blockSearch = document.querySelector('.header__block-search');
-    const blockSearchContent = document.querySelector('.header__block-search-content');
-    const list = document.querySelector('.header__bottom-list-user');
-    let width_list = +list.style.width.replace(/px/, '');
+// const animationSearch = () => {
+//     const word = document.querySelector('.header-search-word');
+//     const headerSearch = document.querySelector('.header-search-word');
+//     const blockSearch = document.querySelector('.header__block-search');
+//     const blockSearchContent = document.querySelector('.header__block-search-content');
+//     const list = document.querySelector('.header__bottom-list-user');
+//     let width_list = +list.style.width.replace(/px/, '');
 
-    // Действия при клике
-    headerSearchWord.addEventListener('click', event => {
-        if (event.target) {
-            word.style.opacity = '0';
+//     // Действия при клике
+//     headerSearchWord.addEventListener('click', event => {
+//         if (event.target) {
+//             word.style.opacity = '0';
 
-            blockSearch.style.width = '115px';
-            blockSearch.style.height = '20px';
-            blockSearch.classList.add('no-border');
+//             blockSearch.style.width = '115px';
+//             blockSearch.style.height = '20px';
+//             blockSearch.classList.add('no-border');
 
-            blockSearchContent.style.height = '20px';
+//             blockSearchContent.style.height = '20px';
 
-            list.style.width = '315px';
+//             list.style.width = '315px';
 
-            headerSearch.style.opacity = '1';
-            headerSearch.focus();
-        }
-    });
+//             headerSearch.style.opacity = '1';
+//             headerSearch.focus();
+//         }
+//     });
 
-    // Действия при выходе из инпута
-    headerSearch.addEventListener('blur', () => {
-        word.style.opacity = '1';
+//     // Действия при выходе из инпута
+//     headerSearch.addEventListener('blur', () => {
+//         word.style.opacity = '1';
 
-        blockSearch.style.width = '40px';
-        blockSearch.style.height = '11px';
-        blockSearch.classList.remove('no-border');
+//         blockSearch.style.width = '40px';
+//         blockSearch.style.height = '11px';
+//         blockSearch.classList.remove('no-border');
 
-        blockSearchContent.style.height = '11px';
+//         blockSearchContent.style.height = '11px';
 
-        headerSearch.style.opacity = '0';
-        headerSearch.value = '';
+//         headerSearch.style.opacity = '0';
+//         headerSearch.value = '';
 
-        if (width_list === 115) {
-            list.style.width = '115px';
-        } else {
-            list.style.width = '200px';
-        }
-    });
-}
+//         if (width_list === 115) {
+//             list.style.width = '115px';
+//         } else {
+//             list.style.width = '200px';
+//         }
+//     });
+// }
 
-animationSearch();
+// animationSearch();
 
 // поиск
 // const search = (data) => {
@@ -324,9 +322,12 @@ const validateForm = () => {
 validateForm();
 
 // удаление товара из корзины
-if (cartProduct) {
-    cartProduct.addEventListener('click', event => {
-        if (event.target.classList.contains('js-remove')) {
+const cartProducts = document.querySelector('.cart__products');
+const cartElement = document.querySelector('.cart');
+
+if (cartElement) {
+    cartElement.addEventListener('click', event => {
+        if (event.target.classList.contains('cart__product-desc-remove-product')) {
             const id = event.target.dataset.id;
             const csrf = event.target.dataset.csrf;
 
@@ -338,17 +339,19 @@ if (cartProduct) {
                 })
                 .then(res => res.json())
                 .then(cart => {
-                    if (cart.products.length) {
-                        const html = cart.products.map(p => {
+                    if (cart.cartProducts.length) {
+                        const html = cart.cartProducts.map(p => {
                             return `
                                 <li class="cart__product">
                                     <div class="cart__product-content">
                                         <div class="cart__product-desc">
-                                            <div class="cart__product-desc-img">
-                                                <figure>
-                                                    <img src="${p.img[0]}" alt="${p.title}" width="128">
-                                                </figure>
-                                            </div>
+                                            <a href="/shop/${p.id}">
+                                                <div class="cart__product-desc-img">
+                                                    <figure>
+                                                        <img src="${p.img[0]}" alt="${p.title}" width="128">
+                                                    </figure>
+                                                </div>
+                                            </a>
                                             <div class="cart__product-desc-text">
                                                 <div class="cart__product-desc-block">
                                                     <div class="cart__product-desc-block-item" style="width: 200px;">
@@ -364,9 +367,7 @@ if (cartProduct) {
                                                         <div class="cart__product-desc-count">Количество: ${p.count}</div>
                                                     </div>
                                                     <div class="cart__product-desc-block-item">
-                                                        <form class="cart__product-desc-form" action="/remove/:id" method="POST">
-                                                            <input class="cart__product-desc-remove-product js-remove" type="submit" data-id="${p.id}" value="Удалить" />
-                                                        </form>
+                                                        <input class="cart__product-desc-remove-product js-remove" type="submit" data-id="${p.id}" value="Удалить" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -379,8 +380,8 @@ if (cartProduct) {
                                                 <input class="cart__product-form-buy" type="submit" value="Заказать">
                                             </form>
                                         </div>
-                                    </div>
-                                </li>   
+                                    </div> 
+                                </li>
                             `
                         }).join('');
 
@@ -397,47 +398,14 @@ if (cartProduct) {
 }
 
 // поиск
-const headerSearchTest = document.querySelector('.header-search-test');
+// const headerSearchTest = document.querySelector('.header-search-test');
 
-headerSearchTest.addEventListener('keydown', event => {
-    const searchValue = event.target.dataset.search;
+// headerSearchTest.addEventListener('keydown', event => {
+//     const searchValue = headerSearchTest.value.toLowerCase().trim();
 
-    if (event.keyCode === 13) {
-        fetch(`/shop/products?search=${searchValue}`)
-            .then(res => res.json())
-            .then(searchProducts => {
-                if (searchProducts.products.length) {
-                    const listCards = document.querySelector('.list-cards');
-
-                    const html = searchProducts.products.map(product => {
-                        return `
-                            <li class="card" data-size="${product.mainSize}">
-                                <a href="/shop/${product.id}" title="${product.title}">
-                                    <div class="card__block-img">
-                                        <figure>
-                                            <img src="${product.img[0]}" alt="${product.title}">
-                                        </figure>
-                                    </div>
-                                    <div class="card__description">
-                                        <span class="card-name">${product.title}</span>
-                                        <div class="card__block-price">
-                                            <span class="card-old-price">${product.oldPrice}</span>
-                                            <span class="card-now-price">${product.nowPrice}</span>
-                                            <span class="card-sale">${product.sale}%</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        `
-                    }).join('');
-
-                    listCards.innerHTML += html;
-                } else {
-                    listCards.innerHTML = `
-                        <h1>Товаров не найдено</h1>
-                    `;
-                }
-            })
-            .catch(err => alert(err))
-    }
-})
+//     if (event.keyCode === 13) {
+//         fetch(`/shop/products/?search=${searchValue}`)
+//             .then(res => res.json())
+//             .catch(err => alert(err))
+//     }
+// })

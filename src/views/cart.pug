@@ -21,11 +21,13 @@
                         <li class="cart__product">
                             <div class="cart__product-content">
                                 <div class="cart__product-desc">
-                                    <div class="cart__product-desc-img">
-                                        <figure>
-                                            <img src="#{product.img[0]}" alt="#{product.title}" width="128">
-                                        </figure>
-                                    </div>
+                                    <a href="/shop/#{product.id}/">
+                                        <div class="cart__product-desc-img">
+                                            <figure>
+                                                <img src="#{product.img[0]}" alt="#{product.title}" width="128">
+                                            </figure>
+                                        </div>
+                                    </a>
                                     <div class="cart__product-desc-text">
                                         <div class="cart__product-desc-block">
                                             <div class="cart__product-desc-block-item" style="width: 200px;">
@@ -41,10 +43,7 @@
                                                 <div class="cart__product-desc-count">Количество: #{product.count}</div>
                                             </div>
                                             <div class="cart__product-desc-block-item">
-                                                <form class="cart__product-desc-form" action="/remove/:id" method="POST">
-                                                    <input class="cart__product-desc-remove-product js-remove" type="submit" data-csrf="#{csrf}" data-id="#{product.id}" value="Удалить" />
-                                                    <input type="hidden" name="_csrf" value="csrf" />
-                                                </form>
+                                                <input class="cart__product-desc-remove-product" type="submit" data-csrf="#{csrf}" data-id="#{product.id}" value="Удалить" />
                                             </div>
                                         </div>
                                     </div>

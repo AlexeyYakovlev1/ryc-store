@@ -20,7 +20,8 @@ const computePrice = (products) => {
 router.post('/add', auth, async(req, res) => {
     try {
         const product = await Product.findById(
-            req.body.id, req.body.title, req.body.nowPrice, req.body.mainSize
+            req.body.id, req.body.title, req.body.nowPrice, req.body.mainSize,
+            req.body.article, req.body.sex
         );
 
         await req.user.addToCart(product);
@@ -40,7 +41,7 @@ router.delete('/remove/:id', auth, async(req, res) => {
         price: computePrice(cartProducts)
     }
 
-    res.status(200).json(cart)
+    res.status(200).json(cart);
 })
 
 router.get('/', auth, async(req, res) => {

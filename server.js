@@ -28,6 +28,7 @@ app.set('views', './src/views');
 
 app.use(express.static(path.join(__dirname, './src/public')));
 app.use(express.static(path.join(__dirname, './src/assets/img')));
+app.use(express.static(path.join(__dirname + './src/images-products')))
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'secret value',

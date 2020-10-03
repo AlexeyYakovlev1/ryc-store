@@ -5,6 +5,14 @@ const productSchema = new Schema({
         type: String,
         required: true
     }],
+    article: {
+        type: String,
+        required: true
+    },
+    sex: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

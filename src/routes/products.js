@@ -16,7 +16,7 @@ const mapCartItems = (cart) => {
 
 router.get('/', async(req, res) => {
     const products = await Product.find()
-        .select('nowPrice oldPrice sale sizes title img mainSize description');
+        .select('nowPrice oldPrice sale sizes title img mainSize description sex article');
 
     if (typeof user !== 'undefined') {
         const user = await req.user
@@ -40,14 +40,13 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/products', async(req, res) => {
-    const searchField = req.query.search;
+// router.get('/products/', async(req, res) => {
+//     const searchField = req.query.search;
 
-    Product.find({ title: { $regex: searchField.toString(), $options: '$i' } })
-        .then(data => {
-            res.status(200).json(data);
-        })
-})
+//     const product = Product.find({ title: { $regex: searchField.toString(), $options: '$i' } });
+
+//     res.status(200).json(product);
+// })
 
 router.get('/:id', async(req, res) => {
     const product = await Product.findById(req.params.id);

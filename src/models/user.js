@@ -53,6 +53,8 @@ user.methods.addToCart = function(product) {
             title: product.title,
             price: product.nowPrice,
             mainSize: product.mainSize,
+            sex: product.sex,
+            article: product.article,
             productId: product._id,
             count: 1
         })
@@ -62,7 +64,7 @@ user.methods.addToCart = function(product) {
     return this.save();
 }
 
-// метод для удления из корзины
+// метод для удaления из корзины
 user.methods.removeFromCart = function(id) {
     let items = [...this.cart.items];
     const idx = items.findIndex(product => product.productId.toString() === id.toString());
