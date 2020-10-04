@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="public/css/style.css">
+  <link rel="icon" href="assets/img/logo.jpg" type="image/jpg" sizes="16x16">
+</head>
+<body>
+  @@include('./components/header.html') @@include('./components/preolaider.html') @@include('./components/up.html')
+  <div class="design-product">
+    <div class="design-product__title">
+      <div class="design-product__img">
+        <img src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-onyx-focus-10_1944x.jpg?v=1601474982" alt="">
+      </div>
+    </div>
+    <div class="container">
+      <div class="design-product__block">
+        <div class="design-product__block-info">
+          <div class="design-product__block-info-title">
+            Название товара
+          </div>
+          <div class="design-product__block-info-desc">
+            Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.
+          </div>
+        </div>
+        <form class="design-product__block-form-register" action="">
+          <input class="design-product__block-form-register-email design-product__block-form-register-info" type="text" placeholder="Эл. почта">
+          <input class="design-product__block-form-register-date design-product__block-form-register-info" type="text" placeholder="Дата рождения (ДД/ММ/ГГГГ)">
+          <select class="design-product__block-form-register-country">
+            <option value="Страна" selected disabled>Страна</option>
+            <option value="Страна">Страна</option>
+            <option value="Страна">Страна</option>
+            <option value="Страна">Страна</option>
+            <option value="Страна">Страна</option>
+            <option value="Страна">Страна</option>
+          </select>
+          <div class="design-product__block-sex">
+            <label for="men">
+              <input type="radio" name="sex" id="men">
+              <span>Мужчина</span>
+            </label>
+            <label for="woomen">
+              <input type="radio" name="sex" id="woomen">
+              <span>Женщина</span>
+            </label>
+          </div>
+          <input class="design-product__block-form-register-submit" type="submit" value="Зарегистрироваться">
+        </form>
+      </div>
+      <div class="design-product__gallery">
+        <div class="design-product__gallery-block design-product__gallery-block-img">
+          <img src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-onyx-focus-1_900x.jpg?v=1601474979" alt="">
+        </div>
+        <div class="design-product__gallery-block design-product__gallery-block-img">
+          <img src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-onyx-focus-2_900x.jpg?v=1601474988" alt="">
+        </div>
+        <div class="design-product__gallery-block design-product__gallery-block-text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio excepturi eos incidunt quasi, nulla hic aliquam optio deleniti commodi nobis?
+        </div>
+        <div class="design-product__gallery-block design-product__gallery-block-img">
+          <img src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-onyx-focus-5_900x.jpg?v=1601474990" alt="">
+        </div>
+        <div class="design-product__gallery-block design-product__gallery-block-img">
+          <img src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-onyx-focus-11_900x.jpg?v=1601474991" alt="">
+        </div>
+        <div class="design-product__gallery-block design-product__gallery-block-text">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio excepturi eos incidunt quasi, nulla hic aliquam optio deleniti commodi nobis?
+        </div>
+        <div class="design-product__gallery-block design-product__gallery-block-img">
+          <img src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-onyx-focus-7_1296x.jpg?v=1601474991" alt="">
+        </div>
+        <div class="design-product__gallery-block design-product__gallery-block-info design-product__gallery-block-text">
+          <div class="design-product__gallery-block-content">
+            <div class="design-product__gallery-block-heading">
+              Характеристики товара
+            </div>
+            <ul class="design-product__gallery-block-list">
+              <li class="design-product__gallery-block-list-item">
+                <div class="design-product__gallery-block-list-item-block">Ткань:</div>
+                <div class="design-product__gallery-block-list-item-block">Ткань</div>
+              </li>
+              <li class="design-product__gallery-block-list-item">
+                <div class="design-product__gallery-block-list-item-block">Размер:</div>
+                <div class="design-product__gallery-block-list-item-block">Размер</div>
+              </li>
+              <li class="design-product__gallery-block-list-item">
+                <div class="design-product__gallery-block-list-item-block">Цвет:</div>
+                <div class="design-product__gallery-block-list-item-block">Цвет</div>
+              </li>
+              <li class="design-product__gallery-block-list-item">
+                <div class="design-product__gallery-block-list-item-block">Цена:</div>
+                <div class="design-product__gallery-block-list-item-block">Цена</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  @@include('./components/footer.html')
+  <script src="public/js/main.js"></script>
+</body>
+</html>

@@ -434,6 +434,10 @@
     .list-cards {
         grid-template-columns: repeat(2, 1fr) !important;
     }
+    .design-product__gallery {
+      grid-template-columns: 1fr !important;
+      grid-gap: 0px !important;
+    }
 }
 
 @media screen and (max-width: 540px) {
@@ -471,6 +475,10 @@
             justify-content: flex-start !important;
             margin-top: 10px;
         }
+    }
+    .design-product__block,
+    .design-product__gallery-block-info {
+      width: 100% !important;
     }
 }
 
