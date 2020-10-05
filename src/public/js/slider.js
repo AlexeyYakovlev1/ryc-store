@@ -8,4 +8,5 @@ let options = {
     gap: 0
 };
 
+// инициализация библиотеки Glide
 document.querySelector('.glide') && new Glide('.glide', options).mount();

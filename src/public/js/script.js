@@ -327,7 +327,7 @@ const showMenu = () => {
 
 showMenu();
 
-// валидация формы 
+// валидация формы
 const validateForm = () => {
     // проверка всех ипутов на действительность
     const checkForm = (inputsSelector, className, btnSelector, textBtn) => {
@@ -379,10 +379,11 @@ const validateForm = () => {
     let regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/g;
     let regexp_password = /^.{6,}$/;
     let regexp_name = /^[а-я|А-Я]{2,}$/;
+    let regexp_date = /^\d{2,2}\/\d{2,2}\/\d{4,4}$/;
 
-    validate('.account__data[name="email-login"]', 'invalid', 'valid', regexp_email, '.account__submit-login', '.account__data-login', 'войти');
     validate('.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-    validate('.account__data[name="password-login"]', 'invalid', 'valid', regexp_password, '.account__submit-login', '.account__data-login', 'войти');
+    validate('.design-product__block-form-register-email', 'invalid', 'valid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
+    validate('.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
     validate('.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
     validate('.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
 
@@ -462,7 +463,7 @@ document.querySelector('.product__block-select-wrapper') && select();
 
 // адаптив
 
-// появление меню 
+// появление меню
 const showMenuList = () => {
     const btn_open_nav = document.querySelector('.header__bottom-btn');
     const btn_open_user = document.querySelector('.header__bottom-btn-user');
