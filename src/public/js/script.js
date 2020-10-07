@@ -339,25 +339,24 @@ const validateForm = () => {
 
         if (arr.length) {
             btn.dataset.valid = 'false';
-            btn.classList.add('no-submit');
             btn.value = 'неверные данные';
-            btn.disabled = 'true';
         } else {
             btn.dataset.valid = 'true';
-            btn.classList.remove('no-submit');
             btn.value = textBtn;
-            btn.removeAttribute('disabled');
         }
     }
 
     // валидация
-    const validate = (elSelector, classInvalid, classValid, regexp, btnSelector, inputsSelector, textBtn) => {
+    const validate = (formSelector, elSelector, classInvalid, classValid, regexp, btnSelector, inputsSelector, textBtn) => {
         let inputs = document.querySelectorAll(elSelector);
         let cls_invalid = classInvalid;
         let cls_valid = classValid;
+        let form = document.querySelector(formSelector);
 
-        inputs.forEach(item => {
-            item.addEventListener('input', () => {
+        form && form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            inputs.forEach(item => {
                 let val = item.value.toLowerCase().trim();
                 let res = regexp.test(val);
 
@@ -376,26 +375,16 @@ const validateForm = () => {
         });
     }
 
-    let regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/g;
+    let regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/gi;
     let regexp_password = /^.{6,}$/;
     let regexp_name = /^[а-я|А-Я]{2,}$/;
-    let regexp_date = /^\d{2,2}\/\d{2,2}\/\d{4,4}$/;
+    let regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/;
 
-    validate('.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-    validate('.design-product__block-form-register-email', 'invalid', 'valid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
-    validate('.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
-    validate('.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-    validate('.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-
-    // отправка данных
-    const formSubmit = (formSelector, inputsSelector, btnSelector, textBtn) => {
-        if (document.querySelector(formSelector)) {
-            document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
-        }
-    }
-
-    formSubmit('.account__block-form-login', '.account__data-login', '.account__submit-login', 'войти');
-    formSubmit('.account__block-form-register', '.account__data-register', '.account__submit-register', 'зарегистрироваться');
+    validate('.account__block-form-register', '.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+    validate('.design-product__block-form-register', '.design-product__block-form-register-email', 'invalid', 'valid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
+    validate('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
+    validate('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+    validate('.account__block-form-register', '.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
 
     // показать/скрыть пароль
     const showHidePassword = () => {

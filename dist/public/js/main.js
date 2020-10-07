@@ -9424,24 +9424,22 @@ var validateForm = function validateForm() {
 
     if (arr.length) {
       btn.dataset.valid = 'false';
-      btn.classList.add('no-submit');
       btn.value = 'неверные данные';
-      btn.disabled = 'true';
     } else {
       btn.dataset.valid = 'true';
-      btn.classList.remove('no-submit');
       btn.value = textBtn;
-      btn.removeAttribute('disabled');
     }
   }; // валидация
 
 
-  var validate = function validate(elSelector, classInvalid, classValid, regexp, btnSelector, inputsSelector, textBtn) {
+  var validate = function validate(formSelector, elSelector, classInvalid, classValid, regexp, btnSelector, inputsSelector, textBtn) {
     var inputs = document.querySelectorAll(elSelector);
     var cls_invalid = classInvalid;
     var cls_valid = classValid;
-    inputs.forEach(function (item) {
-      item.addEventListener('input', function () {
+    var form = document.querySelector(formSelector);
+    form && form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      inputs.forEach(function (item) {
         var val = item.value.toLowerCase().trim();
         var res = regexp.test(val);
 
@@ -9458,24 +9456,15 @@ var validateForm = function validateForm() {
     });
   };
 
-  var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/g;
+  var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/gi;
   var regexp_password = /^.{6,}$/;
   var regexp_name = /^[а-я|А-Я]{2,}$/;
-  var regexp_date = /^\d{2,2}\/\d{2,2}\/\d{4,4}$/;
-  validate('.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-  validate('.design-product__block-form-register-email', 'invalid', 'valid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
-  validate('.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
-  validate('.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-  validate('.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться'); // отправка данных
-
-  var formSubmit = function formSubmit(formSelector, inputsSelector, btnSelector, textBtn) {
-    if (document.querySelector(formSelector)) {
-      document.querySelector(formSelector).addEventListener('submit', checkForm(inputsSelector, 'invalid', btnSelector, textBtn));
-    }
-  };
-
-  formSubmit('.account__block-form-login', '.account__data-login', '.account__submit-login', 'войти');
-  formSubmit('.account__block-form-register', '.account__data-register', '.account__submit-register', 'зарегистрироваться'); // показать/скрыть пароль
+  var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/;
+  validate('.account__block-form-register', '.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+  validate('.design-product__block-form-register', '.design-product__block-form-register-email', 'invalid', 'valid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
+  validate('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
+  validate('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+  validate('.account__block-form-register', '.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться'); // показать/скрыть пароль
 
   var showHidePassword = function showHidePassword() {
     var passwords = document.querySelectorAll('.account__data[type="password"]');
