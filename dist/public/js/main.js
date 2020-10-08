@@ -9096,7 +9096,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var headerSearchWord = document.querySelector('.header-search-word');
 var headerSearch = document.querySelector('.header-search-show');
-var blockFiltersList = document.querySelector('.block-filters-list');
 
 var checkResponse = function checkResponse(res) {
   return document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
@@ -9129,7 +9128,7 @@ var createProducts = function createProducts(response, listSelector) {
         oldPrice = toCurrency(product.oldPrice);
       }
 
-      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a class=\"card__link\" href=\"#\" title=\"").concat(product.name, "\">\n                    <picture class=\"card__block-img\">\n                        <img data-src=\"").concat(product.img, "\" src=\"\" alt=\"").concat(product.name, "\">\n                    </picture>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
+      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a class=\"card__link\" href=\"#\" title=\"").concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <img data-src=\"").concat(product.img, "\" src=\"\" alt=\"").concat(product.name, "\">\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
       listCards.innerHTML += card;
     });
   }
@@ -9153,23 +9152,29 @@ function showImages() {
 } // фильтрация
 
 
-if (blockFiltersList) {
-  blockFiltersList.addEventListener('click', function (event) {
-    var target = event.target;
-    target.tagName !== 'LI' || target.tagName !== 'A' && false;
-    var items = document.querySelector('.list-cards').getElementsByClassName('card');
-    items.forEach(function (item) {
-      if (item.dataset.size === target.dataset.size) {
-        item.classList.remove('hidden');
-      } else if (target.dataset.size === 'all') {
-        item.classList.remove('hidden');
-      } else {
-        item.classList.add('hidden');
-      }
-    });
-  });
-}
+var filter = function filter(list) {
+  var blockFiltersList = document.querySelector('.block-filters-list');
 
+  if (blockFiltersList) {
+    blockFiltersList.addEventListener('click', function (event) {
+      var target = event.target;
+      target.tagName !== 'LI' || target.tagName !== 'A' && false;
+      var items = document.querySelector(list).getElementsByClassName('card');
+      items.forEach(function (item) {
+        if (item.dataset.size === target.dataset.size) {
+          item.classList.remove('hidden');
+        } else if (target.dataset.size === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  }
+};
+
+filter('.list-cards');
+filter('.shop__list');
 document.querySelectorAll('.card-old-price').forEach(function (node) {
   node.textContent = toCurrency(node.textContent);
 });
@@ -9254,6 +9259,7 @@ window.addEventListener('DOMContentLoaded', function () {
     getResource('http://localhost:3000/products') // обработка данных, которые приходят по этому запросу
     .then(function (data) {
       createProducts(data, '.list-cards');
+      createProducts(data, '.shop__list');
       search(data);
     }) // ошибка
     ["catch"](function (err) {

@@ -1,6 +1,5 @@
 const headerSearchWord = document.querySelector('.header-search-word');
 const headerSearch = document.querySelector('.header-search-show');
-const blockFiltersList = document.querySelector('.block-filters-list');
 
 const checkResponse = res => document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
 
@@ -34,9 +33,9 @@ const createProducts = (response, listSelector) => {
             let card = `
             <li class="card" data-size="${product.size}">
                 <a class="card__link" href="#" title="${product.name}">
-                    <picture class="card__block-img">
+                    <div class="card__block-img">
                         <img data-src="${product.img}" src="" alt="${product.name}">
-                    </picture>
+                    </div>
                     <div class="card__description">
                         <span class="card-name">${product.name}</span>
                         <div class="card__block-price">
@@ -71,25 +70,31 @@ function showImages() {
 }
 
 // фильтрация
-if (blockFiltersList) {
-    blockFiltersList.addEventListener('click', event => {
-        const target = event.target;
+const filter = (list) => {
+  const blockFiltersList = document.querySelector('.block-filters-list');
 
-        target.tagName !== 'LI' || target.tagName !== 'A' && false;
+  if (blockFiltersList) {
+      blockFiltersList.addEventListener('click', event => {
+          const target = event.target;
+          target.tagName !== 'LI' || target.tagName !== 'A' && false;
 
-        const items = document.querySelector('.list-cards').getElementsByClassName('card');
-
-        items.forEach(item => {
-            if (item.dataset.size === target.dataset.size) {
-                item.classList.remove('hidden');
-            } else if (target.dataset.size === 'all') {
-                item.classList.remove('hidden');
-            } else {
-                item.classList.add('hidden');
-            }
-        });
-    });
+          const items = document.querySelector(list).getElementsByClassName('card');
+          
+          items.forEach(item => {
+              if (item.dataset.size === target.dataset.size) {
+                  item.classList.remove('hidden');
+              } else if (target.dataset.size === 'all') {
+                  item.classList.remove('hidden');
+              } else {
+                  item.classList.add('hidden');
+              }
+          });
+      });
+  }
 }
+
+filter('.list-cards');
+filter('.shop__list');
 
 document.querySelectorAll('.card-old-price').forEach(node => {
     node.textContent = toCurrency(node.textContent);
@@ -162,6 +167,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // обработка данных, которые приходят по этому запросу
             .then(data => {
                 createProducts(data, '.list-cards');
+                createProducts(data, '.shop__list');
                 search(data);
             })
             // ошибка

@@ -431,7 +431,8 @@
             }
         }
     }
-    .list-cards {
+    .list-cards,
+    .shop__list {
         grid-template-columns: repeat(2, 1fr) !important;
     }
 }
@@ -610,7 +611,8 @@
             font-size: 8.8px !important;
         }
     }
-    .list-cards {
+    .list-cards,
+    .shop__list {
         grid-template-columns: repeat(1, 1fr) !important;
     }
     .card {

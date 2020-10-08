@@ -10,7 +10,16 @@
 </head>
 
 <body>
-    @@include('./components/header.html') @@include('./components/preolaider.html') @@include('./components/up.html') shop
+    @@include('./components/header.html') @@include('./components/preolaider.html') @@include('./components/up.html')
+    <div class="shop">
+        <div class="container">
+            @@include('./components/filter.html')
+            <div class="shop__content">
+                <ul class="shop__list"></ul>
+            </div>
+        </div>
+    </div>
+    @@include('./components/footer.html')
     <script src="public/js/main.js"></script>
 </body>
 
