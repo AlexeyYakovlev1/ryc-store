@@ -71,38 +71,37 @@ function showImages() {
 
 // фильтрация
 const filter = (list) => {
-  const blockFiltersList = document.querySelector('.block-filters-list');
+    const blockFiltersList = document.querySelector('.block-filters-list');
 
-  if (blockFiltersList) {
-      blockFiltersList.addEventListener('click', event => {
-          const target = event.target;
-          target.tagName !== 'LI' || target.tagName !== 'A' && false;
+    if (blockFiltersList) {
+        blockFiltersList.addEventListener('click', event => {
+            const target = event.target;
+            target.tagName !== 'LI' || target.tagName !== 'A' && false;
 
-          const items = document.querySelector(list).getElementsByClassName('card');
-          
-          items.forEach(item => {
-              if (item.dataset.size === target.dataset.size) {
-                  item.classList.remove('hidden');
-              } else if (target.dataset.size === 'all') {
-                  item.classList.remove('hidden');
-              } else {
-                  item.classList.add('hidden');
-              }
-          });
-      });
-  }
+            const items = document.querySelector(list).getElementsByClassName('card');
+
+            items.forEach(item => {
+                if (item.dataset.size === target.dataset.size) {
+                    item.classList.remove('hidden');
+                } else if (target.dataset.size === 'all') {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    }
 }
 
-filter('.list-cards');
 filter('.shop__list');
 
 document.querySelectorAll('.card-old-price').forEach(node => {
     node.textContent = toCurrency(node.textContent);
-})
+});
 
 document.querySelectorAll('.card-now-price').forEach(node => {
     node.textContent = toCurrency(node.textContent);
-})
+});
 
 // анимированный поиск
 const animationSearch = () => {
@@ -381,7 +380,7 @@ const validateForm = () => {
         });
     }
 
-    let regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/gi;
+    let regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
     let regexp_password = /^.{6,}$/;
     let regexp_name = /^[а-я|А-Я]{2,}$/;
     let regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/;
@@ -391,26 +390,26 @@ const validateForm = () => {
     validate('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
     validate('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
     validate('.account__block-form-register', '.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-
-    // показать/скрыть пароль
-    const showHidePassword = () => {
-        let passwords = document.querySelectorAll('.account__data[type="password"]');
-        let eyes = document.querySelectorAll('.account__eye');
-        let show = false;
-
-        eyes.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                show = !show;
-                item.src = show ? './assets/img/eye-hide.png' : './assets/img/eye-show.png';
-                passwords[index].type = show ? 'text' : 'password';
-            });
-        });
-    }
-
-    showHidePassword();
 }
 
 validateForm();
+
+// показать/скрыть пароль
+const showHidePassword = () => {
+    let passwords = document.querySelectorAll('.account__data[type="password"]');
+    let eyes = document.querySelectorAll('.account__eye');
+    let show = false;
+
+    eyes.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            show = !show;
+            item.src = show ? './assets/img/eye-hide.png' : './assets/img/eye-show.png';
+            passwords[index].type = show ? 'text' : 'password';
+        });
+    });
+}
+
+showHidePassword();
 
 // создание select
 const select = () => {

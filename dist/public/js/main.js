@@ -9173,7 +9173,6 @@ var filter = function filter(list) {
   }
 };
 
-filter('.list-cards');
 filter('.shop__list');
 document.querySelectorAll('.card-old-price').forEach(function (node) {
   node.textContent = toCurrency(node.textContent);
@@ -9462,7 +9461,7 @@ var validateForm = function validateForm() {
     });
   };
 
-  var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/gi;
+  var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
   var regexp_password = /^.{6,}$/;
   var regexp_name = /^[а-я|А-Я]{2,}$/;
   var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/;
@@ -9470,25 +9469,25 @@ var validateForm = function validateForm() {
   validate('.design-product__block-form-register', '.design-product__block-form-register-email', 'invalid', 'valid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
   validate('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
   validate('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-  validate('.account__block-form-register', '.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться'); // показать/скрыть пароль
-
-  var showHidePassword = function showHidePassword() {
-    var passwords = document.querySelectorAll('.account__data[type="password"]');
-    var eyes = document.querySelectorAll('.account__eye');
-    var show = false;
-    eyes.forEach(function (item, index) {
-      item.addEventListener('click', function () {
-        show = !show;
-        item.src = show ? './assets/img/eye-hide.png' : './assets/img/eye-show.png';
-        passwords[index].type = show ? 'text' : 'password';
-      });
-    });
-  };
-
-  showHidePassword();
+  validate('.account__block-form-register', '.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
 };
 
-validateForm(); // создание select
+validateForm(); // показать/скрыть пароль
+
+var showHidePassword = function showHidePassword() {
+  var passwords = document.querySelectorAll('.account__data[type="password"]');
+  var eyes = document.querySelectorAll('.account__eye');
+  var show = false;
+  eyes.forEach(function (item, index) {
+    item.addEventListener('click', function () {
+      show = !show;
+      item.src = show ? './assets/img/eye-hide.png' : './assets/img/eye-show.png';
+      passwords[index].type = show ? 'text' : 'password';
+    });
+  });
+};
+
+showHidePassword(); // создание select
 
 var select = function select() {
   var heading = document.querySelector('.product__block-list-heading');
