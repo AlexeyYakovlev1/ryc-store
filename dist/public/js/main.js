@@ -9415,32 +9415,28 @@ var showMenu = function showMenu() {
 
 showMenu(); // валидация формы
 
-var validateForm = function validateForm() {
+var validation = function validation() {
   // проверка всех ипутов на действительность
-  var checkForm = function checkForm(inputsSelector, className, btnSelector, textBtn) {
+  var checkInputsOnValid = function checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector) {
     var inputs = document.querySelectorAll(inputsSelector);
     var btn = document.querySelector(btnSelector);
+    var form = document.querySelector(formSelector);
 
-    var arr = _toConsumableArray(inputs);
-
-    arr = arr.filter(function (item) {
-      return item.classList.contains(className);
+    var invalid_inputs = _toConsumableArray(inputs).filter(function (item) {
+      return item.classList.contains(classInvalid);
     });
 
-    if (arr.length) {
-      btn.dataset.valid = 'false';
+    if (invalid_inputs.length) {
       btn.value = 'неверные данные';
     } else {
-      btn.dataset.valid = 'true';
-      btn.value = textBtn;
+      btn.valud = 'зарегистрироваться';
+      form.submit();
     }
   }; // валидация
 
 
-  var validate = function validate(formSelector, elSelector, classInvalid, classValid, regexp, btnSelector, inputsSelector, textBtn) {
+  var validationForm = function validationForm(formSelector, elSelector, classInvalid, regexp, btnSelector, inputsSelector) {
     var inputs = document.querySelectorAll(elSelector);
-    var cls_invalid = classInvalid;
-    var cls_valid = classValid;
     var form = document.querySelector(formSelector);
     form && form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -9449,30 +9445,32 @@ var validateForm = function validateForm() {
         var res = regexp.test(val);
 
         if (res) {
-          item.classList.remove(cls_invalid);
-          item.classList.add(cls_valid);
-          checkForm(inputsSelector, 'invalid', btnSelector, textBtn);
+          item.classList.remove(classInvalid);
+          checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector);
         } else {
-          item.classList.add(cls_invalid);
-          item.classList.remove(cls_valid);
-          checkForm(inputsSelector, 'invalid', btnSelector, textBtn);
+          item.classList.add(classInvalid);
+          checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector);
         }
       });
     });
-  };
+  }; // регулярные выражения
+
 
   var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
   var regexp_password = /^.{6,}$/;
   var regexp_name = /^[а-я|А-Я]{2,}$/;
-  var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/;
-  validate('.account__block-form-register', '.account__data[name="email-register"]', 'invalid', 'valid', regexp_email, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-  validate('.design-product__block-form-register', '.design-product__block-form-register-email', 'invalid', 'valid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
-  validate('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', 'valid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info', 'зарегистрироваться');
-  validate('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', 'valid', regexp_password, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
-  validate('.account__block-form-register', '.account__data-name', 'invalid', 'valid', regexp_name, '.account__submit-register', '.account__data-register', 'зарегистрироваться');
+  var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/; // страница аккаунта
+
+  validationForm('.account__block-form-register', '.account__data[name="email-register"]', 'invalid', regexp_email, '.account__submit-register', '.account__data-register');
+  validationForm('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', regexp_password, '.account__submit-register', '.account__data-register');
+  validationForm('.account__block-form-register', '.account__data[name="first-name-register"]', 'invalid', regexp_name, '.account__submit-register', '.account__data-register');
+  validationForm('.account__block-form-register', '.account__data[name="last-name-register"]', 'invalid', regexp_name, '.account__submit-register', '.account__data-register'); // страница дизайнерского товара
+
+  validationForm('.design-product__block-form-register', '.design-product__block-form-register-email', 'invalid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info');
+  validationForm('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info');
 };
 
-validateForm(); // показать/скрыть пароль
+validation(); // показать/скрыть пароль
 
 var showHidePassword = function showHidePassword() {
   var passwords = document.querySelectorAll('.account__data[type="password"]');
