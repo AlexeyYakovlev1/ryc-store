@@ -410,10 +410,10 @@
         }
     }
     .title {
-        padding-top: 200px !important;
+        padding-top: 40px !important;
         height: auto !important;
-        .container {
-            padding: 0 !important;
+        .glide__slides {
+            height: auto !important;
         }
         &__text a {
             font-size: 2em !important;
@@ -474,7 +474,7 @@
         }
     }
     .design-product__block {
-      width: 100% !important;
+        width: 100% !important;
     }
     .design-product__gallery {
         grid-template-columns: repeat(1, 1fr) !important;
@@ -483,9 +483,6 @@
             grid-column: 1/3;
         }
     }
-}
-
-@media screen and (max-width: 500px) {
     .design {
         &__title {
             margin-bottom: 30px !important;

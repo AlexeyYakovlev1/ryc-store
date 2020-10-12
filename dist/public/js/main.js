@@ -9612,7 +9612,12 @@ var options = {
   autoplay: 4000,
   animationDuration: 2000,
   animationTimingFunc: 'ease',
-  gap: 0
+  gap: 5,
+  breakpoints: {
+    600: {
+      gap: 20
+    }
+  }
 }; // инициализация библиотеки Glide
 
 document.querySelector('.glide') && new _glidejs_glide__WEBPACK_IMPORTED_MODULE_0__["default"]('.glide', options).mount();

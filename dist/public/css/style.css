@@ -433,11 +433,11 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     width: 300px !important;
   }
   .title {
-    padding-top: 200px !important;
+    padding-top: 40px !important;
     height: auto !important;
   }
-  .title .container {
-    padding: 0 !important;
+  .title .glide__slides {
+    height: auto !important;
   }
   .title__text a {
     font-size: 2em !important;
@@ -490,9 +490,6 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
   .design-product__gallery-block:nth-child(odd) {
     grid-column: 1/3;
   }
-}
-
-@media screen and (max-width: 500px) {
   .design__title {
     margin-bottom: 30px !important;
   }
@@ -3249,6 +3246,11 @@ img {
   height: 100%;
 }
 
+.title__block-img img {
+  display: block;
+  margin: 0 auto;
+}
+
 .title__text {
   width: 100%;
   height: 100%;
@@ -3623,6 +3625,15 @@ img {
 
 .window-look__img {
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   height: auto;
 }
 
