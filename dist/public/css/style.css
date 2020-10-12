@@ -3159,6 +3159,7 @@ img {
 .footer {
   min-height: 120px;
   margin-top: 50px;
+  padding: 20px 0;
 }
 
 .footer__info {

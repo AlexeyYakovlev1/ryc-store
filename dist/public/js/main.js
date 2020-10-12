@@ -9094,9 +9094,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var headerSearchWord = document.querySelector('.header-search-word');
-var headerSearch = document.querySelector('.header-search-show');
-
 var checkResponse = function checkResponse(res) {
   return document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
 }; // цена
@@ -9114,7 +9111,7 @@ var createProducts = function createProducts(response, listSelector) {
   var listCards = document.querySelector(listSelector);
 
   if (listCards) {
-    listCards.textContent = '';
+    listCards.innerHTML = '';
     response.forEach(function (product) {
       var oldPrice = product.oldPrice;
       var sale;
@@ -9128,7 +9125,7 @@ var createProducts = function createProducts(response, listSelector) {
         oldPrice = toCurrency(product.oldPrice);
       }
 
-      var card = "\n            <li class=\"card\" data-size=\"".concat(product.size, "\">\n                <a class=\"card__link\" href=\"#\" title=\"").concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <img data-src=\"").concat(product.img, "\" src=\"\" alt=\"").concat(product.name, "\">\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
+      var card = "\n            <li class=\"card\">\n                <a class=\"card__link\" href=\"#\" title=\"".concat(product.name, "\">\n                    <div class=\"card__block-img\">\n                        <img data-src=\"").concat(product.img, "\" src=\"\" alt=\"").concat(product.name, "\">\n                    </div>\n                    <div class=\"card__description\">\n                        <span class=\"card-name\">").concat(product.name, "</span>\n                        <div class=\"card__block-price\">\n                            <span class=\"card-old-price\">").concat(oldPrice, "</span>\n                            <span class=\"card-now-price\">").concat(toCurrency(nowPrice), "</span>\n                            <span class=\"card-sale\">").concat(sale, "</span>\n                        </div>\n                    </div>\n                </a>\n            </li>\n        ");
       listCards.innerHTML += card;
     });
   }
@@ -9158,34 +9155,62 @@ var filter = function filter(list) {
   if (blockFiltersList) {
     blockFiltersList.addEventListener('click', function (event) {
       var target = event.target;
+      var target_size = target.dataset.size;
       target.tagName !== 'LI' || target.tagName !== 'A' && false;
-      var items = document.querySelector(list).getElementsByClassName('card');
-      items.forEach(function (item) {
-        if (item.dataset.size === target.dataset.size) {
-          item.classList.remove('hidden');
-        } else if (target.dataset.size === 'all') {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
-      });
+
+      var getProducts = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  fetch(url).then(function (data) {
+                    data.json().then(function (products) {
+                      if (target_size === 'all') {
+                        createProducts(products, list);
+                      } else {
+                        createProducts(products.filter(function (product) {
+                          return product.size === target_size;
+                        }), list);
+                      }
+                    });
+                  })["catch"](function (err) {
+                    throw err;
+                  });
+
+                case 1:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function getProducts(_x) {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      getProducts('http://localhost:3000/products');
     });
   }
 };
 
 filter('.shop__list');
 document.querySelectorAll('.card-old-price').forEach(function (node) {
-  node.textContent = toCurrency(node.textContent);
+  return node.textContent = toCurrency(node.textContent);
 });
 document.querySelectorAll('.card-now-price').forEach(function (node) {
-  node.textContent = toCurrency(node.textContent);
+  return node.textContent = toCurrency(node.textContent);
 }); // анимированный поиск
 
 var animationSearch = function animationSearch() {
   var word = document.querySelector('.header-search-word');
   var blockSearch = document.querySelector('.header__block-search');
   var blockSearchContent = document.querySelector('.header__block-search-content');
-  var list = document.querySelector('.header__bottom-list-user'); // Действия при клике
+  var list = document.querySelector('.header__bottom-list-user');
+  var headerSearchWord = document.querySelector('.header-search-word');
+  var headerSearch = document.querySelector('.header-search-show'); // Действия при клике
 
   headerSearchWord.addEventListener('click', function () {
     word.style.opacity = '0';
@@ -9214,42 +9239,42 @@ animationSearch();
 window.addEventListener('DOMContentLoaded', function () {
   // функция для запросов
   var getResource = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(url) {
       var res;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context.prev = _context.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
-              _context.next = 2;
+              _context2.next = 2;
               return fetch("".concat(url));
 
             case 2:
-              res = _context.sent;
+              res = _context2.sent;
 
               if (res.ok) {
-                _context.next = 5;
+                _context2.next = 5;
                 break;
               }
 
               throw new Error("Could not fetch ".concat(url, ", status: ").concat(res.status));
 
             case 5:
-              _context.next = 7;
+              _context2.next = 7;
               return res.json();
 
             case 7:
-              return _context.abrupt("return", _context.sent);
+              return _context2.abrupt("return", _context2.sent);
 
             case 8:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
-    return function getResource(_x) {
-      return _ref.apply(this, arguments);
+    return function getResource(_x2) {
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -9415,43 +9440,33 @@ var showMenu = function showMenu() {
 
 showMenu(); // валидация формы
 
-var validation = function validation() {
-  // проверка всех ипутов на действительность
-  var checkInputsOnValid = function checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector) {
-    var inputs = document.querySelectorAll(inputsSelector);
+var validationForm = function validationForm() {
+  var validation = function validation(regularExpressions, elementSelector, elementsSelector, formSelector, btnSelector) {
+    var className = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'invalid';
+    var form = document.querySelector(formSelector);
+    var list_data = document.querySelectorAll(elementsSelector);
     var btn = document.querySelector(btnSelector);
-    var form = document.querySelector(formSelector);
-
-    var invalid_inputs = _toConsumableArray(inputs).filter(function (item) {
-      return item.classList.contains(classInvalid);
+    list_data.forEach(function (item) {
+      return item.classList.add(className);
     });
-
-    if (invalid_inputs.length) {
-      btn.value = 'неверные данные';
-    } else {
-      btn.valud = 'зарегистрироваться';
-      form.submit();
-    }
-  }; // валидация
-
-
-  var validationForm = function validationForm(formSelector, elSelector, classInvalid, regexp, btnSelector, inputsSelector) {
-    var inputs = document.querySelectorAll(elSelector);
-    var form = document.querySelector(formSelector);
     form && form.addEventListener('submit', function (e) {
       e.preventDefault();
-      inputs.forEach(function (item) {
-        var val = item.value.toLowerCase().trim();
-        var res = regexp.test(val);
+      var el = document.querySelector(elementSelector);
+      var value = el.value.trim().toLowerCase();
+      var regexp = regularExpressions;
+      var result = regexp.test(value);
+      result ? el.classList.remove(className) : el.classList.add(className);
 
-        if (res) {
-          item.classList.remove(classInvalid);
-          checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector);
-        } else {
-          item.classList.add(classInvalid);
-          checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector);
-        }
+      var arr = _toConsumableArray(list_data).filter(function (item) {
+        return item.classList.contains(className);
       });
+
+      if (arr.length) {
+        btn.value = 'неверные данные';
+      } else {
+        form.submit();
+        btn.value = 'зарегистрироваться';
+      }
     });
   }; // регулярные выражения
 
@@ -9459,18 +9474,18 @@ var validation = function validation() {
   var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
   var regexp_password = /^.{6,}$/;
   var regexp_name = /^[а-я|А-Я]{2,}$/;
-  var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/; // страница аккаунта
+  var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/; // форма регистрации на странице аккаунта
 
-  validationForm('.account__block-form-register', '.account__data[name="email-register"]', 'invalid', regexp_email, '.account__submit-register', '.account__data-register');
-  validationForm('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', regexp_password, '.account__submit-register', '.account__data-register');
-  validationForm('.account__block-form-register', '.account__data[name="first-name-register"]', 'invalid', regexp_name, '.account__submit-register', '.account__data-register');
-  validationForm('.account__block-form-register', '.account__data[name="last-name-register"]', 'invalid', regexp_name, '.account__submit-register', '.account__data-register'); // страница дизайнерского товара
+  validation(regexp_email, '.account__data[name="email-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
+  validation(regexp_password, '.account__data[name="password-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
+  validation(regexp_name, '.account__data[name="first-name-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
+  validation(regexp_name, '.account__data[name="last-name-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register'); // форма регистрации на странице дизайнерского товара
 
-  validationForm('.design-product__block-form-register', '.design-product__block-form-register-email', 'invalid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info');
-  validationForm('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info');
+  validation(regexp_email, '.design-product__block-form-register-email', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
+  validation(regexp_date, '.design-product__block-form-register-date', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
 };
 
-validation(); // показать/скрыть пароль
+validationForm(); // показать/скрыть пароль
 
 var showHidePassword = function showHidePassword() {
   var passwords = document.querySelectorAll('.account__data[type="password"]');

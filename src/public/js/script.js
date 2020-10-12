@@ -1,6 +1,3 @@
-const headerSearchWord = document.querySelector('.header-search-word');
-const headerSearch = document.querySelector('.header-search-show');
-
 const checkResponse = res => document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
 
 // цена
@@ -15,7 +12,7 @@ const createProducts = (response, listSelector) => {
     const listCards = document.querySelector(listSelector);
 
     if (listCards) {
-        listCards.textContent = '';
+        listCards.innerHTML = '';
 
         response.forEach(product => {
             let oldPrice = product.oldPrice;
@@ -31,7 +28,7 @@ const createProducts = (response, listSelector) => {
             }
 
             let card = `
-            <li class="card" data-size="${product.size}">
+            <li class="card">
                 <a class="card__link" href="#" title="${product.name}">
                     <div class="card__block-img">
                         <img data-src="${product.img}" src="" alt="${product.name}">
@@ -76,32 +73,30 @@ const filter = (list) => {
     if (blockFiltersList) {
         blockFiltersList.addEventListener('click', event => {
             const target = event.target;
+            const target_size = target.dataset.size;
             target.tagName !== 'LI' || target.tagName !== 'A' && false;
 
-            const items = document.querySelector(list).getElementsByClassName('card');
+            const getProducts = async(url) => {
+                fetch(url).then(data => {
+                    data.json().then(products => {
+                        if (target_size === 'all') {
+                            createProducts(products, list);
+                        } else {
+                            createProducts(products.filter(product => product.size === target_size), list);
+                        }
+                    });
+                }).catch(err => { throw err });
+            }
 
-            items.forEach(item => {
-                if (item.dataset.size === target.dataset.size) {
-                    item.classList.remove('hidden');
-                } else if (target.dataset.size === 'all') {
-                    item.classList.remove('hidden');
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
+            getProducts('http://localhost:3000/products');
         });
     }
 }
 
 filter('.shop__list');
 
-document.querySelectorAll('.card-old-price').forEach(node => {
-    node.textContent = toCurrency(node.textContent);
-});
-
-document.querySelectorAll('.card-now-price').forEach(node => {
-    node.textContent = toCurrency(node.textContent);
-});
+document.querySelectorAll('.card-old-price').forEach(node => node.textContent = toCurrency(node.textContent));
+document.querySelectorAll('.card-now-price').forEach(node => node.textContent = toCurrency(node.textContent));
 
 // анимированный поиск
 const animationSearch = () => {
@@ -109,6 +104,8 @@ const animationSearch = () => {
     const blockSearch = document.querySelector('.header__block-search');
     const blockSearchContent = document.querySelector('.header__block-search-content');
     const list = document.querySelector('.header__bottom-list-user');
+    const headerSearchWord = document.querySelector('.header-search-word');
+    const headerSearch = document.querySelector('.header-search-show');
 
     // Действия при клике
     headerSearchWord.addEventListener('click', () => {
@@ -333,63 +330,50 @@ const showMenu = () => {
 showMenu();
 
 // валидация формы
-const validation = () => {
-    // проверка всех ипутов на действительность
-    const checkInputsOnValid = (inputsSelector, classInvalid, btnSelector, formSelector) => {
-        const inputs = document.querySelectorAll(inputsSelector);
+const validationForm = () => {
+    const validation = (regularExpressions, elementSelector, elementsSelector, formSelector, btnSelector, className = 'invalid') => {
+        const form = document.querySelector(formSelector);
+        const list_data = document.querySelectorAll(elementsSelector);
         const btn = document.querySelector(btnSelector);
-        const form = document.querySelector(formSelector);
-        const invalid_inputs = [...inputs].filter(item => item.classList.contains(classInvalid))
-
-        if (invalid_inputs.length) {
-            btn.value = 'неверные данные';
-        } else {
-            btn.valud = 'зарегистрироваться';
-            form.submit();
-        }
-    }
-
-    // валидация
-    const validationForm = (formSelector, elSelector, classInvalid, regexp, btnSelector, inputsSelector) => {
-        const inputs = document.querySelectorAll(elSelector);
-        const form = document.querySelector(formSelector);
+        list_data.forEach(item => item.classList.add(className));
 
         form && form.addEventListener('submit', e => {
             e.preventDefault();
+            const el = document.querySelector(elementSelector);
+            const value = el.value.trim().toLowerCase();
+            const regexp = regularExpressions;
+            const result = regexp.test(value);
+            result ? el.classList.remove(className) : el.classList.add(className);
 
-            inputs.forEach(item => {
-                const val = item.value.toLowerCase().trim();
-                const res = regexp.test(val);
+            const arr = [...list_data].filter(item => item.classList.contains(className));
 
-                if (res) {
-                    item.classList.remove(classInvalid);
-                    checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector);
-                } else {
-                    item.classList.add(classInvalid);
-                    checkInputsOnValid(inputsSelector, classInvalid, btnSelector, formSelector);
-                }
-            });
+            if (arr.length) {
+                btn.value = 'неверные данные';
+            } else {
+                form.submit();
+                btn.value = 'зарегистрироваться';
+            }
         });
     }
 
     // регулярные выражения
-    let regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
-    let regexp_password = /^.{6,}$/;
-    let regexp_name = /^[а-я|А-Я]{2,}$/;
-    let regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/;
+    const regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
+    const regexp_password = /^.{6,}$/;
+    const regexp_name = /^[а-я|А-Я]{2,}$/;
+    const regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/;
 
-    // страница аккаунта
-    validationForm('.account__block-form-register', '.account__data[name="email-register"]', 'invalid', regexp_email, '.account__submit-register', '.account__data-register');
-    validationForm('.account__block-form-register', '.account__data[name="password-register"]', 'invalid', regexp_password, '.account__submit-register', '.account__data-register');
-    validationForm('.account__block-form-register', '.account__data[name="first-name-register"]', 'invalid', regexp_name, '.account__submit-register', '.account__data-register');
-    validationForm('.account__block-form-register', '.account__data[name="last-name-register"]', 'invalid', regexp_name, '.account__submit-register', '.account__data-register');
+    // форма регистрации на странице аккаунта
+    validation(regexp_email, '.account__data[name="email-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
+    validation(regexp_password, '.account__data[name="password-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
+    validation(regexp_name, '.account__data[name="first-name-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
+    validation(regexp_name, '.account__data[name="last-name-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
 
-    // страница дизайнерского товара
-    validationForm('.design-product__block-form-register', '.design-product__block-form-register-email', 'invalid', regexp_email, '.design-product__block-form-register-submit', '.design-product__block-form-register-info');
-    validationForm('.design-product__block-form-register', '.design-product__block-form-register-date', 'invalid', regexp_date, '.design-product__block-form-register-submit', '.design-product__block-form-register-info');
+    // форма регистрации на странице дизайнерского товара
+    validation(regexp_email, '.design-product__block-form-register-email', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
+    validation(regexp_date, '.design-product__block-form-register-date', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
 }
 
-validation();
+validationForm();
 
 // показать/скрыть пароль
 const showHidePassword = () => {

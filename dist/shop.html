@@ -27,7 +27,9 @@
                         <div class="header__bottom-list-close header__bottom-list-close-nav"></div>
                         <div class="header__bottom-wrapper-list">
                             <li class="header__bottom-link header__bottom-link-mobile-item header__bottom-link-no-border">
-                                <input class="header-search" placeholder="Искать..." type="text">
+                                <form action="/" method="POST">
+                                    <input class="header-search" placeholder="Искать..." type="text">
+                                </form>
                             </li>
                             <li class="header__bottom-shop header__bottom-link">
                                 <a href="shop.html">магазин</a>
@@ -65,10 +67,10 @@
                     <ul class="header__bottom-list header__bottom-list-user">
                         <div class="header__bottom-list-close header__bottom-list-close-user"></div>
                         <li class="header__block-search header__bottom-link">
-                            <div class="header__block-search-content">
+                            <form action="/" method="POST" class="header__block-search-content">
                                 <input class="header-search header-search-show" type="text">
                                 <span class="header-search-word">поиск</span>
-                            </div>
+                            </form>
                         </li>
                         <li class="header__bottom-link">
                             <a href="account.html">аккаунт</a>
@@ -81,8 +83,7 @@
             </nav>
         </div>
     </div>
-</header>
- <div class="preolaider-wrapper">
+</header> <div class="preolaider-wrapper">
     <div class="preolaider">
         <div class="dash uno"></div>
         <div class="dash dos"></div>
@@ -103,15 +104,6 @@
     </button>
     <ul class="block-filters-list">
         <li data-size="big">
-            <a data-size="big" href="#">Мужское</a>
-        </li>
-        <li data-size="big">
-            <a data-size="big" href="#">Unisex</a>
-        </li>
-        <li data-size="big">
-            <a data-size="big" href="#">Женское</a>
-        </li>
-        <li data-size="big">
             <a data-size="big" href="#">Большой размер</a>
         </li>
         <li data-size="small">
@@ -122,7 +114,6 @@
         </li>
     </ul>
 </div>
-
             <div class="shop__content">
                 <ul class="shop__list"></ul>
             </div>
