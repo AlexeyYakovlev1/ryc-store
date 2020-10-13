@@ -1,16 +1,8 @@
 {
     "products": [{
             "type": "type",
-            "size": "big",
-            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076",
-            "name": "Шорты",
-            "oldPrice": 500,
-            "nowPrice": 352
-        },
-        {
-            "type": "type",
             "size": "small",
-            "img": "https://cdn.shopify.com/s/files/1/0123/0644/8443/products/ACW-UF003B-GRY_1_360x.jpg?v=1584713939",
+            "img": "https://www.traektoria.ru/upload/resize_cache/trk_iblock_img/f31/560_560_1/f3186946d179016c827da686be751341.jpg",
             "name": "name",
             "oldPrice": 10,
             "nowPrice": 5

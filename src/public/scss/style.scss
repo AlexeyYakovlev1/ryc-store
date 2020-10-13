@@ -529,6 +529,7 @@
             &-country {
                 height: 35px;
                 border: 1px solid #000;
+                background-color: #fff;
             }
             &-info {
                 border: 1px solid #000;
@@ -591,7 +592,7 @@
             }
         }
         &-block-info {
-            width: 300px;
+            max-width: 300px;
         }
     }
 }

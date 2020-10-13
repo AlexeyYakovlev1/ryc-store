@@ -9078,6 +9078,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9090,9 +9094,68 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+// определение расстояния сверху у выпадающего меню
+var determinationOfTop = function determinationOfTop() {
+  var list_shop = document.querySelector('.header__bottom-shop-list');
+  var items_list = document.querySelectorAll('.header__bottom-shop-list-item');
+  var top = items_list.length >= 7 ? items_list.length * 20 : 100;
+  list_shop.style.top = "-".concat(top, "px");
+};
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+determinationOfTop(); // анимация при клике на поиск
+
+var animationSearch = function animationSearch() {
+  var word = document.querySelector('.header-search-word');
+  var blockSearch = document.querySelector('.header__block-search');
+  var blockSearchContent = document.querySelector('.header__block-search-content');
+  var list = document.querySelector('.header__bottom-list-user');
+  var headerSearchWord = document.querySelector('.header-search-word');
+  var headerSearch = document.querySelector('.header-search-show'); // Действия при клике
+
+  headerSearchWord.addEventListener('click', function () {
+    word.style.opacity = '0';
+    blockSearch.style.width = '115px';
+    blockSearch.style.height = '20px';
+    blockSearch.classList.add('no-border');
+    blockSearchContent.style.height = '20px';
+    list.style.width = '315px';
+    headerSearch.style.opacity = '1';
+    headerSearch.focus();
+  }); // Действия при выходе из инпута
+
+  headerSearch.addEventListener('blur', function () {
+    word.style.opacity = '1';
+    blockSearch.style.width = '40px';
+    blockSearch.style.height = '11px';
+    blockSearch.classList.remove('no-border');
+    blockSearchContent.style.height = '11px';
+    list.style.width = '200px';
+    headerSearch.style.opacity = '0';
+    headerSearch.value = '';
+  });
+};
+
+animationSearch(); // поиск
+
+var search = function search(data) {
+  var search = document.querySelector('.header-search');
+  search.addEventListener('keydown', function (event) {
+    var valueSearch = search.value.trim().toLowerCase();
+    var result = data.filter(function (item) {
+      return item.name.toLowerCase().includes(valueSearch);
+    });
+
+    if (event.keyCode === 13) {
+      if (valueSearch.length > 2) {
+        createProducts(result, '.list-cards');
+        checkResponse(result);
+      } else {
+        createProducts(result, '.list-cards');
+        checkResponse(result);
+      }
+    }
+  });
+};
 
 var checkResponse = function checkResponse(res) {
   return document.querySelector('.no-el').style.display = res.length ? 'none' : 'block';
@@ -9151,47 +9214,71 @@ function showImages() {
 
 var filter = function filter(list) {
   var blockFiltersList = document.querySelector('.block-filters-list');
+  var sizes = document.querySelectorAll('.block-filters-list li[data-size]');
 
   if (blockFiltersList) {
-    blockFiltersList.addEventListener('click', function (event) {
-      var target = event.target;
-      var target_size = target.dataset.size;
-      target.tagName !== 'LI' || target.tagName !== 'A' && false;
+    var hideActiveClass = function hideActiveClass(className) {
+      sizes.forEach(function (item) {
+        return _toConsumableArray(item.children).filter(function (item) {
+          return item.nodeName === 'A';
+        }).forEach(function (el) {
+          return el.classList.remove(className);
+        });
+      });
+    };
 
-      var getProducts = /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  fetch(url).then(function (data) {
-                    data.json().then(function (products) {
-                      if (target_size === 'all') {
-                        createProducts(products, list);
-                      } else {
-                        createProducts(products.filter(function (product) {
-                          return product.size === target_size;
-                        }), list);
-                      }
+    var showActiveClass = function showActiveClass(className, index) {
+      return _toConsumableArray(sizes[index].children).filter(function (item) {
+        return item.nodeName === 'A';
+      })[0].classList.add(className);
+    };
+
+    hideActiveClass('active-filter');
+    showActiveClass('active-filter', 2);
+    sizes.forEach(function (item, index) {
+      item.addEventListener('click', function () {
+        var size = item.dataset.size;
+        hideActiveClass('active-filter');
+        showActiveClass('active-filter', index);
+        document.querySelector('.preolaider-wrapper').style.display = 'flex';
+
+        var getProducts = /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    fetch(url).then(function (data) {
+                      data.json().then(function (products) {
+                        document.querySelector('.preolaider-wrapper').style.display = 'none';
+
+                        if (size === 'all') {
+                          createProducts(products, list);
+                        } else {
+                          createProducts(products.filter(function (product) {
+                            return product.size === size;
+                          }), list);
+                        }
+                      });
+                    })["catch"](function (err) {
+                      throw err;
                     });
-                  })["catch"](function (err) {
-                    throw err;
-                  });
 
-                case 1:
-                case "end":
-                  return _context.stop();
+                  case 1:
+                  case "end":
+                    return _context.stop();
+                }
               }
-            }
-          }, _callee);
-        }));
+            }, _callee);
+          }));
 
-        return function getProducts(_x) {
-          return _ref.apply(this, arguments);
-        };
-      }();
+          return function getProducts(_x) {
+            return _ref.apply(this, arguments);
+          };
+        }();
 
-      getProducts('http://localhost:3000/products');
+        getProducts('http://localhost:3000/products');
+      });
     });
   }
 };
@@ -9202,40 +9289,7 @@ document.querySelectorAll('.card-old-price').forEach(function (node) {
 });
 document.querySelectorAll('.card-now-price').forEach(function (node) {
   return node.textContent = toCurrency(node.textContent);
-}); // анимированный поиск
-
-var animationSearch = function animationSearch() {
-  var word = document.querySelector('.header-search-word');
-  var blockSearch = document.querySelector('.header__block-search');
-  var blockSearchContent = document.querySelector('.header__block-search-content');
-  var list = document.querySelector('.header__bottom-list-user');
-  var headerSearchWord = document.querySelector('.header-search-word');
-  var headerSearch = document.querySelector('.header-search-show'); // Действия при клике
-
-  headerSearchWord.addEventListener('click', function () {
-    word.style.opacity = '0';
-    blockSearch.style.width = '115px';
-    blockSearch.style.height = '20px';
-    blockSearch.classList.add('no-border');
-    blockSearchContent.style.height = '20px';
-    list.style.width = '315px';
-    headerSearch.style.opacity = '1';
-    headerSearch.focus();
-  }); // Действия при выходе из инпута
-
-  headerSearch.addEventListener('blur', function () {
-    word.style.opacity = '1';
-    blockSearch.style.width = '40px';
-    blockSearch.style.height = '11px';
-    blockSearch.classList.remove('no-border');
-    blockSearchContent.style.height = '11px';
-    list.style.width = '200px';
-    headerSearch.style.opacity = '0';
-    headerSearch.value = '';
-  });
-};
-
-animationSearch();
+});
 window.addEventListener('DOMContentLoaded', function () {
   // функция для запросов
   var getResource = /*#__PURE__*/function () {
@@ -9292,28 +9346,7 @@ window.addEventListener('DOMContentLoaded', function () {
   };
 
   req();
-}); // поиск
-
-var search = function search(data) {
-  var search = document.querySelector('.header-search');
-  search.addEventListener('keydown', function (event) {
-    var valueSearch = search.value.trim().toLowerCase();
-    var result = data.filter(function (item) {
-      return item.name.toLowerCase().includes(valueSearch);
-    });
-
-    if (event.keyCode === 13) {
-      if (valueSearch.length > 2) {
-        createProducts(result, '.list-cards');
-        checkResponse(result);
-      } else {
-        createProducts(result, '.list-cards');
-        checkResponse(result);
-      }
-    }
-  });
-}; // прокрутка вверх
-
+}); // прокрутка вверх
 
 var scrollUp = function scrollUp() {
   var up = document.querySelector('.up-wrapper');
@@ -9359,52 +9392,57 @@ var lookingImagesInModalWindow = function lookingImagesInModalWindow(array) {
   var close = document.querySelector('.window-look__close');
   var list_images = document.querySelector('.window-look__list-images');
 
-  var hideImage = function hideImage() {
-    modal_window.classList.remove('open-window');
-    document.body.style.height = 'auto';
-    document.body.style.overflow = 'visible';
-    window.scrollTo({
-      behavior: 'auto',
-      top: 0
-    });
-  };
-
-  array.forEach(function (item, index) {
-    if (index === 0) {
-      img.src = item.img;
-    } // создание блоков с картинками
-
-
-    var createImages = function createImages() {
-      var block = "\n            <li class=\"window-look__img\">\n                <img src=\"".concat(item.img, "\" alt=\"\" />\n            </li>\n            ");
-      list_images.innerHTML += block;
+  if (product_img) {
+    var hideImage = function hideImage() {
+      modal_window.classList.remove('open-window');
+      document.body.style.height = 'auto';
+      document.body.style.overflow = 'visible';
+      window.scrollTo({
+        behavior: 'auto',
+        top: 0
+      });
     };
 
-    createImages();
-  });
-  var images = document.querySelectorAll('.window-look__img'); // появление окна просмотра
+    array.forEach(function (item, index) {
+      if (index === 0) {
+        img.src = item.img;
+      } // создание блоков с картинками
 
-  product_img.addEventListener('click', function () {
-    modal_window.classList.add('open-window');
-    document.body.style.height = "".concat(document.querySelector('.window-look').clientHeight, "px");
-    document.body.style.overflow = 'hidden';
-    window.scrollTo({
-      behavior: 'auto',
-      top: 0
+
+      var createImages = function createImages() {
+        var block = "\n                    <li class=\"window-look__img\">\n                        <img src=\"".concat(item.img, "\" alt=\"\" />\n                    </li>\n                ");
+        list_images.innerHTML += block;
+      };
+
+      createImages();
     });
-  }); // закрытие окна просмотра
 
-  close.addEventListener('click', function () {
-    return hideImage();
-  });
-  window.addEventListener('keydown', function (event) {
-    return event.keyCode === 27 && hideImage();
-  });
-  images.forEach(function (item) {
-    return item.addEventListener('click', function () {
+    var _images = document.querySelectorAll('.window-look__img'); // появление окна просмотра
+
+
+    product_img.addEventListener('click', function () {
+      modal_window.classList.add('open-window');
+      document.body.style.height = "".concat(document.querySelector('.window-look').clientHeight, "px");
+      document.body.style.overflow = 'hidden';
+      window.scrollTo({
+        behavior: 'auto',
+        top: 0
+      });
+    }); // закрытие окна просмотра
+
+    close.addEventListener('click', function () {
       return hideImage();
     });
-  });
+    window.addEventListener('keydown', function (event) {
+      return event.keyCode === 27 && hideImage();
+    });
+
+    _images.forEach(function (item) {
+      return item.addEventListener('click', function () {
+        return hideImage();
+      });
+    });
+  }
 };
 
 var images = [{
@@ -9416,70 +9454,59 @@ var images = [{
 }, {
   img: 'https://cdn.shopify.com/s/files/1/0123/0644/8443/products/OVERLAY_JAQUARD_MOCK_NECK_JUMPER_1_180x.jpg?v=1598624076'
 }];
-document.querySelector('.product__img') && lookingImagesInModalWindow(images); // появление меню
-
-var showMenu = function showMenu() {
-  var el = document.querySelector('.header__bottom-shop');
-  var menu = document.querySelector('.header__bottom-shop-list');
-
-  var mouseEvents = function mouseEvents(item, ev, add, bottomCount) {
-    item.addEventListener(ev, function () {
-      if (add) {
-        item.classList.add('no-bottom-line');
-      } else {
-        item.classList.remove('no-bottom-line');
-      }
-
-      menu.style.bottom = "".concat(bottomCount, "px");
-    });
-  };
-
-  mouseEvents(el, 'mouseover', true, -100);
-  mouseEvents(el, 'mouseout', false, 100);
-};
-
-showMenu(); // валидация формы
+lookingImagesInModalWindow(images); // валидация формы
 
 var validationForm = function validationForm() {
   var validation = function validation(regularExpressions, elementSelector, elementsSelector, formSelector, btnSelector) {
-    var className = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'invalid';
+    var textValidBtn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'зарегистрироваться';
+    var className = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'invalid';
     var form = document.querySelector(formSelector);
     var list_data = document.querySelectorAll(elementsSelector);
     var btn = document.querySelector(btnSelector);
     list_data.forEach(function (item) {
-      return item.classList.add(className);
+      item.classList.add(className);
+      item.addEventListener('input', function () {
+        var el = document.querySelector(elementSelector);
+        var value = el.value.trim().toLowerCase();
+        var regexp = regularExpressions;
+        var result = regexp.test(value);
+        result ? el.classList.remove(className) : el.classList.add(className);
+        btn.value = _toConsumableArray(list_data).filter(function (item) {
+          return item.classList.contains(className);
+        }).length ? 'заполните пропуски' : textValidBtn;
+      });
     });
     form && form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var el = document.querySelector(elementSelector);
-      var value = el.value.trim().toLowerCase();
-      var regexp = regularExpressions;
-      var result = regexp.test(value);
-      result ? el.classList.remove(className) : el.classList.add(className);
 
       var arr = _toConsumableArray(list_data).filter(function (item) {
         return item.classList.contains(className);
       });
 
       if (arr.length) {
-        btn.value = 'неверные данные';
+        arr[0].focus();
+        btn.value = 'заполните пропуски';
       } else {
         form.submit();
-        btn.value = 'зарегистрироваться';
+        btn.value = textValidBtn;
       }
     });
   }; // регулярные выражения
 
 
-  var regexp_email = /^[a-z|A-Z|\d|\.]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
+  var regexp_email = /^[a-z|A-Z|\d|\.|\_]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
   var regexp_password = /^.{6,}$/;
   var regexp_name = /^[а-я|А-Я]{2,}$/;
-  var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}$/; // форма регистрации на странице аккаунта
+  var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}|(\d{2,2}\.){2,2}\d{4,4}|(\d{2,2}\-){2,2}\d{4,4}$/;
+  var regexp_required = /.{1,1}/; // форма регистрации на странице аккаунта
 
   validation(regexp_email, '.account__data[name="email-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
   validation(regexp_password, '.account__data[name="password-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
   validation(regexp_name, '.account__data[name="first-name-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register');
-  validation(regexp_name, '.account__data[name="last-name-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register'); // форма регистрации на странице дизайнерского товара
+  validation(regexp_name, '.account__data[name="last-name-register"]', '.account__data-register', '.account__block-form-register', '.account__submit-register'); // форма входа на странице аккаунта
+
+  validation(regexp_required, '.account__data-login[name="email-login"]', '.account__data-login', '.account__block-form-login', '.account__submit-login', 'войти');
+  validation(regexp_required, '.account__data-login[name="password-login"]', '.account__data-login', '.account__block-form-login', '.account__submit-login', 'войти'); // форма регистрации на странице дизайнерского товара
 
   validation(regexp_email, '.design-product__block-form-register-email', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
   validation(regexp_date, '.design-product__block-form-register-date', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
@@ -9505,41 +9532,44 @@ showHidePassword(); // создание select
 var select = function select() {
   var heading = document.querySelector('.product__block-list-heading');
   var list = document.querySelector('.product__block-list');
-  var sizes = document.querySelectorAll('.product__block-size');
   var block = document.querySelector('.product__block-select-wrapper');
-  var height = sizes.length * sizes[0].clientHeight;
-  var bottom = sizes.length * sizes[0].clientHeight;
-  var open = false; // открытие/закрытие select
+  var open = false;
 
-  var openCloseSelect = function openCloseSelect() {
-    heading.addEventListener('click', function () {
-      open = !open;
-      list.style.height = open ? "".concat(height, "px") : "0px";
-      list.style.bottom = open ? "-".concat(bottom, "px") : "0px";
-      list.classList.toggle('open-select');
-      block.classList.toggle('open-options');
-    });
-  };
+  if (block) {
+    var sizes = document.querySelectorAll('.product__block-size');
+    var height = sizes.length * sizes[0].clientHeight;
+    var bottom = sizes.length * sizes[0].clientHeight; // открытие/закрытие select
 
-  openCloseSelect(); // выбор размера
-
-  var choiceSize = function choiceSize() {
-    sizes.forEach(function (item) {
-      item.addEventListener('click', function () {
-        open = false;
+    var openCloseSelect = function openCloseSelect() {
+      heading.addEventListener('click', function () {
+        open = !open;
         list.style.height = open ? "".concat(height, "px") : "0px";
         list.style.bottom = open ? "-".concat(bottom, "px") : "0px";
-        heading.innerHTML = item.innerHTML;
-        list.classList.remove('open-select');
-        block.classList.remove('open-options');
+        list.classList.toggle('open-select');
+        block.classList.toggle('open-options');
       });
-    });
-  };
+    };
 
-  choiceSize();
+    openCloseSelect(); // выбор размера
+
+    var choiceSize = function choiceSize() {
+      sizes.forEach(function (item) {
+        item.addEventListener('click', function () {
+          open = false;
+          list.style.height = open ? "".concat(height, "px") : "0px";
+          list.style.bottom = open ? "-".concat(bottom, "px") : "0px";
+          heading.innerHTML = item.innerHTML;
+          list.classList.remove('open-select');
+          block.classList.remove('open-options');
+        });
+      });
+    };
+
+    choiceSize();
+  }
 };
 
-document.querySelector('.product__block-select-wrapper') && select(); // адаптив
+select(); // адаптив
 // появление меню
 
 var showMenuList = function showMenuList() {
