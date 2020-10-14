@@ -222,7 +222,7 @@
         right: 5px !important;
         top: 200px !important;
         span {
-            height: 16px !important;
+            height: 16.5px !important;
             &:not(:last-child) {
                 left: 12px !important;
             }
@@ -331,6 +331,7 @@
         padding-top: 50px;
     }
     .account {
+        padding-top: 110px !important;
         height: auto !important;
         &__block-heading {
             font-size: 1.3em !important;

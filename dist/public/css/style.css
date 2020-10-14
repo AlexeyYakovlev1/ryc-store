@@ -256,7 +256,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     top: 200px !important;
   }
   .up-wrapper span {
-    height: 16px !important;
+    height: 16.5px !important;
   }
   .up-wrapper span:not(:last-child) {
     left: 12px !important;
@@ -362,6 +362,7 @@ body, .header__bottom-link, .account__block-heading, .account__block-label-headi
     padding-top: 50px;
   }
   .account {
+    padding-top: 110px !important;
     height: auto !important;
   }
   .account__block-heading {
@@ -2614,7 +2615,6 @@ img {
 }
 
 .header__bottom-list {
-  width: 200px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2657,58 +2657,45 @@ img {
   width: 100%;
 }
 
+.header__bottom-link:not(:last-child) {
+  margin-right: 20px;
+}
+
 .header__block-search {
-  width: 40px;
+  min-width: 40px;
   height: 11px;
   display: block;
 }
 
 .header__block-search-content {
-  width: inherit;
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
-  height: 11px;
-  overflow: hidden;
-  position: relative;
-}
-
-.header__block-search-content span {
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  margin: auto 0;
-  cursor: pointer;
+  -webkit-transition-duration: .3s;
+       -o-transition-duration: .3s;
+          transition-duration: .3s;
+  -webkit-transition-property: width;
+  -o-transition-property: width;
+  transition-property: width;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: inherit;
+  overflow: hidden;
+}
+
+.header__block-search-content span {
+  cursor: pointer;
 }
 
 .header-search {
   padding-bottom: 2px;
-  font-size: 12px;
   width: 160px;
+  font-size: 12px;
   height: 16px;
   border: none;
-  position: absolute;
-  border-bottom: 1px solid black;
-  bottom: 0;
-  opacity: 0;
-  left: 0;
-  -webkit-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
+  border-bottom: 1px solid #000;
   background-color: transparent;
-}
-
-.no-border:hover::after {
-  display: none !important;
 }
 
 .no-el {
@@ -3231,6 +3218,10 @@ img {
 
 .active-filter::after {
   width: 100% !important;
+}
+
+.no-border:hover::after {
+  display: none !important;
 }
 
 .title {

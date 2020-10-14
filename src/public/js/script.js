@@ -12,47 +12,41 @@ determinationOfTop();
 // анимация при клике на поиск
 const animationSearch = () => {
     const word = document.querySelector('.header-search-word');
-    const blockSearch = document.querySelector('.header__block-search');
     const blockSearchContent = document.querySelector('.header__block-search-content');
-    const list = document.querySelector('.header__bottom-list-user');
     const headerSearchWord = document.querySelector('.header-search-word');
     const headerSearch = document.querySelector('.header-search-show');
+    const headerBlockSearch = document.querySelector('.header__block-search');
+
+    blockSearchContent.style.width = `${word.offsetWidth}px`;
+    blockSearchContent.style.height = `${word.offsetHeight}px`;
 
     // Действия при клике
     headerSearchWord.addEventListener('click', () => {
-        word.style.opacity = '0';
+        blockSearchContent.style.width = `${headerSearch.offsetWidth}px`;
+        blockSearchContent.style.height = `${headerSearch.offsetHeight}px`;
 
-        blockSearch.style.width = '115px';
-        blockSearch.style.height = '20px';
-        blockSearch.classList.add('no-border');
+        headerBlockSearch.classList.add('no-border');
 
-        blockSearchContent.style.height = '20px';
-
-        list.style.width = '315px';
-
-        headerSearch.style.opacity = '1';
+        headerSearch.style.order = '1';
         headerSearch.focus();
+
+        word.style.display = 'none';
     });
 
     // Действия при выходе из инпута
     headerSearch.addEventListener('blur', () => {
-        word.style.opacity = '1';
-
-        blockSearch.style.width = '40px';
-        blockSearch.style.height = '11px';
-        blockSearch.classList.remove('no-border');
-
-        blockSearchContent.style.height = '11px';
-
-        list.style.width = '200px';
-
-        headerSearch.style.opacity = '0';
+        headerBlockSearch.classList.remove('no-border');
+        headerSearch.style.order = '2';
         headerSearch.value = '';
+
+        word.style.display = 'inline';
+
+        blockSearchContent.style.width = `${word.offsetWidth}px`;
+        blockSearchContent.style.height = `${word.offsetHeight}px`;
     });
 }
 
 animationSearch();
-
 
 // поиск
 const search = (data) => {
@@ -145,12 +139,12 @@ function showImages() {
 // фильтрация
 const filter = (list) => {
     const blockFiltersList = document.querySelector('.block-filters-list');
-    const sizes = document.querySelectorAll('.block-filters-list li[data-size]');
+    const sizes = document.querySelectorAll('.block-filters-list li');
 
     if (blockFiltersList) {
         const hideActiveClass = className => {
             sizes.forEach(item => {
-                return [...item.children].filter(item => item.nodeName === 'A').forEach(el => el.classList.remove(className));
+                return [...item.children].filter(item => item.nodeName === 'A').map(el => el.classList.remove(className));
             });
         };
 
@@ -159,7 +153,7 @@ const filter = (list) => {
         };
 
         hideActiveClass('active-filter');
-        showActiveClass('active-filter', 2);
+        showActiveClass('active-filter', 5);
 
         sizes.forEach((item, index) => {
             item.addEventListener('click', () => {
@@ -225,14 +219,13 @@ window.addEventListener('DOMContentLoaded', () => {
     req();
 });
 
-// прокрутка вверх
-const scrollUp = () => {
+// появление кнопки "вверх" при скролле
+const showScrollUp = () => {
     const up = document.querySelector('.up-wrapper');
     const lines = document.querySelectorAll('.up-wrapper span');
 
     up.style.opacity = '0';
 
-    // появление кнопки "вверх" при скролле
     window.addEventListener('scroll', function() {
         let y = pageYOffset;
 
@@ -262,7 +255,7 @@ const scrollUp = () => {
     });
 }
 
-scrollUp();
+showScrollUp();
 
 // просмотр изображений в модальном окне
 const lookingImagesInModalWindow = array => {
