@@ -22,6 +22,7 @@ const animationSearch = () => {
 
     // Действия при клике
     headerSearchWord.addEventListener('click', () => {
+        headerSearch.style.width = '160px';
         blockSearchContent.style.width = `${headerSearch.offsetWidth}px`;
         blockSearchContent.style.height = `${headerSearch.offsetHeight}px`;
 
@@ -37,6 +38,7 @@ const animationSearch = () => {
     headerSearch.addEventListener('blur', () => {
         headerBlockSearch.classList.remove('no-border');
         headerSearch.style.order = '2';
+        headerSearch.style.width = '0px';
         headerSearch.value = '';
 
         word.style.display = 'inline';
@@ -157,7 +159,7 @@ const filter = (list) => {
 
         sizes.forEach((item, index) => {
             item.addEventListener('click', () => {
-                const size = item.dataset.size;
+                const data_product = item.dataset.size;
 
                 hideActiveClass('active-filter');
                 showActiveClass('active-filter', index);
@@ -168,10 +170,10 @@ const filter = (list) => {
                     fetch(url).then(data => {
                         data.json().then(products => {
                             document.querySelector('.preolaider-wrapper').style.display = 'none';
-                            if (size === 'all') {
+                            if (data_product === 'all') {
                                 createProducts(products, list);
                             } else {
-                                createProducts(products.filter(product => product.size === size), list);
+                                createProducts(products.filter(product => product.size === data_product), list);
                             }
                         });
                     }).catch(err => { throw err });

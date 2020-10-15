@@ -9,7 +9,6 @@ let gulp = require('gulp'),
     webpack = require('webpack-stream'),
     jsonServer = require('gulp-json-srv').create();
 
-
 gulp.task('html', () => {
     return gulp.src('src/*.html')
         .pipe(fileInclude())
