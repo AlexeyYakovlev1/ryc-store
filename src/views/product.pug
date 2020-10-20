@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet", href="/css/style.css")
+        link(rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16")
+    body
+        include ./partials/header.pug
+        include ./partials/arrow-up.pug
+        include ./partials/preolaider.pug
+        div.window-look
+            ul.window-look__list-images
+                each img in product.img
+                    li.window-look__img(style="background-image: url(#{img});")
+            div.window-look__close
+        div.product
+            div.container
+                div.product__info
+                    div.product__block.product__block-img
+                        img(src= product.img[0] alt="")
+                        div.product__img-cursor.product__img-cursor-open
+                    div.product__block.product__block-information
+                        div.product__block-content
+                            div.product__block-heading= product.title
+                            div.product__block-price= product.nowPrice
+                            p.product__block-desc= product.description || 'У этого товара нет описания'
+                            div.product__block-order-info
+                                div.product__block-select-wrapper
+                                    div.product__block-list-size
+                                        div.product__block-list-heading
+                                        ul.product__block-list
+                                            each size in product.sizes
+                                                li.product__block-size= size
+                                div.product__block-links
+                                    if isAuth
+                                        form(action="/cart/add" method="POST")
+                                            input(type="hidden" name="id" value= product.id)
+                                            input(type="hidden" name="_csrf" value= csrf)
+                                            input.product__block-link(type="submit" value="Добавить в корзину")
+                                    else
+                                        form(action="/auth/login" method="GET")
+                                            input(type="hidden" name="_csrf" value= csrf)
+                                            input.product__block-link(type="submit" value="Добавить в корзину")
+        div.options-wrapper
+            div.container
+                ul.options
+                    each product in products
+                        li.options__product(data-size= product.size)
+                            a.options__link(href="/shop/"+product.id title= product.name)
+                                picture.options__block-img
+                                    img(src= product.img[0] alt= product.name)
+                                div.options__description
+                                    span.options-name= product.title
+                                    div.options__block-price
+                                        if product.oldPrice > 0
+                                            span.options-old-price= product.oldPrice
+                                            span.options-now-price= product.nowPrice
+                                        if product.sale > 0
+                                            span.options-sale= product.sale + '%'
+        include ./partials/footer.pug
+        script(src="/js/main.js")

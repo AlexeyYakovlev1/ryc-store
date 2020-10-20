@@ -1,1 +1,0 @@
-window.addEventListener('load', () => document.querySelector('.preolaider-wrapper').style.display = 'none');

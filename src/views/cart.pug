@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet", href="/css/style.css")
+        link(rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16")
+    body
+        include ./partials/header.pug
+        include ./partials/arrow-up.pug
+        include ./partials/preolaider.pug
+        div.cart
+            div.container
+                if cartProducts.length
+                    ul.cart__porducts
+                        each product in cartProducts
+                            li.cart__product
+                                div.cart__product-content
+                                    div.cart__product-desc
+                                        a(href="/shop/"+product.id)
+                                            div.cart__product-desc-img
+                                                img(src= product.img[0] alt= product.title width="128")
+                                        div.cart__product-desc-text
+                                            div.cart__product-desc-block
+                                                div.cart__product-desc-block-item.cart__product-desc-block-item-text(style="width: 200px;")
+                                                    p= product.description
+                                                    div.cart__product-desc-size Размер: #{product.mainSize} (#{product.sizes[0]})
+                                                div.cart__product-desc-block-item.cart__product-desc-block-item-price
+                                                    div.cart__product-desc-price= product.nowPrice
+                                            div.cart__product-desc-block
+                                                div.cart__product-desc-block-item.cart__product-desc-block-item-count
+                                                    div.cart__product-desc-count Количество: #{product.count}
+                                                div.cart__product-desc-block-item
+                                                    form(action="/cart" method="GET")
+                                                        input.cart__product-desc-remove-product(type="submit" data-csrf=""+csrf data-id=""+product.id value="Удалить")
+                                    div.cart__product-info
+                                        div.cart__product-heading Осень-зима              
+                                        div.cart__product-total Итого: #{product.nowPrice * product.count}
+                                        form.cart__product-info-form(action="/order" method="GET")
+                                            input(type="hidden" name="_csrf" value= csrf)
+                                            input.cart__product-form-buy(type="submit" value="Заказать")
+                else 
+                    h1 SHOPPING BAG
+                    p Your shopping bag is currently empty. Enable cookies to use the shopping cart
+        include ./partials/footer.pug
+        script(src="/js/main.js")

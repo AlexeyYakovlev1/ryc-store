@@ -1,0 +1,61 @@
+header.header
+    div.header__top
+        div.container
+            div.header__top-title
+                a(href="#") Осень-зима 2020
+    div.header__bottom
+        div.container
+            nav.header__bottom-nav
+                div.header__bottom-block
+                    button.header__bottom-btn
+                    ul.header__bottom-list.header__bottom-list-nav
+                        div.header__bottom-list-close.header__bottom-list-close-nav
+                        div.header__bottom-wrapper-list
+                            li.header__bottom-link.header__bottom-link-mobile-item.header__bottom-link-no-border
+                                form(action="/" method="POST")
+                                    input.header-search(type="text" placeholder="Искать...")
+                            li.header__bottom-link.header__bottom-shop
+                                a(href="/shop") магазин
+                                ul.header__bottom-shop-list
+                                    li.header__bottom-shop-list-item
+                                        a(href="/shop") Коллекция
+                                    li.header__bottom-shop-list-item
+                                        a(href="/shop") Аксессуары
+                                    li.header__bottom-shop-list-item
+                                        a(href="/shop") Распродажа
+                            li.header__bottom-link
+                                a(href="/shop") Распродажа 
+                            li.header__bottom-link
+                                a(href="/design") Дизайнерское
+                            li.header__bottom-link.header__bottom-link-mobile-item
+                                a(href="/shop") Коллекция
+                            li.header__bottom-link.header__bottom-link-mobile-item
+                                a(href="/shop") Аксессуары
+                    div.header__bottom-title
+                        a(href="/")
+                            img(src="/svg/logo.svg" alt="logo" width="80")
+                div.header__bottom-block
+                if isAuth
+                    button.header__bottom-btn-user
+                    ul.header__bottom-list.header__bottom-list-user
+                        div.header__bottom-list-close.header__bottom-list-close-user
+                        li.header__block-search.header__bottom-link
+                            form.header__block-search-content(action="/shop/search-product" method="GET")
+                                span.header-search-word Поиск
+                                input.header-search.header-search-show(type="text")
+                        li.header__bottom-link
+                            a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)
+                        li.header__bottom-link
+                            a(href="/auth/logout") Выйти
+                else
+                    button.header__bottom-btn-user 
+                    ul.header__bottom-list.header__bottom-list-user
+                        div.header__bottom-list-close.header__bottom-list-close-user
+                        li.header__block-search.header__bottom-link
+                            form.header__block-search-content(action="/shop/search-product" method="GET")
+                                span.header-search-word Поиск
+                                input.header-search.header-search-show(type="text")
+                        li.header__bottom-link
+                            a(href="/auth/login") Аккаунт
+                        li.header__bottom-link
+                            a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)

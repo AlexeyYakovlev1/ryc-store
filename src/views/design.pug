@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet", href="/css/style.css")
+        link(rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16")
+    body
+        include ./partials/header.pug
+        include ./partials/arrow-up.pug
+        include ./partials/preolaider.pug
+        div.design
+            div.container
+                div.design__title
+                    div.design__title-heading
+                        h5 ФОКУС
+                        p Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+                ul.design__list
+                    li.design__product
+                        a(href="#")
+                            div.design__product-content
+                                div.design__product-block-img
+                                    img(src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-onyx-focus-10_900x.jpg?v=1601474982" alt="")
+                                div.design__product-content-title.
+                                    Далеко-далеко за словесными горами.
+        include ./partials/footer.pug
+        script(src="/js/main.js")

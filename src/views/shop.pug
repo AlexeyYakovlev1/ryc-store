@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet" href="/css/style.css")
+        link(rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16")
+    body
+        include ./partials/header.pug
+        include ./partials/arrow-up.pug
+        include ./partials/preolaider.pug
+        div.shop
+            div.container
+                if products.length
+                    div.block__filters
+                        button.btn-open-filters
+                            img(src="/svg/filter.svg" alt="фильтрация")
+                        ul.block-filters-list
+                            li(data-product="sale")
+                                a(href="#") Распродажа
+                            li(data-product="accessories")
+                                a(href="#") Аксессуары
+                            li(data-product="collections")
+                                a(href="#") Коллекции
+                            li(data-product="big")
+                                a(href="#") Большой размер
+                            li(data-product="small")
+                                a(href="#") Маленький размер
+                            li(data-product="all")
+                                a(href="#") Все товары
+                    div.shop__content
+                        ul.shop__list
+                            each product in products
+                                li.card(data-size= product.mainSize)
+                                    a(href="/shop/"+product.id title= product.title)
+                                        div.card__block-img
+                                            figure
+                                                img(src= product.img[0] alt= product.title)
+                                        div.card__description
+                                            span.card-name= product.title
+                                            div.card__block-price
+                                                if product.oldPrice > 0
+                                                    span.card-old-price= product.oldPrice
+                                                    span.card-now-price= product.nowPrice
+                                                if product.sale > 0
+                                                    span.card-sale= product.sale + '%'
+                else 
+                    p.nothing Ничего не найдено
+        include ./partials/footer.pug
+        script(src="/js/main.js")

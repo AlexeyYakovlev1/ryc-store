@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= title
+        link(rel="stylesheet", href="/css/style.css")
+        link(rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16")
+    body
+        include ./partials/header.pug
+        include ./partials/arrow-up.pug
+        include ./partials/preolaider.pug
+        div.account
+            div.container
+                div.account__content
+                    div.account__block
+                        h2.account__block-heading Вход
+                        if loginError
+                            p= loginError                        
+                        form.account__block-form.account__block-form-login(action="/auth/login" method="POST")
+                            label.account__block-label(for="email-login")
+                                h4.account__block-label-heading Эл. почта
+                                input.account__data.account__data-login.account__data-login-email#email-login(type="text" placeholder="Эл. почта" name="email" autofocus)
+                            label.account__block-label(for="password-login")
+                                h4.account__block-label-heading Пароль
+                                input.account__data.account__data-login.account__data-login-password#password-login(type="password" placeholder="Пароль" name="password")
+                                img.account__eye(src="/eye-show.png" alt="глаз")
+                            input(type="hidden" name="_csrf" value= csrf)
+                            input.account__submit.account__submit-login(type="submit" value="Войти")
+                    div.account__block
+                        h2.account__block-heading Регистрация
+                        if registerError
+                            p= registerError
+                        form.account__block-form.account__block-form-register(action="/auth/register" method="POST")
+                            label.account__block-label(for="first-name")
+                                h4.account__block-label-heading Имя
+                                input.account__data.account__data-register.account__data-register-first-name#first-name(type="text" placeholder="Имя" name="name")
+                            label.account__block-label(for="last-name")
+                                h4.account__block-label-heading Фамилия
+                                input.account__data.account__data-register.account__data-register-last-name#last-name(type="text" placeholder="Фамилия" name="lastName")
+                            label.account__block-label(for="email-register")
+                                h4.account__block-label-heading Эл. почта
+                                input.account__data.account__data-register.account__data-register-email#email-register(type="text" placeholder="Эл. почта" name="email")
+                            label.account__block-label(for="password-register")
+                                h4.account__block-label-heading Фамилия
+                                input.account__data.account__data-register.account__data-register-password#password-register(type="password" placeholder="Пароль" name="password")
+                                img.account__eye(src="/eye-show.png" alt="глаз")
+                            input(type="hidden" name="_csrf" value= csrf)
+                            input.account__submit.account__submit-register(type="submit" value="Зарегистрироваться")
+        script(src="/js/main.js")
