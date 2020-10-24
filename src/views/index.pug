@@ -7,33 +7,34 @@ html(lang="en")
         link(rel="stylesheet", href="/css/style.css")
         link(rel="icon" href="/logo.jpg" type="image/jpg" sizes="16x16")
     body
-        include ./partials/header.pug
-        include ./partials/arrow-up.pug
-        include ./partials/preolaider.pug
-        div.title
-            div.container
-                div.glide
-                    div.glide__track(data-glide-el="track")
-                        ul.glide__slides
-                            li.glide__slide
-                                a.title__block-img(href="#")
-                                    picture
-                                        source(srcset="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-landing-mobile-asset-1_1728x.jpg?v=1601475023" media="(max-width: 640px)")
-                                        img(src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-homepage-asset_1728x.jpg?v=1601479138" alt="")
-                                    div.title__text.
-                                        Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.
-                            li.glide__slide
-                                a.title__block-img(href="#")
-                                    picture
-                                        source(srcset="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-landing-mobile-asset-1_1728x.jpg?v=1601475023" media="(max-width: 640px)")
-                                        img(src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-homepage-asset_1728x.jpg?v=1601479138" alt="")
-                                    div.title__text.
-                                        Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.
-                            li.glide__slide
-                                a.title__block-img(href="#")
-                                    picture
-                                        source(srcset="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-landing-mobile-asset-1_1728x.jpg?v=1601475023" media="(max-width: 640px)")
-                                        img(src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-homepage-asset_1728x.jpg?v=1601479138" alt="")
-                                    div.title__text.
-                                        Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.
+        .wrapper
+            include ./partials/header.pug
+            include ./partials/arrow-up.pug
+            include ./partials/preolaider.pug
+            div.title.main-content
+                div.container
+                    div.glide
+                        div.glide__track(data-glide-el="track")
+                            ul.glide__slides
+                                li.glide__slide
+                                    a.title__block-img(href="#")
+                                        picture
+                                            source(srcset="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-landing-mobile-asset-1_1728x.jpg?v=1601475023" media="(max-width: 640px)")
+                                            img(src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-homepage-asset_1728x.jpg?v=1601479138" alt="")
+                                        div.title__text.
+                                            Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.
+                                li.glide__slide
+                                    a.title__block-img(href="#")
+                                        picture
+                                            source(srcset="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-landing-mobile-asset-1_1728x.jpg?v=1601475023" media="(max-width: 640px)")
+                                            img(src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-homepage-asset_1728x.jpg?v=1601479138" alt="")
+                                        div.title__text.
+                                            Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.
+                                li.glide__slide
+                                    a.title__block-img(href="#")
+                                        picture
+                                            source(srcset="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-landing-mobile-asset-1_1728x.jpg?v=1601475023" media="(max-width: 640px)")
+                                            img(src="https://cdn.shopify.com/s/files/1/0123/0644/8443/files/a_cold_wall-acw-converse-ct-onyx-homepage-asset_1728x.jpg?v=1601479138" alt="")
+                                        div.title__text.
+                                            Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.
         script(src="/js/main.js")

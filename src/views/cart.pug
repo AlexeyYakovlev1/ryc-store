@@ -10,7 +10,7 @@ html(lang="en")
         include ./partials/header.pug
         include ./partials/arrow-up.pug
         include ./partials/preolaider.pug
-        div.cart
+        div.cart.main-content
             div.container
                 if cartProducts.length
                     ul.cart__porducts
@@ -18,7 +18,7 @@ html(lang="en")
                             li.cart__product
                                 div.cart__product-content
                                     div.cart__product-desc
-                                        a(href="/shop/"+product.id)
+                                        a(href=`/shop/${product.id}`)
                                             div.cart__product-desc-img
                                                 img(src= product.img[0] alt= product.title width="128")
                                         div.cart__product-desc-text
@@ -33,7 +33,7 @@ html(lang="en")
                                                     div.cart__product-desc-count Количество: #{product.count}
                                                 div.cart__product-desc-block-item
                                                     form(action="/cart" method="GET")
-                                                        input.cart__product-desc-remove-product(type="submit" data-csrf=""+csrf data-id=""+product.id value="Удалить")
+                                                        input.cart__product-desc-remove-product(type="submit" data-csrf= csrf data-id= product.id value="Удалить")
                                     div.cart__product-info
                                         div.cart__product-heading Осень-зима              
                                         div.cart__product-total Итого: #{product.nowPrice * product.count}
