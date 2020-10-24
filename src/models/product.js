@@ -33,6 +33,14 @@ const productSchema = new Schema({
         type: Number,
         required: true
     },
+    collections: {
+        type: Boolean,
+        required: true
+    },
+    accessories: {
+        type: Boolean,
+        required: true
+    },
     mainSize: {
         type: String,
         required: true
@@ -50,6 +58,6 @@ productSchema.method('toClient', function() {
     delete product._id;
 
     return product;
-})
+});
 
 module.exports = model('Product', productSchema);

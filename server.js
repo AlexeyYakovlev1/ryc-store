@@ -14,6 +14,8 @@ const authRoutes = require('./src/routes/auth');
 const cartRoutes = require('./src/routes/cart');
 const productsRoutes = require('./src/routes/products');
 const designRoutes = require('./src/routes/design');
+const accessoriesRoutes = require('./src/routes/accessories');
+const collectionsRoutes = require('./src/routes/collections');
 
 const URI = config.get('URI');
 
@@ -44,11 +46,13 @@ app.use(varMiddleware);
 app.use(userMiddleware);
 
 app.use('/', homeRoutes);
-app.use('/sale', saleRoutes);
+app.use('/shop/sale', saleRoutes);
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
 app.use('/shop', productsRoutes);
 app.use('/design', designRoutes);
+app.use('/shop/collections', collectionsRoutes);
+app.use('/shop/accessories', accessoriesRoutes);
 
 const PORT = process.env.PORT || config.get('port');
 

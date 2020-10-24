@@ -18,11 +18,11 @@ html(lang="en")
                             img(src="/svg/filter.svg" alt="фильтрация")
                         ul.block-filters-list
                             li(data-product="sale")
-                                a(href="#") Распродажа
+                                a(href="/shop/sale") Распродажа
                             li(data-product="accessories")
-                                a(href="#") Аксессуары
+                                a(href="/shop/accessories") Аксессуары
                             li(data-product="collections")
-                                a(href="#") Коллекции
+                                a(href="/shop/collections") Коллекции
                             li(data-product="big")
                                 a(href="#") Большой размер
                             li(data-product="small")
@@ -45,7 +45,25 @@ html(lang="en")
                                                 span.card-now-price= product.nowPrice
                                                 if product.sale > 0
                                                     span.card-sale= product.sale + '%'
-                else 
-                    p.nothing Ничего не найдено
+                else if textSearch && !products.length
+                    div.no-el
+                        div.no-el__block
+                            div.no-el__content
+                                p По запросу "#{textSearch}" ничего не найдено
+                else if sale && !products.length
+                    div.no-el
+                        div.no-el__block
+                            div.no-el__content
+                                p Товаров со скидкой нет
+                else if accessories && !products.length
+                    div.no-el
+                        div.no-el__block
+                            div.no-el__content
+                                p Аксессуаров нет
+                else if collections && !products.length
+                    div.no-el
+                        div.no-el__block
+                            div.no-el__content
+                                p Коллекций нет
         include ./partials/footer.pug
         script(src="/js/main.js")

@@ -60,4 +60,16 @@ router.get('/:id', async(req, res) => {
     })
 })
 
+router.post('/', async(req, res) => {
+    const products = await Product.find()
+        .select('nowPrice oldPrice sale sizes title img mainSize description sex article');
+
+    res.render('shop', {
+        title: 'Ryc-store магазин',
+        isProducts: true,
+        products: products.filter(item => item.title.toLowerCase().search(req.body.search.toLowerCase()) !== -1),
+        textSearch: req.body.search
+    });
+});
+
 module.exports = router;
