@@ -4,7 +4,8 @@ const router = Router();
 
 router.get('/', (req, res) => {
     res.render('design', {
-        title: 'Дизайнерские товары'
+        title: 'Дизайнерские товары',
+        isDesign: true
     })
 })
 

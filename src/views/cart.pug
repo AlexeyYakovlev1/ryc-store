@@ -32,8 +32,7 @@ html(lang="en")
                                                 div.cart__product-desc-block-item.cart__product-desc-block-item-count
                                                     div.cart__product-desc-count Количество: #{product.count}
                                                 div.cart__product-desc-block-item
-                                                    form(action="/cart" method="GET")
-                                                        input.cart__product-desc-remove-product(type="submit" data-csrf= csrf data-id= product.id value="Удалить")
+                                                    input.cart__product-desc-remove-product(type="submit" data-csrf= csrf data-id= product.id value="Удалить")
                                     div.cart__product-info
                                         div.cart__product-heading Осень-зима              
                                         div.cart__product-total Итого: #{product.nowPrice * product.count}

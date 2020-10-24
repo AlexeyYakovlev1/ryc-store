@@ -14,19 +14,34 @@ header.header
                             li.header__bottom-link.header__bottom-link-mobile-item.header__bottom-link-no-border
                                 form(action="/" method="POST")
                                     input.header-search(type="text" placeholder="Искать...")
-                            li.header__bottom-link.header__bottom-shop
-                                a(href="/shop") магазин
-                                ul.header__bottom-shop-list
-                                    li.header__bottom-shop-list-item
-                                        a(href="/shop") Коллекция
-                                    li.header__bottom-shop-list-item
-                                        a(href="/shop") Аксессуары
-                                    li.header__bottom-shop-list-item
-                                        a(href="/shop") Распродажа
+                            if isProducts
+                                li.header__bottom-link.header__bottom-shop.active-page
+                                    a(href="/shop") магазин
+                                    ul.header__bottom-shop-list
+                                        li.header__bottom-shop-list-item
+                                            a(href="/shop") Коллекция
+                                        li.header__bottom-shop-list-item
+                                            a(href="/shop") Аксессуары
+                                        li.header__bottom-shop-list-item
+                                            a(href="/shop") Распродажа
+                            else
+                                li.header__bottom-link.header__bottom-shop
+                                    a(href="/shop") магазин
+                                    ul.header__bottom-shop-list
+                                        li.header__bottom-shop-list-item
+                                            a(href="/shop") Коллекция
+                                        li.header__bottom-shop-list-item
+                                            a(href="/shop") Аксессуары
+                                        li.header__bottom-shop-list-item
+                                            a(href="/shop") Распродажа
                             li.header__bottom-link
                                 a(href="/shop") Распродажа 
-                            li.header__bottom-link
-                                a(href="/design") Дизайнерское
+                            if isDesign
+                                li.header__bottom-link.active-page
+                                    a(href="/design") Дизайнерское
+                            else
+                                li.header__bottom-link
+                                    a(href="/design") Дизайнерское
                             li.header__bottom-link.header__bottom-link-mobile-item
                                 a(href="/shop") Коллекция
                             li.header__bottom-link.header__bottom-link-mobile-item
@@ -43,8 +58,12 @@ header.header
                             form.header__block-search-content(action="/shop/search-product" method="GET")
                                 span.header-search-word Поиск
                                 input.header-search.header-search-show(type="text")
-                        li.header__bottom-link
-                            a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)
+                        if isCart
+                            li.header__bottom-link.active-page
+                                a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)
+                        else 
+                            li.header__bottom-link
+                                a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)
                         li.header__bottom-link
                             a(href="/auth/logout") Выйти
                 else
@@ -55,7 +74,15 @@ header.header
                             form.header__block-search-content(action="/shop/search-product" method="GET")
                                 span.header-search-word Поиск
                                 input.header-search.header-search-show(type="text")
-                        li.header__bottom-link
-                            a(href="/auth/login") Аккаунт
-                        li.header__bottom-link
-                            a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)
+                        if isLogin
+                            li.header__bottom-link.active-page
+                                a(href="/auth/login") Аккаунт
+                        else 
+                            li.header__bottom-link
+                                a(href="/auth/login") Аккаунт
+                        if isCart
+                            li.header__bottom-link.active-page
+                                a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)
+                        else 
+                            li.header__bottom-link
+                                a(href="/cart") корзина (<strong>#{cartProducts ? cartProducts.length : 0}</strong>)
