@@ -31,7 +31,7 @@ app.set('views', './src/views');
 
 app.use(express.static(path.join(__dirname, './src/public')));
 app.use(express.static(path.join(__dirname, './src/assets/img')));
-app.use(express.static(path.join(__dirname + './src/images-products')))
+app.use(express.static(path.join(__dirname + './src/images-products')));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'secret value',
@@ -46,11 +46,11 @@ app.use(varMiddleware);
 app.use(userMiddleware);
 
 app.use('/', homeRoutes);
-app.use('/shop/sale', saleRoutes);
 app.use('/auth', authRoutes);
 app.use('/cart', cartRoutes);
 app.use('/shop', productsRoutes);
 app.use('/design', designRoutes);
+app.use('/shop/sale', saleRoutes);
 app.use('/shop/collections', collectionsRoutes);
 app.use('/shop/accessories', accessoriesRoutes);
 
@@ -61,7 +61,7 @@ const start = async() => {
         mongoose.connect(URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        })
+        });
         app.listen(PORT, () => console.log('server has been started'));
     } catch (err) {
         console.log(err.message);

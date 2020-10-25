@@ -34,11 +34,11 @@ const productSchema = new Schema({
         required: true
     },
     collections: {
-        type: Boolean,
+        type: Number,
         required: true
     },
     accessories: {
-        type: Boolean,
+        type: Number,
         required: true
     },
     mainSize: {
@@ -49,7 +49,7 @@ const productSchema = new Schema({
         type: String,
         required: true
     }]
-})
+});
 
 productSchema.method('toClient', function() {
     const product = this.toObject();
