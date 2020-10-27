@@ -2386,8 +2386,6 @@ img {
 }
 
 .header__block-search {
-    min-width: 40px;
-    height: 11px;
     display: block;
 }
 
@@ -2404,15 +2402,16 @@ img {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    height: inherit;
     overflow: hidden;
 }
 
 .header__block-search-content span {
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .header-search {
+    width: 0px;
     padding-bottom: 2px;
     font-size: 12px;
     height: 16px;

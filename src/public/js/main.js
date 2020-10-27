@@ -9172,8 +9172,8 @@
             var headerSearchWord = document.querySelector('.header-search-word');
             var headerSearch = document.querySelector('.header-search-show');
             var headerBlockSearch = document.querySelector('.header__block-search');
-            blockSearchContent.style.width = "".concat(word.offsetWidth, "px");
-            blockSearchContent.style.height = "".concat(word.offsetHeight, "px"); // Действия при клике
+            blockSearchContent.style.width = word.offsetWidth ? "".concat(word.offsetWidth, "px") : 'max-content';
+            blockSearchContent.style.height = word.offsetHeight ? "".concat(word.offsetHeight, "px") : 'max-content'; // Действия при клике
 
             headerSearchWord.addEventListener('click', function() {
                 headerSearch.style.width = '160px';
