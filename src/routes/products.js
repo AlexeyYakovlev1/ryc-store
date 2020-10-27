@@ -11,7 +11,7 @@ const mapCartItems = (cart) => {
         ...p.productId._doc,
         id: p.productId.id,
         count: p.count
-    }))
+    }));
 }
 
 router.get('/', async(req, res) => {
@@ -30,15 +30,15 @@ router.get('/', async(req, res) => {
             isProducts: true,
             products,
             cartProducts
-        })
+        });
     } else {
         res.render('shop', {
             title: 'Ryc-store магазин',
             isProducts: true,
             products
-        })
+        });
     }
-})
+});
 
 // router.get('/products/', async(req, res) => {
 //     const searchField = req.query.search;
@@ -57,8 +57,8 @@ router.get('/:id', async(req, res) => {
         title: `Продукт ${product.title}`,
         product,
         products
-    })
-})
+    });
+});
 
 router.post('/', async(req, res) => {
     const products = await Product.find()
@@ -67,7 +67,7 @@ router.post('/', async(req, res) => {
     res.render('shop', {
         title: 'Ryc-store магазин',
         isProducts: true,
-        products: products.filter(item => item.title.toLowerCase().search(req.body.search.toLowerCase()) !== -1),
+        products: products.filter(item => item.title.toLowerCase().search(req.body.search.trim().toLowerCase()) !== -1),
         textSearch: req.body.search
     });
 });

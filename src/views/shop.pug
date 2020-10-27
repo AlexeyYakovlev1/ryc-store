@@ -36,7 +36,7 @@ html(lang="en")
                                     a(href="/shop/"+product.id title= product.title)
                                         div.card__block-img
                                             figure
-                                                img(src= product.img[0] alt= product.title)
+                                                img(src= product.img[0] alt= product.title data-src= product.img[0])
                                         div.card__description
                                             span.card-name= product.title
                                             div.card__block-price
