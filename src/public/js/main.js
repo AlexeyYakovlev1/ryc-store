@@ -9156,6 +9156,80 @@
 
         function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+        "use strict";
+
+        function _toConsumableArray(e) { return _arrayWithoutHoles(e) || _iterableToArray(e) || _unsupportedIterableToArray(e) || _nonIterableSpread() }
+
+        function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.") }
+
+        function _unsupportedIterableToArray(e, t) { if (e) { if ("string" == typeof e) return _arrayLikeToArray(e, t); var i = Object.prototype.toString.call(e).slice(8, -1); return "Object" === i && e.constructor && (i = e.constructor.name), "Map" === i || "Set" === i ? Array.from(e) : "Arguments" === i || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(i) ? _arrayLikeToArray(e, t) : void 0 } }
+
+        function _iterableToArray(e) { if ("undefined" != typeof Symbol && Symbol.iterator in Object(e)) return Array.from(e) }
+
+        function _arrayWithoutHoles(e) { if (Array.isArray(e)) return _arrayLikeToArray(e) }
+
+        function _arrayLikeToArray(e, t) {
+            (null == t || t > e.length) && (t = e.length);
+            for (var i = 0, o = new Array(t); i < t; i++) o[i] = e[i];
+            return o
+        }
+
+        function _classCallCheck(e, t) { if (!(e instanceof t)) throw new TypeError("Cannot call a class as a function") }
+
+        function _defineProperties(e, t) {
+            for (var i = 0; i < t.length; i++) {
+                var o = t[i];
+                o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, o.key, o)
+            }
+        }
+
+        function _createClass(e, t, i) { return t && _defineProperties(e.prototype, t), i && _defineProperties(e, i), e }
+        var Check = function() {
+            function Check() { _classCallCheck(this, Check), this.all_options = ["mail", "date", "password", "tel", "firstName", "lastName", "repeatPassword"], this.options = {}, this.regexp_password = "", this.regexp_password_only_rus = "", this.regexp_password_only_numbers = "", this.regexp_password_only_en = "", this.regexp_mail = "", this.regexp_date = "", this.regexp_tel = "", this.regexp_required = "", this.regexp_repeat_password = "", this.regexp_date_only_slash = "", this.regexp_date_only_dot = "", this.regexp_date_only_hyphen = "", this.regexp_first_name = "", this.regexp_first_name_only_en = "", this.regexp_first_name_only_rus = "", this.regexp_last_name = "", this.regexp_last_name_only_en = "", this.regexp_last_name_only_rus = "", this.invalidSize = 0 }
+            return _createClass(Check, [{
+                key: "submitForm",
+                value: function(e) {
+                    var t = this,
+                        i = e.form;
+                    i.addEventListener("submit", function(o) { e.preventDefault && o.preventDefault(), t.invalidSize ? e.required && t.checkRequired(e) : i.submit() })
+                }
+            }, { key: "checkRequired", value: function(e) { this.regexp_required.test(e.element.value) || (e.valid = !1, this.checkValid(e.classInvalid, e.classValid, e, e.element), this.checkValidationElement(e), this.invalidSize = this.addInvalidElementsInArray(e)) } }, { key: "getOptions", value: function() { return this.options } }, { key: "addInvalidElementsInArray", value: function(e) { var t = new Set; for (var i in e.objOptions) !e.objOptions[i].valid && t.add(e.objOptions[i]); return t.size } }, {
+                key: "checkValidationElement",
+                value: function(e) {
+                    if (e.validationElement && e.validationElement.have) {
+                        var t = document.querySelector(e.validationElement.selectorEl);
+                        e.valid ? (t.innerText = e.validationElement.textWhenValid, t.classList.add(e.validationElement.classValid || "check-valid-el"), t.classList.remove(e.validationElement.classInvalid || "check-invalid-el")) : (t.innerText = e.validationElement.textWhenInvalid, t.classList.remove(e.validationElement.classValid || "check-valid-el"), t.classList.add(e.validationElement.classInvalid || "check-invalid-el"))
+                    }
+                }
+            }, {
+                key: "validationElement",
+                value: function(e, t, i) {
+                    (e = e || /^''$/).test(t) ? (i.valid = !0, this.checkValid(i.classInvalid, i.classValid, i, i.element), this.checkValidationElement(i), this.invalidSize = this.addInvalidElementsInArray(i)) : (i.valid = !1, this.checkValid(i.classInvalid, i.classValid, i, i.element), this.checkValidationElement(i), this.invalidSize = this.addInvalidElementsInArray(i))
+                }
+            }, { key: "checkValid", value: function(e, t, i, o) { console.log(), i.valid ? (o.classList.add(t), o.classList.remove(e)) : (o.classList.remove(t), o.classList.add(e)) } }, {
+                key: "start",
+                value: function start() {
+                    var _this2 = this,
+                        options = arguments[0],
+                        _loop = function _loop(item) {
+                            if (_this2.all_options.includes(item)) {
+                                var el = document.querySelector(options[item].selectorEl);
+                                options[item].preventDefault = !0, options[item].element = !!el.className.includes(options[item].selectorEl.replace(/\./, "")) && el, options[item].form = options[item].element.form, options[item].elementsInForm = _toConsumableArray(options[item].element.form.elements).filter(function(e) { return "submit" !== e.type }), options[item].submit = _toConsumableArray(options[item].element.form.elements).find(function(e) { return "submit" === e.type }), options[item].objOptions = options, options[item].classInvalid = options[item].classInvalid ? options[item].classInvalid : "check-invalid", options[item].classValid = options[item].classValid ? options[item].classValid : "check-valid", options[item].valid = !options[item].required, options[item].required = !!options[item].required && options[item].required, "date" !== item && "mail" !== item && "repeatPassword" !== item && "radio" !== item && (options[item].minLength = options[item].minLength ? options[item].minLength : 1, options[item].maxLength = options[item].maxLength ? options[item].maxLength : ""), "password" === item && (_this2.regexp_password = eval("/^.{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.regexp_password_only_rus = eval("/^[А-Я|а-я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.regexp_password_only_numbers = eval("/^\\d{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.regexp_password_only_en = eval("/^[A-Z|a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"))), "mail" === item && (_this2.regexp_mail = /^[A-Z|a-z|\d|\_|\-|\.]{1,}@[A-Z|a-z]{1,}\.[A-Z|a-z]{1,}$/), "date" === item && (_this2.regexp_date = /^(\d{2,2}[\/|\.|\-]){2,2}\d{4,4}$/, _this2.regexp_date_only_slash = /^(\d{2,2}\/){2,2}\d{4,4}$/, _this2.regexp_date_only_dot = /^(\d{2,2}\.){2,2}\d{4,4}$/, _this2.regexp_date_only_hyphen = /^(\d{2,2}\-){2,2}\d{4,4}$/), "tel" === item && (_this2.regexp_tel = eval("/^\\d{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"))), "firstName" === item && (_this2.regexp_first_name = eval("/^[a-z|A-Z|а-я|А-Я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.regexp_first_name_only_rus = eval("/^[А-Я|а-я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.regexp_first_name_only_en = eval("/^[A-Z|a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"))), "lastName" === item && (_this2.regexp_last_name = eval("/^[a-z|A-Z|а-я|А-Я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.regexp_last_name_only_rus = eval("/^[А-Я|а-я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.regexp_last_name_only_en = eval("/^[A-Z|a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"))), _this2.regexp_required = /.{1,}/, _this2.options = options;
+                                var getSize = function() {
+                                    var e = new Set;
+                                    for (var t in options[item].objOptions) e.add(t);
+                                    _this2.invalidSize = e.size
+                                };
+                                getSize(), options[item].element.addEventListener("input", function() { var value = options[item].element.value; "password" !== item || options[item].onlyRus || options[item].onlyNumbers || options[item].onlyEn || (options[item].objOptions.repeatPassword ? value && (_this2.regexp_repeat_password = eval("/^".concat(document.querySelector(options.repeatPassword.repeatAt).value, "$/")), _this2.validationElement(_this2.regexp_password, value, options[item]), _this2.validationElement(_this2.regexp_repeat_password, document.querySelector(options.repeatPassword.selectorEl).value, options.repeatPassword)) : _this2.validationElement(_this2.regexp_password, value, options[item])), "password" === item && options[item].onlyRus && (options[item].objOptions.repeatPassword ? value && (_this2.regexp_repeat_password = eval("/^".concat(document.querySelector(options.repeatPassword.repeatAt).value, "$/")), _this2.validationElement(_this2.regexp_password_only_rus, value, options[item]), _this2.validationElement(_this2.regexp_repeat_password, document.querySelector(options.repeatPassword.selectorEl).value, options.repeatPassword)) : _this2.validationElement(_this2.regexp_password_only_rus, value, options[item])), "password" === item && options[item].onlyNumbers && (options[item].objOptions.repeatPassword ? value && (_this2.regexp_repeat_password = eval("/^".concat(document.querySelector(options.repeatPassword.repeatAt).value, "$/")), _this2.validationElement(_this2.regexp_password_only_numbers, value, options[item]), _this2.validationElement(_this2.regexp_repeat_password, document.querySelector(options.repeatPassword.selectorEl).value, options.repeatPassword)) : _this2.validationElement(_this2.regexp_password_only_numbers, value, options[item])), "password" === item && options[item].onlyEn && (options[item].objOptions.repeatPassword ? value && (_this2.regexp_repeat_password = eval("/^".concat(document.querySelector(options.repeatPassword.repeatAt).value, "$/")), _this2.validationElement(_this2.regexp_password_only_en, value, options[item]), _this2.validationElement(_this2.regexp_repeat_password, document.querySelector(options.repeatPassword.selectorEl).value, options.repeatPassword)) : _this2.validationElement(_this2.regexp_password_only_en, value, options[item])), "mail" === item && _this2.validationElement(_this2.regexp_mail, value, options[item]), "date" !== item || options[item].onlySlash || options[item].onlyDot || options[item].onlyHyphen || _this2.validationElement(_this2.regexp_date, value, options[item]), "date" === item && options[item].onlySlash && _this2.validationElement(_this2.regexp_date_only_slash, value, options[item]), "date" === item && options[item].onlyDot && _this2.validationElement(_this2.regexp_date_only_dot, value, options[item]), "date" === item && options[item].onlyHyphen && _this2.validationElement(_this2.regexp_date_only_hyphen, value, options[item]), "tel" === item && _this2.validationElement(_this2.regexp_tel, value, options[item]), "repeatPassword" === item && (document.querySelector(options.repeatPassword.repeatAt).value ? (_this2.regexp_repeat_password = _this2.regexp_repeat_password = eval("/^".concat(document.querySelector(options.repeatPassword.repeatAt).value, "$/")), _this2.validationElement(_this2.regexp_repeat_password, value, options[item])) : (options[item].valid = !1, _this2.checkValid(options[item].classInvalid, options[item].classValid, options[item], options[item].element), _this2.checkValidationElement(options[item]), _this2.invalidSize = _this2.addInvalidElementsInArray(options[item]))), "firstName" !== item || options[item].onlyRus || options[item].onlyEn || options[item].bigFirstSymbol || _this2.validationElement(_this2.regexp_first_name, value, options[item]), "firstName" === item && options[item].bigFirstSymbol && (_this2.regexp_first_name = eval("/^[A-Z|А-Я]{1,1}[a-z|а-я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.validationElement(_this2.regexp_first_name, value, options[item])), "firstName" === item && options[item].onlyEn && (_this2.regexp_first_name_only_en = eval("/^[A-Z]{1,1}[a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.validationElement(_this2.regexp_first_name_only_en, value, options[item])), "firstName" === item && options[item].onlyRus && (_this2.regexp_first_name_only_rus = eval("/^[А-Я]{1,1}[а-я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.validationElement(_this2.regexp_first_name_only_rus, value, options[item])), "lastName" !== item || options[item].onlyRus || options[item].onlyEn || _this2.validationElement(_this2.regexp_last_name, value, options[item]), "lastName" === item && options[item].bigFirstSymbol && (_this2.regexp_last_name = eval("/^[A-Z|А-Я]{1,1}[a-z|а-я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.validationElement(_this2.regexp_last_name, value, options[item])), "lastName" === item && options[item].onlyEn && (_this2.regexp_last_name_only_en = eval("/^[A-Z]{1,1}[a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.validationElement(_this2.regexp_last_name_only_en, value, options[item])), "lastName" === item && options[item].onlyRus && (_this2.regexp_last_name_only_rus = eval("/^[А-Я]{1,1}[а-я]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/")), _this2.validationElement(_this2.regexp_last_name_only_rus, value, options[item])) })
+                            }
+                            _this2.submitForm(options[item])
+                        };
+                    for (var item in options) _loop(item);
+                    return this
+                }
+            }]), Check
+        }();
+
         // определение расстояния сверху у выпадающего меню
         var determinationOfTop = function determinationOfTop() {
             var list_shop = document.querySelector('.header__bottom-shop-list');
@@ -9296,9 +9370,62 @@
             });
         };
 
-        showScrollUp(); // просмотр изображений в модальном окне
+        showScrollUp(); // Регистрация
 
-        var lookingImagesInModalWindow = function lookingImagesInModalWindow() {
+        if (document.querySelector('.account__data-register-first-name')) {
+            var options_register = {
+                firstName: {
+                    required: true,
+                    selectorEl: '.account__data-register-first-name',
+                    classInvalid: 'invalid',
+                    classValid: 'valid',
+                    onlyRus: true,
+                    bigFirstSymbol: true,
+                    minLength: 2
+                },
+                lastName: {
+                    required: true,
+                    selectorEl: '.account__data-register-last-name',
+                    classInvalid: 'invalid',
+                    classValid: 'valid',
+                    onlyRus: true,
+                    bigFirstSymbol: true,
+                    minLength: 2
+                },
+                mail: {
+                    required: true,
+                    selectorEl: '.account__data-register-email',
+                    classInvalid: 'invalid',
+                    classValid: 'valid'
+                },
+                password: {
+                    required: true,
+                    selectorEl: '.account__data-register-password',
+                    classInvalid: 'invalid',
+                    classValid: 'valid',
+                    minLength: 6
+                }
+            };
+            new Check().start(options_register); // Вход
+
+            var options_sign_in = {
+                mail: {
+                    selectorEl: '.account__data-login-email',
+                    required: true,
+                    classInvalid: 'invalid',
+                    classValid: 'valid'
+                },
+                password: {
+                    selectorEl: '.account__data-login-password',
+                    required: true,
+                    classInvalid: 'invalid',
+                    classValid: 'valid'
+                }
+            };
+            new Check().start(options_sign_in);
+        }
+
+        var lookingImagesInModalWindow = function lookingImagesInModalWindow() { // просмотр изображений в модальном окне
             var product_img = document.querySelector('.product__img');
             var modal_window = document.querySelector('.window-look');
             var close = document.querySelector('.window-look__close');
@@ -9341,64 +9468,6 @@
         };
 
         lookingImagesInModalWindow(); // валидация формы
-
-        var validationForm = function validationForm() {
-            var validation = function validation(regularExpressions, elementSelector, elementsSelector, formSelector, btnSelector) {
-                var textValidBtn = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'зарегистрироваться';
-                var className = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'invalid';
-                var form = document.querySelector(formSelector);
-                var list_data = document.querySelectorAll(elementsSelector);
-                var btn = document.querySelector(btnSelector);
-                list_data.forEach(function(item) {
-                    item.classList.add(className);
-                    item.addEventListener('input', function() {
-                        var el = document.querySelector(elementSelector);
-                        var value = el.value.trim().toLowerCase();
-                        var regexp = regularExpressions;
-                        var result = regexp.test(value);
-                        result ? el.classList.remove(className) : el.classList.add(className);
-                        btn.value = _toConsumableArray(list_data).filter(function(item) {
-                            return item.classList.contains(className);
-                        }).length ? 'заполните пропуски' : textValidBtn;
-                    });
-                });
-                form && form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    var arr = _toConsumableArray(list_data).filter(function(item) {
-                        return item.classList.contains(className);
-                    });
-
-                    if (arr.length) {
-                        arr[0].focus();
-                        btn.value = 'заполните пропуски';
-                    } else {
-                        form.submit();
-                        btn.value = textValidBtn;
-                    }
-                });
-            }; // регулярные выражения
-
-
-            var regexp_email = /^[a-z|A-Z|\d|\.|\_]{1,}@[a-z|A-Z]{1,}\.[a-z|A-Z]{1,}$/;
-            var regexp_password = /^.{6,}$/;
-            var regexp_name = /^[а-я|А-Я]{2,}$/;
-            var regexp_date = /^(\d{2,2}\/){2,2}\d{4,4}|(\d{2,2}\.){2,2}\d{4,4}|(\d{2,2}\-){2,2}\d{4,4}$/;
-            var regexp_required = /.{1,1}/; // форма регистрации на странице аккаунта
-
-            validation(regexp_email, '.account__data-register-email', '.account__data-register', '.account__block-form-register', '.account__submit-register');
-            validation(regexp_password, '.account__data-register-password', '.account__data-register', '.account__block-form-register', '.account__submit-register');
-            validation(regexp_name, '.account__data-register-first-name', '.account__data-register', '.account__block-form-register', '.account__submit-register');
-            validation(regexp_name, '.account__data-register-last-name', '.account__data-register', '.account__block-form-register', '.account__submit-register'); // форма входа на странице аккаунта
-
-            validation(regexp_required, '.account__data-login-email', '.account__data-login', '.account__block-form-login', '.account__submit-login', 'войти');
-            validation(regexp_required, '.account__data-login-password', '.account__data-login', '.account__block-form-login', '.account__submit-login', 'войти'); // форма регистрации на странице дизайнерского товара
-
-            validation(regexp_email, '.design-product__block-form-register-email', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
-            validation(regexp_date, '.design-product__block-form-register-date', '.design-product__block-form-register-info', '.design-product__block-form-register', '.design-product__block-form-register-submit');
-        };
-
-        validationForm(); // удаление товара из корзины
 
         var cartProducts = document.querySelector('.cart__products');
         var cartElement = document.querySelector('.cart');
