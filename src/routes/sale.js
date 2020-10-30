@@ -9,43 +9,43 @@ router.get('/', async(req, res) => {
     res.render('shop', {
         title: 'Ryc-store распродажа',
         isProducts: true,
-        products: products.filter(item => item.sale),
-        sale: true
+        products: products.filter(item => item.salePrd),
+        salePrd: true
     });
 });
 
-// const mapCartItems = (cart) => {
-//     return cart.items.map(p => ({
-//         ...p.productId._doc,
-//         id: p.productId.id,
-//         count: p.count
-//     }))
-// }
+const mapCartItems = (cart) => {
+    return cart.items.map(p => ({
+        ...p.productId._doc,
+        id: p.productId.id,
+        count: p.count
+    }))
+}
 
-// router.get('/', async(req, res) => {
-//     const products = await Product.find()
-//         .select('nowPrice oldPrice sale sizes title img description mainSize');
+router.get('/', async(req, res) => {
+    const products = await Product.find()
+        .select('nowPrice oldPrice sale sizes title img description mainSize sale');
 
-//     if (typeof user !== 'undefined') {
-//         const user = await req.user
-//             .populate('cart.items.productId')
-//             .execPopulate();
+    if (typeof user !== 'undefined') {
+        const user = await req.user
+            .populate('cart.items.productId')
+            .execPopulate();
 
-//         const cartProducts = mapCartItems(user.cart);
+        const cartProducts = mapCartItems(user.cart);
 
-//         res.render('sale', {
-//             title: 'Ryc-store распродажа',
-//             isSale: true,
-//             products,
-//             cartProducts
-//         })
-//     } else {
-//         res.render('sale', {
-//             title: 'Ryc-store распродажа',
-//             isSale: true,
-//             products
-//         })
-//     }
-// })
+        res.render('sale', {
+            title: 'Ryc-store распродажа',
+            isSale: true,
+            products,
+            cartProducts
+        })
+    } else {
+        res.render('sale', {
+            title: 'Ryc-store распродажа',
+            isSale: true,
+            products
+        })
+    }
+})
 
 module.exports = router;

@@ -33,12 +33,16 @@ const productSchema = new Schema({
         type: Number,
         required: true
     },
+    salePrd: {
+        type: Boolean,
+        required: true
+    },
     collections: {
-        type: Number,
+        type: Boolean,
         required: true
     },
     accessories: {
-        type: Number,
+        type: Boolean,
         required: true
     },
     mainSize: {

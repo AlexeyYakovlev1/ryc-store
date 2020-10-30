@@ -9157,6 +9157,8 @@
         function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
+        "use strict";
+
         function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
         function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -9171,15 +9173,10 @@
 
         function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-        function _defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-                var descriptor = props[i];
+        function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i];
                 descriptor.enumerable = descriptor.enumerable || false;
-                descriptor.configurable = true;
-                if ("value" in descriptor) descriptor.writable = true;
-                Object.defineProperty(target, descriptor.key, descriptor);
-            }
-        }
+                descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true;
+                Object.defineProperty(target, descriptor.key, descriptor); } }
 
         function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
@@ -9561,7 +9558,7 @@
 
 
                                 if (item === 'firstName' && options[item].onlyEn) {
-                                    _this2.regexp_first_name_only_en = eval("/^[a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
+                                    _this2.regexp_first_name_only_en = eval("/^[A-Z|a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
 
                                     _this2.validationElement(_this2.regexp_first_name_only_en, value, options[item]);
                                 } // First name and only en and big first symbol
@@ -9575,7 +9572,7 @@
 
 
                                 if (item === 'firstName' && options[item].onlyRus) {
-                                    _this2.regexp_first_name_only_rus = eval("/^[\u0430-\u044F]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
+                                    _this2.regexp_first_name_only_rus = eval("/^[\u0410-\u042F|\u0430-\u044F]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
 
                                     _this2.validationElement(_this2.regexp_first_name_only_rus, value, options[item]);
                                 } // First name and only rus and big first symbol
@@ -9601,7 +9598,7 @@
 
 
                                 if (item === 'lastName' && options[item].onlyEn) {
-                                    _this2.regexp_last_name_only_en = eval("/^[a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
+                                    _this2.regexp_last_name_only_en = eval("/^[A-Z|a-z]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
 
                                     _this2.validationElement(_this2.regexp_last_name_only_en, value, options[item]);
                                 } // last name and only en and big first symbol
@@ -9615,7 +9612,7 @@
 
 
                                 if (item === 'lastName' && options[item].onlyRus) {
-                                    _this2.regexp_last_name_only_rus = eval("/^[\u0430-\u044F]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
+                                    _this2.regexp_last_name_only_rus = eval("/^[\u0410-\u042F|\u0430-\u044F]{".concat(options[item].minLength, ",").concat(options[item].maxLength, "}$/"));
 
                                     _this2.validationElement(_this2.regexp_last_name_only_rus, value, options[item]);
                                 } // last name and only rus and big first symbol
@@ -9641,7 +9638,7 @@
             }]);
 
             return Valval;
-        }();
+        }(); // module.exports.Valval = Valval;
 
         module.exports.Valval = Valval;
 

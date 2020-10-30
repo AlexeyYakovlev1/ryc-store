@@ -16,7 +16,7 @@ const mapCartItems = (cart) => {
 
 router.get('/', async(req, res) => {
     const products = await Product.find()
-        .select('nowPrice oldPrice sale sizes title img mainSize description sex article');
+        .select('nowPrice oldPrice sale sizes title img mainSize description sex article accessories');
 
     if (typeof user !== 'undefined') {
         const user = await req.user
@@ -40,18 +40,10 @@ router.get('/', async(req, res) => {
     }
 });
 
-// router.get('/products/', async(req, res) => {
-//     const searchField = req.query.search;
-
-//     const product = Product.find({ title: { $regex: searchField.toString(), $options: '$i' } });
-
-//     res.status(200).json(product);
-// })
-
 router.get('/:id', async(req, res) => {
     const product = await Product.findById(req.params.id);
     const products = await Product.find()
-        .select('nowPrice oldPrice size title img');
+        .select('nowPrice oldPrice sizes title img');
 
     res.render('product', {
         title: `Продукт ${product.title}`,
@@ -62,7 +54,7 @@ router.get('/:id', async(req, res) => {
 
 router.post('/', async(req, res) => {
     const products = await Product.find()
-        .select('nowPrice oldPrice sale sizes title img mainSize description sex article');
+        .select('nowPrice oldPrice sale sizes title img mainSize description sex article accessories');
 
     res.render('shop', {
         title: 'Ryc-store магазин',
